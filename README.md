@@ -2,6 +2,7 @@
 
 ![Platforms](https://img.shields.io/badge/Platform-Windows-lightgray.svg)
 ![.NET](https://img.shields.io/badge/.NET-10-blue.svg)
+[![NuGet](https://img.shields.io/nuget/v/dll2llm.svg)](https://www.nuget.org/packages/dll2llm)
 [![Revit](https://img.shields.io/badge/Revit-2025|2026-lightblue.svg)](http://developer.autodesk.com/)
 [![AutoCAD](https://img.shields.io/badge/AutoCAD-2026-lightblue.svg)](http://developer.autodesk.com/)
 
@@ -23,16 +24,41 @@ This repository includes pre-built examples under **`docs/revit-api-2025/`** and
 ## Prerequisites
 
 - .NET 10 SDK
-- Windows (required for most Autodesk desktop APIs due to native dependencies)
+- Windows x64 (required for most Autodesk desktop APIs due to native dependencies)
 - The target product must be **installed on the machine running dll2llm**, so its native and managed dependencies can be resolved
 
-## Building
+## Installation
+
+Install as a .NET global tool from [NuGet](https://www.nuget.org/packages/dll2llm):
+
+```bash
+dotnet tool install --global dll2llm
+```
+
+The `dll2llm` command is then available from any directory. To update later:
+
+```bash
+dotnet tool update --global dll2llm
+```
+
+Or run it once without installing (requires the .NET 10 SDK):
+
+```bash
+dnx dll2llm "C:\Program Files\Autodesk\Revit 2026\RevitAPI.dll"
+```
+
+## Building from source
 
 ```bash
 dotnet build -c Release
 ```
 
-The executable is emitted under `bin/Release/net10.0/` (or `bin/Debug/net10.0/` after a Debug build).
+The executable is emitted under `bin/Release/net10.0/` (or `bin/Debug/net10.0/` after a Debug build). To install your local build as a tool:
+
+```bash
+dotnet pack -c Release -o nupkg
+dotnet tool install --global dll2llm --add-source ./nupkg
+```
 
 ## Quick start — generate and install a skill in one command
 
@@ -40,15 +66,15 @@ Adjust the year and install path to match your Revit version and the skills dire
 
 ```bash
 # Revit API — generate skill and install to a skills directory
-dll2llm.exe "C:\Program Files\Autodesk\Revit 2026\RevitAPI.dll" --install "<path-to-your-skills-directory>"
+dll2llm "C:\Program Files\Autodesk\Revit 2026\RevitAPI.dll" --install "<path-to-your-skills-directory>"
 
 # Revit API — merge DB + UI layers
-dll2llm.exe "C:\Program Files\Autodesk\Revit 2026\RevitAPI.dll" ^
+dll2llm "C:\Program Files\Autodesk\Revit 2026\RevitAPI.dll" ^
             "C:\Program Files\Autodesk\Revit 2026\RevitAPIUI.dll" ^
             --install "<path-to-your-skills-directory>"
 
 # AutoCAD .NET API (adjust year to your install)
-dll2llm.exe "C:\Program Files\Autodesk\AutoCAD 2026\AcDbMgd.dll" ^
+dll2llm "C:\Program Files\Autodesk\AutoCAD 2026\AcDbMgd.dll" ^
             "C:\Program Files\Autodesk\AutoCAD 2026\AcMgd.dll" ^
             "C:\Program Files\Autodesk\AutoCAD 2026\AcCoreMgd.dll" ^
             --install "<path-to-your-skills-directory>"
@@ -59,7 +85,7 @@ dll2llm.exe "C:\Program Files\Autodesk\AutoCAD 2026\AcDbMgd.dll" ^
 ## CLI usage
 
 ```bash
-dll2llm.exe RevitAPI.dll RevitAPIUI.dll --output ./revit-api-skill
+dll2llm RevitAPI.dll RevitAPIUI.dll --output ./revit-api-skill
 ```
 
 If you omit `--output`, the default is **`<directory-of-first-dll>\<first-assembly-name-lower>-skill`** (for example, pointing at `RevitAPI.dll` yields `revitapi-skill` next to that DLL).
@@ -89,7 +115,7 @@ revit-api-skill/
 Run without arguments for a guided prompt:
 
 ```bash
-dll2llm.exe
+dll2llm
 ```
 
 ## Output format

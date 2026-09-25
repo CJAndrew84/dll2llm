@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -6,10 +6,33 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PlatformTarget>x64</PlatformTarget>
+    <RollForward>Major</RollForward>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>dll2llm</ToolCommandName>
+    <PackageId>dll2llm</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Joao Martins</Authors>
+    <Description>Generates ready-to-use Agent Skills (SKILL.md, INDEX.md and topic Markdown files) from any .NET assembly, such as the Revit or AutoCAD APIs.</Description>
+    <PackageTags>revit;autocad;autodesk;llm;agent-skills;reflection;documentation</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/autodesk-platform-services/dll2llm</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/autodesk-platform-services/dll2llm</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Drawing.Common" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="output/**" />
+    <None Remove="output/**" />
+    <Content Remove="output/**" />
+    <None Include="README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>
