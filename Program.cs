@@ -151,6 +151,34 @@ namespace DllToLLMDoc
 
         static void Main(string[] args)
         {
+            if (args.Length > 0 && args[0] == "index")
+            {
+                if (args.Length < 5)
+                {
+                    Console.Error.WriteLine("Usage: dll2llm index <managed.json> <headers.json> <exports.json> <output-dir>");
+                    Environment.ExitCode = 2;
+                    return;
+                }
+                try { UnifiedApiIndex.Build(args[1], args[2], args[3], args[4]); }
+                catch (Exception ex) { Console.Error.WriteLine(ex); Environment.ExitCode = 1; }
+                return;
+            }
+            if (args.Length > 0 && args[0] == "search-index")
+            {
+                if (args.Length < 3)
+                {
+                    Console.Error.WriteLine("Usage: dll2llm search-index <api-index.json> <query> [--limit <number>]");
+                    Environment.ExitCode = 2;
+                    return;
+                }
+                var limitFlag = Array.IndexOf(args, "--limit");
+                var limit = limitFlag >= 0 && limitFlag + 1 < args.Length && int.TryParse(args[limitFlag + 1], out var parsed)
+                    ? parsed : 50;
+                try { UnifiedApiIndex.Search(args[1], args[2], limit); }
+                catch (Exception ex) { Console.Error.WriteLine(ex); Environment.ExitCode = 1; }
+                return;
+            }
+
             if (args.Length > 0 && args[0] == "correlate")
             {
                 if (args.Length < 4)
