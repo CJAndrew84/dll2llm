@@ -13,12 +13,14 @@ namespace DllToLLMDoc;
 /// </summary>
 internal static class CppSdkInventory
 {
-    internal static void WriteHeaders(string root, string output, string clangPath, string[] includes)
+    internal static void WriteHeaders(string root, string output, string clangPath, string[] includes, string? deltaManifest = null)
     {
         if (!Directory.Exists(root)) throw new DirectoryNotFoundException(root);
+        var changed = ReadDelta(deltaManifest);
         var headers = Directory.EnumerateFiles(root, "*", SearchOption.AllDirectories)
-            .Where(p => p.EndsWith(".h", StringComparison.OrdinalIgnoreCase) ||
-                        p.EndsWith(".hpp", StringComparison.OrdinalIgnoreCase))
+            .Where(p => (p.EndsWith(".h", StringComparison.OrdinalIgnoreCase) ||
+                        p.EndsWith(".hpp", StringComparison.OrdinalIgnoreCase)) &&
+                        (changed is null || changed.Contains(Path.GetRelativePath(root, p).Replace(Path.DirectorySeparatorChar, '/'))))
             .OrderBy(p => p, StringComparer.OrdinalIgnoreCase).ToArray();
         var results = new List<object>();
         foreach (var header in headers)
@@ -65,6 +67,15 @@ internal static class CppSdkInventory
             }
         }
         Write(output, new { format = "llvm-coff-symbols-v1", source = Path.GetFullPath(root), libraries = results });
+    }
+
+    private static HashSet<string>? ReadDelta(string? manifest)
+    {
+        if (manifest is null) return null;
+        using var doc = JsonDocument.Parse(File.ReadAllText(manifest));
+        return doc.RootElement.GetProperty("delta").GetProperty("changed")
+            .EnumerateArray().Select(x => x.GetString() ?? "")
+            .ToHashSet(StringComparer.OrdinalIgnoreCase);
     }
 
     private static (int exitCode, string stdout, string stderr) Execute(string tool, IEnumerable<string> args)
