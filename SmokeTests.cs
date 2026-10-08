@@ -118,6 +118,13 @@ internal static class SmokeTests
                 !File.Exists(Path.Combine(combinedRoot, "skills", "SKILL.md")) ||
                 !File.ReadAllText(Path.Combine(combinedRoot, "skills", "clang-ast.md")).Contains("Example::Value"))
                 throw new InvalidOperationException("Automatic skill composition failed.");
+            var docsRoot = Path.Combine(combinedRoot, "documentation");
+            if (!File.Exists(Path.Combine(docsRoot, "README.md")) ||
+                !File.Exists(Path.Combine(docsRoot, "SKILL.md")) ||
+                !File.Exists(Path.Combine(docsRoot, "search", "api-index.json")) ||
+                !File.Exists(Path.Combine(docsRoot, "domains", "other.md")) ||
+                !Directory.EnumerateFiles(Path.Combine(docsRoot, "api"), "*.md").Any())
+                throw new InvalidOperationException("Domain-organized documentation was not generated.");
             Console.WriteLine("PASS: metadata decoding, managed inventory, C++ AST normalization, unified index, correlation");
         }
         finally { Directory.Delete(temp, recursive: true); }
