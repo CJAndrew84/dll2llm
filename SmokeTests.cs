@@ -67,6 +67,17 @@ internal static class SmokeTests
                 if (manifest.RootElement.GetProperty("delta").GetProperty("changed").GetArrayLength() != 1)
                     throw new InvalidOperationException("Changed file was not detected.");
             }
+            var auditDir = Path.Combine(temp, "audit-fixture");
+            Directory.CreateDirectory(auditDir);
+            File.WriteAllText(Path.Combine(auditDir, "api.md"), "[SKIPPED METHOD] One\\n[RECOVERED: CLR metadata]\\n");
+            var auditFile = Path.Combine(temp, "audit.json");
+            RecoveryAudit.Write(auditDir, auditFile, null);
+            using (var audit = System.Text.Json.JsonDocument.Parse(File.ReadAllText(auditFile)))
+            {
+                if (audit.RootElement.GetProperty("recovered").GetInt32() != 1 ||
+                    audit.RootElement.GetProperty("skipped").GetInt32() != 1)
+                    throw new InvalidOperationException("Recovery audit counts incorrect.");
+            }
             Console.WriteLine("PASS: metadata decoding, managed inventory, C++ AST normalization, unified index, correlation");
         }
         finally { Directory.Delete(temp, recursive: true); }
