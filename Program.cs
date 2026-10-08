@@ -151,6 +151,24 @@ namespace DllToLLMDoc
 
         static void Main(string[] args)
         {
+            if (args.Length > 0 && args[0] == "audit-recovery")
+            {
+                if (args.Length < 2)
+                {
+                    Console.Error.WriteLine("Usage: dll2llm audit-recovery <skills-dir> [--output audit.json] [--baseline prior-audit.json]");
+                    Environment.ExitCode = 2;
+                    return;
+                }
+                string? Option(string key)
+                {
+                    var i = Array.IndexOf(args, key);
+                    return i >= 0 && i + 1 < args.Length ? args[i + 1] : null;
+                }
+                try { RecoveryAudit.Write(args[1], Option("--output") ?? "dll2llm-recovery-audit.json", Option("--baseline")); }
+                catch (Exception ex) { Console.Error.WriteLine(ex); Environment.ExitCode = 1; }
+                return;
+            }
+
             if (args.Length > 0 && args[0] == "manifest")
             {
                 if (args.Length < 2)
