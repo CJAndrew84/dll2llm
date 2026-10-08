@@ -23,8 +23,7 @@ internal static class BinaryInventory
             throw new DirectoryNotFoundException(directory);
 
         var results = new List<Entry>();
-        foreach (var path in Directory.EnumerateFiles(directory, "*.dll", SearchOption.AllDirectories)
-                     .OrderBy(p => p, StringComparer.OrdinalIgnoreCase))
+        foreach (var path in EnumerateDlls(directory).OrderBy(p => p, StringComparer.OrdinalIgnoreCase))
         {
             try
             {
@@ -47,6 +46,43 @@ internal static class BinaryInventory
             }
         }
         return results;
+    }
+
+    private static IEnumerable<string> EnumerateDlls(string root)
+    {
+        var pending = new Stack<string>();
+        var visited = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        pending.Push(root);
+        while (pending.Count > 0)
+        {
+            var directory = pending.Pop();
+            if (!visited.Add(Path.GetFullPath(directory))) continue;
+            string[] files;
+            string[] children;
+            try
+            {
+                files = Directory.GetFiles(directory, "*.dll");
+                children = Directory.GetDirectories(directory);
+            }
+            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+            {
+                Console.Error.WriteLine($"Skipping inaccessible directory {directory}: {ex.Message}");
+                continue;
+            }
+            foreach (var file in files) yield return file;
+            foreach (var child in children)
+            {
+                try
+                {
+                    if ((File.GetAttributes(child) & FileAttributes.ReparsePoint) == 0)
+                        pending.Push(child);
+                }
+                catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+                {
+                    Console.Error.WriteLine($"Skipping inaccessible directory {child}: {ex.Message}");
+                }
+            }
+        }
     }
 
     internal static void WriteJson(string directory, string outputFile)
