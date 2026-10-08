@@ -151,6 +151,17 @@ namespace DllToLLMDoc
 
         static void Main(string[] args)
         {
+            if (args.Length > 0 && args[0] == "self-test")
+            {
+                try { SmokeTests.Run(); }
+                catch (Exception ex)
+                {
+                    Console.Error.WriteLine(ex);
+                    Environment.ExitCode = 1;
+                }
+                return;
+            }
+
             if (args.Length > 0 && (args[0] == "headers" || args[0] == "import-libs"))
             {
                 if (args.Length < 2)
