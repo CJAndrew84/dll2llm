@@ -151,6 +151,28 @@ namespace DllToLLMDoc
 
         static void Main(string[] args)
         {
+            if (args.Length > 0 && args[0] == "scan")
+            {
+                if (args.Length < 2)
+                {
+                    Console.Error.WriteLine("Usage: dll2llm scan <directory> [--output <inventory.json>]");
+                    Environment.ExitCode = 2;
+                    return;
+                }
+                var scanDirectory = args[1];
+                var outputFlag = Array.IndexOf(args, "--output");
+                var inventoryPath = outputFlag >= 0 && outputFlag + 1 < args.Length
+                    ? args[outputFlag + 1]
+                    : Path.Combine(Environment.CurrentDirectory, "dll2llm-inventory.json");
+                try { BinaryInventory.WriteJson(scanDirectory, inventoryPath); }
+                catch (Exception ex)
+                {
+                    Console.Error.WriteLine(ex.Message);
+                    Environment.ExitCode = 1;
+                }
+                return;
+            }
+
             var dllPaths = new List<string>();
             string installDir = null;
             string outputPath = null;
