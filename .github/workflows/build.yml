@@ -1,0 +1,36 @@
+name: Build and smoke test
+on:
+  push:
+    branches: [main, feature/native-pe-inventory]
+  pull_request:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Build
+        run: dotnet build dll2llm.sln -c Release --warnaserror
+      - name: Native/managed scan smoke test
+        shell: pwsh
+        run: |
+          dotnet run --project dll2llm.csproj -c Release -- scan "$env:WINDIR\System32" --output "$env:RUNNER_TEMP\inventory.json"
+          $result = Get-Content "$env:RUNNER_TEMP\inventory.json" -Raw | ConvertFrom-Json
+          if (@($result.binaries).Count -eq 0) { throw "No DLLs discovered" }
+      - name: Managed metadata smoke test
+        shell: pwsh
+        run: |
+          $assembly = (Get-ChildItem -Path . -Filter dll2llm.dll -Recurse | Where-Object FullName -Match 'Release' | Select-Object -First 1).FullName
+          if (-not $assembly) { throw "Tool assembly not found" }
+          dotnet run --project dll2llm.csproj -c Release -- metadata "$assembly" --output "$env:RUNNER_TEMP\metadata.json"
+          $result = Get-Content "$env:RUNNER_TEMP\metadata.json" -Raw | ConvertFrom-Json
+          if (@($result.types).Count -eq 0) { throw "No CLR types extracted" }
+      - name: Native exports smoke test
+        shell: pwsh
+        run: |
+          dotnet run --project dll2llm.csproj -c Release -- exports "$env:WINDIR\System32\kernel32.dll" --output "$env:RUNNER_TEMP\exports.json"
+          $result = Get-Content "$env:RUNNER_TEMP\exports.json" -Raw | ConvertFrom-Json
+          if (@($result.exports).Count -eq 0) { throw "No PE exports extracted" }
