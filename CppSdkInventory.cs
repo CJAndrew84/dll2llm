@@ -30,14 +30,20 @@ internal static class CppSdkInventory
             {
                 var run = Execute(clangPath, args);
                 // Preserve AST as JSON text; do not invent declarations if dependencies are missing.
-                results.Add(new { header, run.exitCode, run.stderr, astJson = run.stdout });
+                var declarations = new List<ClangAstNormalizer.Declaration>();
+                if (!string.IsNullOrWhiteSpace(run.stdout))
+                {
+                    try { declarations.AddRange(ClangAstNormalizer.Extract(run.stdout, header)); }
+                    catch (JsonException ex) { results.Add(new { header, exitCode = -2, stderr = "Invalid AST JSON: " + ex.Message, declarations }); continue; }
+                }
+                results.Add(new { header, run.exitCode, run.stderr, declarations });
             }
             catch (Exception ex)
             {
-                results.Add(new { header, exitCode = -1, stderr = ex.Message, astJson = "" });
+                results.Add(new { header, exitCode = -1, stderr = ex.Message, declarations = new List<ClangAstNormalizer.Declaration>() });
             }
         }
-        Write(output, new { format = "clang-ast-json-v1", source = Path.GetFullPath(root), headers = results });
+        Write(output, new { format = "clang-declarations-v2", source = Path.GetFullPath(root), headers = results });
     }
 
     internal static void WriteLibraries(string root, string output, string readobjPath)
