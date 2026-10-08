@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-using System.Text.RegularExpressions;
 
 namespace DllToLLMDoc;
 
@@ -27,9 +26,16 @@ internal static class CppSdkInventory
             var args = new List<string> { "-x", "c++", "-fsyntax-only", "-Xclang", "-ast-dump=json" };
             foreach (var include in includes) { args.Add("-I"); args.Add(include); }
             args.Add(header);
-            var run = Execute(clangPath, args);
-            // Preserve AST as JSON text; do not invent declarations if dependencies are missing.
-            results.Add(new { header, run.exitCode, run.stderr, astJson = run.stdout });
+            try
+            {
+                var run = Execute(clangPath, args);
+                // Preserve AST as JSON text; do not invent declarations if dependencies are missing.
+                results.Add(new { header, run.exitCode, run.stderr, astJson = run.stdout });
+            }
+            catch (Exception ex)
+            {
+                results.Add(new { header, exitCode = -1, stderr = ex.Message, astJson = "" });
+            }
         }
         Write(output, new { format = "clang-ast-json-v1", source = Path.GetFullPath(root), headers = results });
     }
@@ -42,8 +48,15 @@ internal static class CppSdkInventory
         var results = new List<object>();
         foreach (var lib in libs)
         {
-            var run = Execute(readobjPath, new[] { "--coff-imports", "--symbols", lib });
-            results.Add(new { library = lib, run.exitCode, run.stderr, symbols = run.stdout });
+            try
+            {
+                var run = Execute(readobjPath, new[] { "--coff-imports", "--symbols", lib });
+                results.Add(new { library = lib, run.exitCode, run.stderr, symbols = run.stdout });
+            }
+            catch (Exception ex)
+            {
+                results.Add(new { library = lib, exitCode = -1, stderr = ex.Message, symbols = "" });
+            }
         }
         Write(output, new { format = "llvm-coff-symbols-v1", source = Path.GetFullPath(root), libraries = results });
     }
