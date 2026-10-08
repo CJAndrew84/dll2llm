@@ -924,7 +924,10 @@ namespace DllToLLMDoc
                     }
                     catch (Exception ex)
                     {
-                        sb.AppendLine($"    [SKIPPED PROPERTY] {prop.Name}: {ex.Message}");
+                        var recovered = ReflectionSignatureRecovery.Property(prop);
+                        sb.AppendLine(recovered is null
+                            ? $"    [SKIPPED PROPERTY] {prop.Name}: {ex.Message}"
+                            : $"    {recovered} [RECOVERED: CLR metadata]");
                     }
                 }
                 sb.AppendLine();
@@ -953,7 +956,10 @@ namespace DllToLLMDoc
                     }
                     catch (Exception ex)
                     {
-                        sb.AppendLine($"    [SKIPPED METHOD] {method.Name}: {ex.Message}");
+                        var recovered = ReflectionSignatureRecovery.Method(method);
+                        sb.AppendLine(recovered is null
+                            ? $"    [SKIPPED METHOD] {method.Name}: {ex.Message}"
+                            : $"    {recovered} [RECOVERED: CLR metadata]");
                     }
                 }
                 sb.AppendLine();
