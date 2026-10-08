@@ -47,6 +47,26 @@ internal static class SmokeTests
             ApiCorrelation.Write(metadata, headers, exports, correlation);
             if (!File.Exists(correlation))
                 throw new InvalidOperationException("Correlation output missing.");
+            var fixtureDir = Path.Combine(temp, "manifest-fixture");
+            Directory.CreateDirectory(fixtureDir);
+            File.WriteAllText(Path.Combine(fixtureDir, "fixture.h"), "int example;");
+            var firstManifest = Path.Combine(temp, "manifest-first.json");
+            var secondManifest = Path.Combine(temp, "manifest-second.json");
+            IncrementalManifest.Write(fixtureDir, firstManifest, null);
+            IncrementalManifest.Write(fixtureDir, secondManifest, firstManifest);
+            using (var manifest = System.Text.Json.JsonDocument.Parse(File.ReadAllText(secondManifest)))
+            {
+                if (manifest.RootElement.GetProperty("delta").GetProperty("changed").GetArrayLength() != 0)
+                    throw new InvalidOperationException("Unchanged files were reported as changed.");
+            }
+            File.WriteAllText(Path.Combine(fixtureDir, "fixture.h"), "int changed;");
+            var thirdManifest = Path.Combine(temp, "manifest-third.json");
+            IncrementalManifest.Write(fixtureDir, thirdManifest, secondManifest);
+            using (var manifest = System.Text.Json.JsonDocument.Parse(File.ReadAllText(thirdManifest)))
+            {
+                if (manifest.RootElement.GetProperty("delta").GetProperty("changed").GetArrayLength() != 1)
+                    throw new InvalidOperationException("Changed file was not detected.");
+            }
             Console.WriteLine("PASS: metadata decoding, managed inventory, C++ AST normalization, unified index, correlation");
         }
         finally { Directory.Delete(temp, recursive: true); }
