@@ -151,6 +151,21 @@ namespace DllToLLMDoc
 
         static void Main(string[] args)
         {
+            if (args.Length > 0 && args[0] == "correlate")
+            {
+                if (args.Length < 4)
+                {
+                    Console.Error.WriteLine("Usage: dll2llm correlate <managed.json> <headers.json> <exports.json> [--output <correlation.json>]");
+                    Environment.ExitCode = 2;
+                    return;
+                }
+                var index = Array.IndexOf(args, "--output");
+                var output = index >= 0 && index + 1 < args.Length ? args[index + 1] : "dll2llm-correlation.json";
+                try { ApiCorrelation.Write(args[1], args[2], args[3], output); }
+                catch (Exception ex) { Console.Error.WriteLine(ex); Environment.ExitCode = 1; }
+                return;
+            }
+
             if (args.Length > 0 && args[0] == "self-test")
             {
                 try { SmokeTests.Run(); }
