@@ -10,6 +10,18 @@
 
 A command-line tool that generates ready-to-use **Agent Skills** directly from any .NET assembly.
 
+> **Extended fork:** This branch adds one-command product-root analysis, managed/native extraction, CLR signature recovery, C++ SDK header/import-library inspection, optional PDB/demangling tools, incremental manifests, unified symbol search, and domain-organised documentation for humans and AI agents. See the [complete feature guide](docs/FEATURE-GUIDE.md) for commands, output structure, requirements, limitations and validation status. The original single/multi-DLL workflow remains supported.
+
+## Extended workflow: product root to documentation
+
+```powershell
+dotnet run --project dll2llm.csproj -c Release -- analyze ` 
+  --source "C:\\Path\\To\\InstalledProduct" ` 
+  --output "C:\\Repos\\ProductAPI"
+```
+
+Optionally add `--sdk "C:\\Path\\To\\SDK"`. The output includes `documentation/README.md` for humans, `documentation/SKILL.md` for AI assistants, `documentation/domains/`, `documentation/api/`, and `index/api-index.json`. See [feature guide](docs/FEATURE-GUIDE.md) for the full tree. The Windows CI baseline passes; real Bentley 2026 extraction remains unverified.
+
 ## Overview
 
 dll2llm reflects .NET assemblies and extracts public types, constructors, methods, properties, events, and constants — formatting them into an Agent Skill folder with `SKILL.md` (including YAML frontmatter), `INDEX.md`, and topic Markdown files, optimized for LLM consumption.
