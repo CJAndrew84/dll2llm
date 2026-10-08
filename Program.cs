@@ -287,7 +287,7 @@ namespace DllToLLMDoc
                 var destination = Option("--output", headers ? "dll2llm-headers.json" : "dll2llm-import-libs.json");
                 try
                 {
-                    if (headers) CppSdkInventory.WriteHeaders(args[1], destination, tool, includeDirs.ToArray());
+                    if (headers) CppSdkInventory.WriteHeaders(args[1], destination, tool, includeDirs.ToArray(), Option("--delta-manifest", "" ) is string delta && delta.Length > 0 ? delta : null);
                     else CppSdkInventory.WriteLibraries(args[1], destination, tool);
                 }
                 catch (Exception ex)
