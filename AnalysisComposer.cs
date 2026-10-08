@@ -109,6 +109,7 @@ internal static class AnalysisComposer
         File.WriteAllText(Path.Combine(outputRoot, "composition-report.json"),
             JsonSerializer.Serialize(new { symbols = sorted.Length, sources = groups.Select(g => new { origin = g.Key, count = g.Count() }), errors },
                 new JsonSerializerOptions { WriteIndented = true }));
+        DocumentationPublisher.Publish(outputRoot, sorted);
         return errors.Count;
     }
 }
