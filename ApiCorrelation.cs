@@ -29,9 +29,10 @@ internal static class ApiCorrelation
                 var managedQualified = symbol.Name.Replace("::", ".", StringComparison.Ordinal);
                 var nativeQualified = candidate.Name.Replace("::", ".", StringComparison.Ordinal);
                 var exact = string.Equals(managedQualified, nativeQualified, StringComparison.Ordinal);
+                var ambiguous = candidates.Length > 1;
                 var type = exact ? "qualified-name" : "normalized-name";
                 // Exact text is stronger evidence of naming, not evidence of a callable ABI.
-                matches.Add(new Match(symbol, candidate, type, exact ? "medium" : "low"));
+                matches.Add(new Match(symbol, candidate, type, exact && !ambiguous ? "medium" : "low"));
             }
         }
         Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(output))!);
