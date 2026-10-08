@@ -151,6 +151,27 @@ namespace DllToLLMDoc
 
         static void Main(string[] args)
         {
+            if (args.Length > 0 && args[0] == "metadata")
+            {
+                if (args.Length < 2)
+                {
+                    Console.Error.WriteLine("Usage: dll2llm metadata <managed.dll> [--output <metadata.json>]");
+                    Environment.ExitCode = 2;
+                    return;
+                }
+                var outputFlag = Array.IndexOf(args, "--output");
+                var metadataPath = outputFlag >= 0 && outputFlag + 1 < args.Length
+                    ? args[outputFlag + 1]
+                    : Path.Combine(Environment.CurrentDirectory, "dll2llm-metadata.json");
+                try { MetadataInventory.WriteJson(args[1], metadataPath); }
+                catch (Exception ex)
+                {
+                    Console.Error.WriteLine(ex.Message);
+                    Environment.ExitCode = 1;
+                }
+                return;
+            }
+
             if (args.Length > 0 && args[0] == "scan")
             {
                 if (args.Length < 2)
