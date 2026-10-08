@@ -26,7 +26,20 @@ internal static class SmokeTests
             var declarations = ClangAstNormalizer.Extract(sample, "selftest");
             if (!declarations.Any(d => d.QualifiedName == "Example::Value" && d.Access == "public"))
                 throw new InvalidOperationException("C++ struct access parsing failed.");
-            Console.WriteLine("PASS: metadata decoding, managed inventory, C++ AST normalization");
+            var headers = Path.Combine(temp, "headers.json");
+            var exports = Path.Combine(temp, "exports.json");
+            File.WriteAllText(headers, """{"headers":[{"header":"fixture.h","declarations":[{"qualifiedName":"Example::Value","kind":"FieldDecl","type":"int"}]}]}""");
+            File.WriteAllText(exports, """{"exports":[{"name":"Value","ordinal":1}]}""");
+            var output = Path.Combine(temp, "index");
+            UnifiedApiIndex.Build(metadata, headers, exports, output);
+            var indexFile = Path.Combine(output, "api-index.json");
+            if (!File.Exists(indexFile) || !File.ReadAllText(indexFile).Contains("Example::Value"))
+                throw new InvalidOperationException("Unified index fixture missing.");
+            var correlation = Path.Combine(temp, "correlation.json");
+            ApiCorrelation.Write(metadata, headers, exports, correlation);
+            if (!File.Exists(correlation))
+                throw new InvalidOperationException("Correlation output missing.");
+            Console.WriteLine("PASS: metadata decoding, managed inventory, C++ AST normalization, unified index, correlation");
         }
         finally { Directory.Delete(temp, recursive: true); }
     }
