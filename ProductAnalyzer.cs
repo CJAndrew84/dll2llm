@@ -61,6 +61,11 @@ internal static class ProductAnalyzer
             StageRun("sdk-import-libs", () => CppSdkInventory.WriteLibraries(sdk,
                 Path.Combine(output, "sdk-libraries.json"), "llvm-readobj"));
         }
+        StageRun("compose", () =>
+        {
+            var failures = AnalysisComposer.Compose(output);
+            if (failures != 0) throw new InvalidDataException($"Composition had {failures} input errors; see composition-report.json");
+        });
         File.WriteAllText(Path.Combine(output, "analysis-report.json"),
             JsonSerializer.Serialize(new
             {
