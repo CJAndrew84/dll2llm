@@ -177,6 +177,8 @@ namespace DllToLLMDoc
             string installDir = null;
             string outputPath = null;
             string extraXmlPath = null;
+            var referenceDirs = new List<string>();
+            string resolutionReport = null;
 
             for (int i = 0; i < args.Length; i++)
             {
@@ -187,6 +189,12 @@ namespace DllToLLMDoc
                         break;
                     case "--output":
                         if (i + 1 < args.Length) outputPath = args[++i].Trim('"');
+                        break;
+                    case "--reference-dir":
+                        if (i + 1 < args.Length) referenceDirs.Add(args[++i].Trim('"'));
+                        break;
+                    case "--resolution-report":
+                        if (i + 1 < args.Length) resolutionReport = args[++i].Trim('"');
                         break;
                     case "--xml":
                         if (i + 1 < args.Length) extraXmlPath = args[++i].Trim('"');
@@ -225,10 +233,13 @@ namespace DllToLLMDoc
 
             try
             {
-                RegisterAssemblyResolver(dllPaths);
+                using var resolver = new AssemblyDependencyResolver(dllPaths, referenceDirs);
                 LoadXmlDocs(dllPaths, extraXmlPath);
-
-                GenerateSplitSkill(dllPaths, outputPath);
+                try { GenerateSplitSkill(dllPaths, outputPath); }
+                finally
+                {
+                    if (resolutionReport != null) resolver.WriteReport(resolutionReport);
+                }
                 if (installDir != null)
                     InstallSkill(outputPath, installDir);
             }
