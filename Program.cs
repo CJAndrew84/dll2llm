@@ -151,6 +151,19 @@ namespace DllToLLMDoc
 
         static void Main(string[] args)
         {
+            if (args.Length > 0 && args[0] == "merge-headers")
+            {
+                if (args.Length < 5)
+                {
+                    Console.Error.WriteLine("Usage: dll2llm merge-headers <previous.json> <delta.json> <manifest.json> <output.json>");
+                    Environment.ExitCode = 2;
+                    return;
+                }
+                try { HeaderCatalogueMerge.Merge(args[1], args[2], args[3], args[4]); }
+                catch (Exception ex) { Console.Error.WriteLine(ex); Environment.ExitCode = 1; }
+                return;
+            }
+
             if (args.Length > 0 && args[0] == "audit-recovery")
             {
                 if (args.Length < 2)
