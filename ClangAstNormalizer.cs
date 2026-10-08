@@ -54,7 +54,9 @@ internal static class ClangAstNormalizer
         }
         if (isContainer && !string.IsNullOrEmpty(name)) nextScope.Add(name);
         if (!node.TryGetProperty("inner", out var children) || children.ValueKind != JsonValueKind.Array) return;
-        var currentAccess = isRecord ? "private" : access;
+        var currentAccess = isRecord
+            ? (Read(node, "tagUsed") is "struct" or "union" ? "public" : "private")
+            : access;
         foreach (var child in children.EnumerateArray())
         {
             if (Read(child, "kind") == "AccessSpecDecl")
