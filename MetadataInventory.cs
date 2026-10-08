@@ -21,6 +21,7 @@ internal static class MetadataInventory
         if (!pe.HasMetadata || pe.PEHeaders.CorHeader is null)
             throw new InvalidDataException("Input is not a managed CLR assembly: " + dll);
         var md = pe.GetMetadataReader();
+        var typeProvider = new MetadataTypeProvider(md);
         var types = new List<object>();
         foreach (var handle in md.TypeDefinitions)
         {
@@ -36,8 +37,20 @@ internal static class MetadataInventory
                     .Where(p => p.SequenceNumber > 0)
                     .Select(p => new { sequence = p.SequenceNumber, name = md.GetString(p.Name) })
                     .ToArray();
+                string? decodedSignature;
+                try
+                {
+                    var signature = method.DecodeSignature(typeProvider, null);
+                    decodedSignature = signature.ReturnType + " " + md.GetString(method.Name) + "(" +
+                        string.Join(", ", signature.ParameterTypes) + ")";
+                }
+                catch (Exception ex) when (ex is BadImageFormatException or ArgumentException or InvalidOperationException)
+                {
+                    decodedSignature = null;
+                }
                 methods.Add(new
                 {
+                    decodedSignature,
                     name = md.GetString(method.Name),
                     attributes = method.Attributes.ToString(),
                     signatureHex = Convert.ToHexString(md.GetBlobBytes(method.Signature)),
@@ -47,7 +60,11 @@ internal static class MetadataInventory
             var fields = type.GetFields().Select(fh =>
             {
                 var field = md.GetFieldDefinition(fh);
-                return new { name = md.GetString(field.Name),
+                string? decodedType;
+                try { decodedType = field.DecodeSignature(typeProvider, null); }
+                catch (Exception ex) when (ex is BadImageFormatException or ArgumentException or InvalidOperationException)
+                { decodedType = null; }
+                return new { name = md.GetString(field.Name), decodedType,
                     signatureHex = Convert.ToHexString(md.GetBlobBytes(field.Signature)) };
             }).ToArray();
             types.Add(new
@@ -63,8 +80,8 @@ internal static class MetadataInventory
         File.WriteAllText(output, JsonSerializer.Serialize(new
         {
             source = Path.GetFullPath(dll),
-            format = "raw-clr-metadata-v1",
-            note = "Signatures are ECMA-335 blobs, not decoded C# signatures.",
+            format = "decoded-clr-metadata-v2",
+            note = "Decoded signatures are best-effort; raw ECMA-335 blobs remain authoritative.",
             types
         }, new JsonSerializerOptions { WriteIndented = true }));
         Console.WriteLine($"Extracted CLR metadata for {types.Count} types to {output}");
