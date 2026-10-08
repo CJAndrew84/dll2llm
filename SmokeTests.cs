@@ -106,6 +106,18 @@ internal static class SmokeTests
                 if (merged.RootElement.GetProperty("headers").GetArrayLength() != 1)
                     throw new InvalidOperationException("Deleted headers were not pruned.");
             }
+            var combinedRoot = Path.Combine(temp, "combined");
+            Directory.CreateDirectory(Path.Combine(combinedRoot, "managed"));
+            Directory.CreateDirectory(Path.Combine(combinedRoot, "native"));
+            File.Copy(metadata, Path.Combine(combinedRoot, "managed", "fixture.json"));
+            File.Copy(exports, Path.Combine(combinedRoot, "native", "fixture.json"));
+            File.Copy(headers, Path.Combine(combinedRoot, "sdk-headers.json"));
+            if (AnalysisComposer.Compose(combinedRoot) != 0)
+                throw new InvalidOperationException("Composition reported input failures.");
+            if (!File.Exists(Path.Combine(combinedRoot, "index", "api-index.json")) ||
+                !File.Exists(Path.Combine(combinedRoot, "skills", "SKILL.md")) ||
+                !File.ReadAllText(Path.Combine(combinedRoot, "skills", "clang-ast.md")).Contains("Example::Value"))
+                throw new InvalidOperationException("Automatic skill composition failed.");
             Console.WriteLine("PASS: metadata decoding, managed inventory, C++ AST normalization, unified index, correlation");
         }
         finally { Directory.Delete(temp, recursive: true); }
