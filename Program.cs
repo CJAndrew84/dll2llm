@@ -151,6 +151,38 @@ namespace DllToLLMDoc
 
         static void Main(string[] args)
         {
+            if (args.Length > 0 && (args[0] == "headers" || args[0] == "import-libs"))
+            {
+                if (args.Length < 2)
+                {
+                    Console.Error.WriteLine("Usage: dll2llm headers|import-libs <sdk-directory> [--output <file.json>] [--tool <clang++|llvm-readobj>] [--include <directory>]...");
+                    Environment.ExitCode = 2;
+                    return;
+                }
+                string Option(string name, string fallback)
+                {
+                    var i = Array.IndexOf(args, name);
+                    return i >= 0 && i + 1 < args.Length ? args[i + 1] : fallback;
+                }
+                var includeDirs = new List<string>();
+                for (int i = 2; i < args.Length - 1; i++)
+                    if (args[i] == "--include") includeDirs.Add(args[++i]);
+                var headers = args[0] == "headers";
+                var tool = Option("--tool", headers ? "clang++" : "llvm-readobj");
+                var destination = Option("--output", headers ? "dll2llm-headers.json" : "dll2llm-import-libs.json");
+                try
+                {
+                    if (headers) CppSdkInventory.WriteHeaders(args[1], destination, tool, includeDirs.ToArray());
+                    else CppSdkInventory.WriteLibraries(args[1], destination, tool);
+                }
+                catch (Exception ex)
+                {
+                    Console.Error.WriteLine(ex.Message);
+                    Environment.ExitCode = 1;
+                }
+                return;
+            }
+
             if (args.Length > 0 && args[0] == "exports")
             {
                 if (args.Length < 2)
