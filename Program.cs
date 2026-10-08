@@ -151,6 +151,31 @@ namespace DllToLLMDoc
 
         static void Main(string[] args)
         {
+            if (args.Length > 0 && (args[0] == "pdb" || args[0] == "demangle"))
+            {
+                if (args.Length < 2)
+                {
+                    Console.Error.WriteLine("Usage: dll2llm pdb <directory> [--tool llvm-pdbutil] [--output file.json] OR demangle <exports.json> [--tool llvm-undname] [--output file.json]");
+                    Environment.ExitCode = 2;
+                    return;
+                }
+                string Option(string key, string fallback)
+                {
+                    var i = Array.IndexOf(args, key);
+                    return i >= 0 && i + 1 < args.Length ? args[i + 1] : fallback;
+                }
+                var pdb = args[0] == "pdb";
+                var output = Option("--output", pdb ? "dll2llm-pdb.json" : "dll2llm-demangled.json");
+                var tool = Option("--tool", pdb ? "llvm-pdbutil" : "llvm-undname");
+                try
+                {
+                    if (pdb) NativeDebugSymbols.Inspect(args[1], output, tool, "llvm-undname");
+                    else NativeDebugSymbols.Demangle(args[1], output, tool);
+                }
+                catch (Exception ex) { Console.Error.WriteLine(ex); Environment.ExitCode = 1; }
+                return;
+            }
+
             if (args.Length > 0 && args[0] == "index")
             {
                 if (args.Length < 5)
