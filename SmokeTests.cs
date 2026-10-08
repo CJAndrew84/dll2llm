@@ -19,6 +19,14 @@ internal static class SmokeTests
             var contents = File.ReadAllText(metadata);
             if (!contents.Contains("decodedSignature", StringComparison.Ordinal))
                 throw new InvalidOperationException("Decoded signatures missing from metadata output.");
+            var method = typeof(SmokeTests).GetMethod("Run", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic);
+            if (method is null || ReflectionSignatureRecovery.Method(method) is not string recovered ||
+                !recovered.Contains("Run(", StringComparison.Ordinal))
+                throw new InvalidOperationException("Metadata-token method recovery failed.");
+            var property = typeof(BinaryInventory.Entry).GetProperty("Kind");
+            if (property is null || ReflectionSignatureRecovery.Property(property) is not string recoveredProperty ||
+                !recoveredProperty.Contains("Kind", StringComparison.Ordinal))
+                throw new InvalidOperationException("Metadata-token property recovery failed.");
             var inventory = BinaryInventory.Scan(Path.GetDirectoryName(dll)!);
             if (!inventory.Any(e => e.Kind == "managed" && e.Path == dll))
                 throw new InvalidOperationException("Managed assembly not discovered.");
