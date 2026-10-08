@@ -78,6 +78,34 @@ internal static class SmokeTests
                     audit.RootElement.GetProperty("skipped").GetInt32() != 1)
                     throw new InvalidOperationException("Recovery audit counts incorrect.");
             }
+            var headerRoot = Path.Combine(temp, "headers-fixture");
+            Directory.CreateDirectory(headerRoot);
+            var one = Path.Combine(headerRoot, "one.h");
+            var two = Path.Combine(headerRoot, "two.h");
+            File.WriteAllText(one, "struct One {};");
+            File.WriteAllText(two, "struct Two {};");
+            var oldHeaderManifest = Path.Combine(temp, "old-header-manifest.json");
+            IncrementalManifest.Write(headerRoot, oldHeaderManifest, null);
+            var oldHeaderCatalogue = Path.Combine(temp, "old-headers.json");
+            File.WriteAllText(oldHeaderCatalogue, System.Text.Json.JsonSerializer.Serialize(new {
+                headers = new object[] { new { header = one, declarations = new object[0] },
+                    new { header = two, declarations = new object[0] } }
+            }));
+            File.Delete(two);
+            File.WriteAllText(one, "struct One { int value; };");
+            var newHeaderManifest = Path.Combine(temp, "new-header-manifest.json");
+            IncrementalManifest.Write(headerRoot, newHeaderManifest, oldHeaderManifest);
+            var deltaCatalogue = Path.Combine(temp, "delta-headers.json");
+            File.WriteAllText(deltaCatalogue, System.Text.Json.JsonSerializer.Serialize(new {
+                headers = new object[] { new { header = one, declarations = new object[0] } }
+            }));
+            var mergedCatalogue = Path.Combine(temp, "merged-headers.json");
+            HeaderCatalogueMerge.Merge(oldHeaderCatalogue, deltaCatalogue, newHeaderManifest, mergedCatalogue);
+            using (var merged = System.Text.Json.JsonDocument.Parse(File.ReadAllText(mergedCatalogue)))
+            {
+                if (merged.RootElement.GetProperty("headers").GetArrayLength() != 1)
+                    throw new InvalidOperationException("Deleted headers were not pruned.");
+            }
             Console.WriteLine("PASS: metadata decoding, managed inventory, C++ AST normalization, unified index, correlation");
         }
         finally { Directory.Delete(temp, recursive: true); }
