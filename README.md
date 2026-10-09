@@ -51,34 +51,34 @@ With `--sdk`, the pipeline also creates `sdk-headers.json`, `sdk-libraries.json`
 
 ## Capabilities and limits
 
-| Input | Extracted evidence | Limitation |
-|---|---|---|
-| Managed .NET DLL | Types, methods, fields, decoded and raw CLR signatures | Not proof of runtime loadability |
-| Native DLL | PE exports, ordinals, RVAs and forwarders | Not complete internal C++ classes |
-| C++ SDK headers | Clang AST declarations and type relationships | Requires correct compiler environment |
-| COFF .lib | Import/library symbol inventory | Not all libraries are import stubs |
-| PDB | Optional public debug symbols | Only available symbols |
-| Decorated exports | Optional MSVC demangling | Not a supported API guarantee |
+| Input             | Extracted evidence                                     | Limitation                            |
+| ----------------- | ------------------------------------------------------ | ------------------------------------- |
+| Managed .NET DLL  | Types, methods, fields, decoded and raw CLR signatures | Not proof of runtime loadability      |
+| Native DLL        | PE exports, ordinals, RVAs and forwarders              | Not complete internal C++ classes     |
+| C++ SDK headers   | Clang AST declarations and type relationships          | Requires correct compiler environment |
+| COFF .lib         | Import/library symbol inventory                        | Not all libraries are import stubs    |
+| PDB               | Optional public debug symbols                          | Only available symbols                |
+| Decorated exports | Optional MSVC demangling                               | Not a supported API guarantee         |
 
 ## Commands
 
-| Command | Purpose |
-|---|---|
+| Command                                            | Purpose                                 |
+| -------------------------------------------------- | --------------------------------------- |
 | `analyze --source ROOT --output DIR [--sdk SDK]` | Complete product scan and documentation |
-| `scan ROOT` | Managed/native DLL inventory |
-| `metadata DLL` | Static CLR metadata |
-| `exports DLL` | Native PE export analysis |
-| `headers SDK` | C++ AST extraction |
-| `import-libs SDK` | COFF symbol inspection |
-| `pdb ROOT` | PDB public symbol inspection |
-| `demangle EXPORTS_JSON` | MSVC name demangling |
-| `correlate MANAGED HEADERS EXPORTS` | Candidate managed/native matches |
-| `index MANAGED HEADERS EXPORTS DIR` | Build index from individual inputs |
-| `search-index INDEX QUERY` | Search indexed symbols |
-| `manifest ROOT` | SHA-256 file inventory and deltas |
-| `merge-headers OLD DELTA MANIFEST OUTPUT` | Merge incremental header results |
-| `audit-recovery SKILLS_DIR` | Measure recovery markers |
-| `self-test` | Run internal regression tests |
+| `scan ROOT`                                      | Managed/native DLL inventory            |
+| `metadata DLL`                                   | Static CLR metadata                     |
+| `exports DLL`                                    | Native PE export analysis               |
+| `headers SDK`                                    | C++ AST extraction                      |
+| `import-libs SDK`                                | COFF symbol inspection                  |
+| `pdb ROOT`                                       | PDB public symbol inspection            |
+| `demangle EXPORTS_JSON`                          | MSVC name demangling                    |
+| `correlate MANAGED HEADERS EXPORTS`              | Candidate managed/native matches        |
+| `index MANAGED HEADERS EXPORTS DIR`              | Build index from individual inputs      |
+| `search-index INDEX QUERY`                       | Search indexed symbols                  |
+| `manifest ROOT`                                  | SHA-256 file inventory and deltas       |
+| `merge-headers OLD DELTA MANIFEST OUTPUT`        | Merge incremental header results        |
+| `audit-recovery SKILLS_DIR`                      | Measure recovery markers                |
+| `self-test`                                      | Run internal regression tests           |
 
 ## Original .NET skill generation remains supported
 

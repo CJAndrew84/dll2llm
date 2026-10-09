@@ -171,6 +171,27 @@ namespace DllToLLMDoc
                 return;
             }
 
+            if (args.Length > 0 && args[0] == "compose")
+            {
+                if (args.Length < 2)
+                {
+                    Console.Error.WriteLine("Usage: dll2llm compose <output-dir>");
+                    Environment.ExitCode = 2;
+                    return;
+                }
+                try
+                {
+                    var failures = AnalysisComposer.Compose(args[1]);
+                    if (failures != 0)
+                    {
+                        Console.Error.WriteLine($"Composition completed with {failures} input errors; see composition-report.json.");
+                        Environment.ExitCode = 1;
+                    }
+                }
+                catch (Exception ex) { Console.Error.WriteLine(ex); Environment.ExitCode = 1; }
+                return;
+            }
+
             if (args.Length > 0 && args[0] == "merge-headers")
             {
                 if (args.Length < 5)

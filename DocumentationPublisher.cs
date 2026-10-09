@@ -22,7 +22,13 @@ internal static class DocumentationPublisher
         ("projectwise", new[] { "projectwise", "document", "repository" })
     };
 
-    internal static void Publish(string outputRoot, IReadOnlyList<AnalysisComposer.Symbol> symbols)
+    private sealed class DomainBucket
+    {
+        internal int Count;
+        internal List<(string Name, string Origin)> Samples { get; } = new();
+    }
+
+    internal static void Publish(string outputRoot, string symbolStream)
     {
         var root = Path.Combine(outputRoot, "documentation");
         var domains = Path.Combine(root, "domains");
@@ -34,52 +40,95 @@ internal static class DocumentationPublisher
         foreach (var dir in new[] { root, domains, api, relationships, search, reports, sources })
             Directory.CreateDirectory(dir);
 
-        var classified = symbols.Select(s => new { Symbol = s, Domains = Classify(s.Name) }).ToArray();
-        var namespaceGroups = symbols.GroupBy(s => NamespaceOf(s.Name))
-            .OrderBy(g => g.Key, StringComparer.OrdinalIgnoreCase).ToArray();
+        var namespaces = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var symbol in ReadSymbols(symbolStream))
+            namespaces.Add(NamespaceOf(symbol.Name));
+
+        var namespaceGroups = namespaces.OrderBy(x => x, StringComparer.OrdinalIgnoreCase).ToArray();
         var apiLinks = new Dictionary<string, string>(StringComparer.Ordinal);
         var usedNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         foreach (var group in namespaceGroups)
         {
-            var slug = Slug(group.Key);
+            var slug = Slug(group);
             var unique = slug;
             for (var n = 2; !usedNames.Add(unique); n++) unique = slug + "-" + n;
             var file = unique + ".md";
-            apiLinks[group.Key] = file;
+            apiLinks[group] = file;
             using var writer = new StreamWriter(Path.Combine(api, file));
-            writer.WriteLine("# " + group.Key);
+            writer.WriteLine("# " + group);
             writer.WriteLine();
             writer.WriteLine("Exact extracted records. Verify version and API support before calling native symbols.");
-            foreach (var symbol in group.OrderBy(s => s.Name, StringComparer.OrdinalIgnoreCase))
+        }
+
+        var apiBuffers = new Dictionary<string, StringBuilder>(StringComparer.Ordinal);
+        var domainBuckets = new Dictionary<string, Dictionary<string, DomainBucket>>(StringComparer.Ordinal);
+        foreach (var symbol in ReadSymbols(symbolStream))
+        {
+            var ns = NamespaceOf(symbol.Name);
+            if (!apiLinks.TryGetValue(ns, out var apiFile)) continue;
+
+            if (!apiBuffers.TryGetValue(apiFile, out var buffer))
             {
-                writer.WriteLine();
-                writer.WriteLine("## " + Clean(symbol.Name));
-                writer.WriteLine();
-                writer.WriteLine("- Kind: " + Clean(symbol.Kind));
-                writer.WriteLine("- Evidence: " + Clean(symbol.Origin));
-                writer.WriteLine("- Source: `" + Clean(symbol.Source).Replace("`", "'") + "`");
-                if (symbol.Signature is not null)
-                    writer.WriteLine("- Signature: `" + Clean(symbol.Signature).Replace("`", "'") + "`");
+                buffer = new StringBuilder();
+                apiBuffers[apiFile] = buffer;
             }
+
+            buffer.AppendLine();
+            buffer.AppendLine("## " + Clean(symbol.Name));
+            buffer.AppendLine();
+            buffer.AppendLine("- Kind: " + Clean(symbol.Kind));
+            buffer.AppendLine("- Evidence: " + Clean(symbol.Origin));
+            buffer.AppendLine("- Source: `" + Clean(symbol.Source).Replace("`", "'") + "`");
+            if (symbol.Signature is not null)
+                buffer.AppendLine("- Signature: `" + Clean(symbol.Signature).Replace("`", "'") + "`");
+
+            if (buffer.Length > 65536)
+            {
+                File.AppendAllText(Path.Combine(api, apiFile), buffer.ToString());
+                buffer.Clear();
+            }
+
+            foreach (var domain in Classify(symbol.Name))
+            {
+                if (!domainBuckets.TryGetValue(domain, out var namespaceMap))
+                {
+                    namespaceMap = new Dictionary<string, DomainBucket>(StringComparer.Ordinal);
+                    domainBuckets[domain] = namespaceMap;
+                }
+
+                if (!namespaceMap.TryGetValue(ns, out var bucket))
+                {
+                    bucket = new DomainBucket();
+                    namespaceMap[ns] = bucket;
+                }
+
+                bucket.Count++;
+                if (bucket.Samples.Count < 150)
+                    bucket.Samples.Add((symbol.Name, symbol.Origin));
+            }
+        }
+
+        foreach (var entry in apiBuffers)
+        {
+            if (entry.Value.Length == 0) continue;
+            File.AppendAllText(Path.Combine(api, entry.Key), entry.Value.ToString());
         }
 
         foreach (var domain in Rules.Select(r => r.Domain).Append("other"))
         {
-            var matches = classified.Where(x => x.Domains.Contains(domain)).ToArray();
-            if (matches.Length == 0) continue;
+            if (!domainBuckets.TryGetValue(domain, out var matches) || matches.Count == 0) continue;
             using var writer = new StreamWriter(Path.Combine(domains, domain + ".md"));
             writer.WriteLine("# " + domain.Replace('-', ' '));
             writer.WriteLine();
             writer.WriteLine("Automatic keyword classification. Entries may appear in multiple domains.");
             writer.WriteLine();
-            foreach (var group in matches.GroupBy(x => NamespaceOf(x.Symbol.Name))
-                         .OrderBy(g => g.Key, StringComparer.OrdinalIgnoreCase))
+            foreach (var group in matches.OrderBy(g => g.Key, StringComparer.OrdinalIgnoreCase))
             {
                 writer.WriteLine("## " + group.Key);
                 var link = "../api/" + apiLinks[group.Key];
-                foreach (var item in group.Take(150))
-                    writer.WriteLine("- [" + Clean(item.Symbol.Name) + "](" + link + ") — " + item.Symbol.Origin);
-                if (group.Count() > 150) writer.WriteLine("- Further entries: " + link);
+                foreach (var item in group.Value.Samples)
+                    writer.WriteLine("- [" + Clean(item.Name) + "](" + link + ") - " + item.Origin);
+                if (group.Value.Count > 150) writer.WriteLine("- Further entries: " + link);
             }
         }
 
@@ -112,6 +161,16 @@ internal static class DocumentationPublisher
         File.WriteAllText(Path.Combine(root, "INDEX.md"),
             "# API navigation\n\n" + string.Join("\n", domainLinks) + "\n\n" +
             string.Join("\n", apiLinks.OrderBy(x => x.Key).Select(x => "- [" + x.Key + "](api/" + x.Value + ")")));
+    }
+
+    private static IEnumerable<AnalysisComposer.Symbol> ReadSymbols(string symbolStream)
+    {
+        foreach (var line in File.ReadLines(symbolStream))
+        {
+            if (string.IsNullOrWhiteSpace(line)) continue;
+            var symbol = JsonSerializer.Deserialize<AnalysisComposer.Symbol>(line);
+            if (symbol is not null) yield return symbol;
+        }
     }
 
     private static string[] Classify(string name)
