@@ -27,6 +27,24 @@ internal static class SmokeTests
             if (property is null || ReflectionSignatureRecovery.Property(property) is not string recoveredProperty ||
                 !recoveredProperty.Contains("Kind", StringComparison.Ordinal))
                 throw new InvalidOperationException("Metadata-token property recovery failed.");
+            var inventoryJson = Path.Combine(temp, "inventory.json");
+            BinaryInventory.WriteJson(Path.GetDirectoryName(dll)!, inventoryJson);
+            using (var inventoryDocument = System.Text.Json.JsonDocument.Parse(File.ReadAllText(inventoryJson)))
+            {
+                var first = inventoryDocument.RootElement.GetProperty("binaries").EnumerateArray().First();
+                _ = first.GetProperty("path").GetString();
+                _ = first.GetProperty("kind").GetString();
+            }
+            var exportJson = Path.Combine(temp, "exports-from-managed.json");
+            NativeExports.WriteJson(dll, exportJson);
+            using (var exportDocument = System.Text.Json.JsonDocument.Parse(File.ReadAllText(exportJson)))
+            {
+                foreach (var export in exportDocument.RootElement.GetProperty("exports").EnumerateArray())
+                {
+                    _ = export.GetProperty("ordinal").GetUInt32();
+                    _ = export.GetProperty("rva").GetUInt32();
+                }
+            }
             var inventory = BinaryInventory.Scan(Path.GetDirectoryName(dll)!);
             if (!inventory.Any(e => e.Kind == "managed" && e.Path == dll))
                 throw new InvalidOperationException("Managed assembly not discovered.");
