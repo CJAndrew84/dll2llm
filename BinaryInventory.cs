@@ -94,7 +94,7 @@ internal static class BinaryInventory
             source = Path.GetFullPath(directory),
             generatedUtc = DateTimeOffset.UtcNow,
             binaries = entries
-        }, new JsonSerializerOptions { WriteIndented = true }));
+        }, new JsonSerializerOptions { WriteIndented = true, PropertyNamingPolicy = JsonNamingPolicy.CamelCase }));
         Console.WriteLine($"Indexed {entries.Count} DLLs ({entries.Count(e => e.Kind == "native")} native, " +
                           $"{entries.Count(e => e.Kind == "managed")} managed).");
     }
