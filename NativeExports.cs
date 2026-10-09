@@ -96,7 +96,7 @@ internal static class NativeExports
             kind = "pe-export-table",
             note = "Export names may be mangled; ordinals and addresses are not callable API contracts.",
             exports
-        }, new JsonSerializerOptions { WriteIndented = true }));
+        }, new JsonSerializerOptions { WriteIndented = true, PropertyNamingPolicy = JsonNamingPolicy.CamelCase }));
         Console.WriteLine($"Indexed {exports.Count} exports");
     }
 }
