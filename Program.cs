@@ -520,9 +520,9 @@ namespace DllToLLMDoc
                 SafeGeneratedWrite(Path.Combine(outputDir, "INDEX.md"), fullIndex);
             else
             {
-                var page = new StringBuilder("# API Index — continued\\n\\n");
+                var page = new StringBuilder("# API Index — continued\n\n");
                 var pages = new List<string>();
-                foreach (var line in fullIndex.Split('\\n'))
+                foreach (var line in fullIndex.Split('\n'))
                 {
                     if (Encoding.UTF8.GetByteCount(line) + 4 > 48_000)
                         throw new InvalidDataException("Single index row exceeds 48 KB; cannot split safely.");
@@ -541,7 +541,7 @@ namespace DllToLLMDoc
                     SafeGeneratedWrite(Path.Combine(outputDir, filename), page.ToString());
                     pages.Add(filename);
                 }
-                var navigation = "# API Index\\n\\n" + string.Join("", pages.Select(p => $"- [{p}]({p})\\n"));
+                var navigation = "# API Index\n\n" + string.Join("", pages.Select(p => $"- [{p}]({p})\n"));
                 SafeGeneratedWrite(Path.Combine(outputDir, "INDEX.md"), navigation);
             }
             Console.WriteLine($"  Written: INDEX.md ({types.Count} types indexed)");
