@@ -56,7 +56,7 @@ internal static class ProductCatalog
         var opts = new JsonSerializerOptions { WriteIndented = false };
         var ndjson = entries.Select(e => JsonSerializer.Serialize(e, opts));
         WriteIfChanged(Path.Combine(output, "catalog.jsonl"), string.Join("\n", ndjson) + (entries.Count > 0 ? "\n" : ""));
-        WriteIfChanged(Path.Combine(output, "symbols.jsonl"), string.Join("\\n", symbols.Select(x => JsonSerializer.Serialize(x))) + (symbols.Count > 0 ? "\\n" : ""));
+        WriteIfChanged(Path.Combine(output, "symbols.jsonl"), string.Join("\n", symbols.Select(x => JsonSerializer.Serialize(x))) + (symbols.Count > 0 ? "\n" : ""));
         var sb = new StringBuilder("# Product API navigation\n\n");
         sb.AppendLine("Generated from extracted metadata. Entries are source-file records, **not verified callable APIs**.");
         sb.AppendLine("Native exports do not establish C++ method signatures. Consult SDK headers and PDBs.");
