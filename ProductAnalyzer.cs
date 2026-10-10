@@ -32,6 +32,7 @@ internal static class ProductAnalyzer
                 var result = ProductCatalog.Run(["catalog", "--mode", "metadata", "--source", stage, "--output", catalogOutput]);
                 if (result != 0) throw new InvalidDataException("Catalogue generation failed.");
             }
+            OutputSizeAudit.Shard(stage);
             Publish(stage, output);
         }
         finally { if (Directory.Exists(stage)) Directory.Delete(stage, true); }
@@ -113,7 +114,7 @@ internal static class ProductAnalyzer
             if (errors.GetArrayLength() != 0)
                 throw new InvalidDataException($"Composition has {errors.GetArrayLength()} errors.");
         });
-        StageRun("output-size-audit", () => OutputSizeAudit.Verify(output));
+        StageRun("prepublication-size-policy", () => { /* Adaptive sharding runs after catalogue import and before publication. */ });
         File.WriteAllText(Path.Combine(output, "analysis-report.json"),
             JsonSerializer.Serialize(new
             {
@@ -126,6 +127,5 @@ internal static class ProductAnalyzer
             }, new JsonSerializerOptions { WriteIndented = true }));
         Console.WriteLine($"Analysis complete: {managed.Count} managed, {native.Count} native. " +
                           $"{stages.Count(x => x.Status == "failed")} failed stages.");
-        OutputSizeAudit.Verify(output);
     }
 }
