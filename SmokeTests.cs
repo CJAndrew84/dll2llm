@@ -149,10 +149,9 @@ internal static class SmokeTests
             using (var sparse = new FileStream(oversized, FileMode.CreateNew, FileAccess.Write))
                 sparse.SetLength(CatalogOutput.MaximumBytes + 1);
             bool rejected = false;
-            try { OutputSizeAudit.Verify(budgetRoot); }
+            try { OutputSizeAudit.Shard(budgetRoot); }
             catch (InvalidDataException) { rejected = true; }
-            if (!rejected) throw new InvalidOperationException("Oversized output was not rejected.");
-            File.Delete(oversized);
+            if (rejected) throw new InvalidOperationException("Oversized output was not sharded.");
             OutputSizeAudit.Verify(budgetRoot);
             Console.WriteLine("PASS: metadata decoding, managed inventory, C++ AST normalization, unified index, correlation");
         }
