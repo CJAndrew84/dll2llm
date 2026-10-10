@@ -1,0 +1,38 @@
+# clr-metadata
+
+Symbols: 14386
+
+## Shards
+
+- [clr-metadata-01.md](clr-metadata-01.md)
+- [clr-metadata-02.md](clr-metadata-02.md)
+- [clr-metadata-03.md](clr-metadata-03.md)
+- [clr-metadata-04.md](clr-metadata-04.md)
+- [clr-metadata-05.md](clr-metadata-05.md)
+- [clr-metadata-06.md](clr-metadata-06.md)
+- [clr-metadata-07.md](clr-metadata-07.md)
+- [clr-metadata-08.md](clr-metadata-08.md)
+- [clr-metadata-09.md](clr-metadata-09.md)
+- [clr-metadata-10.md](clr-metadata-10.md)
+- [clr-metadata-11.md](clr-metadata-11.md)
+- [clr-metadata-12.md](clr-metadata-12.md)
+- [clr-metadata-13.md](clr-metadata-13.md)
+- [clr-metadata-14.md](clr-metadata-14.md)
+- [clr-metadata-15.md](clr-metadata-15.md)
+- [clr-metadata-16.md](clr-metadata-16.md)
+- [clr-metadata-17.md](clr-metadata-17.md)
+- [clr-metadata-18.md](clr-metadata-18.md)
+- [clr-metadata-19.md](clr-metadata-19.md)
+- [clr-metadata-20.md](clr-metadata-20.md)
+- [clr-metadata-21.md](clr-metadata-21.md)
+- [clr-metadata-22.md](clr-metadata-22.md)
+- [clr-metadata-23.md](clr-metadata-23.md)
+- [clr-metadata-24.md](clr-metadata-24.md)
+- [clr-metadata-25.md](clr-metadata-25.md)
+- [clr-metadata-26.md](clr-metadata-26.md)
+- [clr-metadata-27.md](clr-metadata-27.md)
+- [clr-metadata-28.md](clr-metadata-28.md)
+- [clr-metadata-29.md](clr-metadata-29.md)
+- [clr-metadata-30.md](clr-metadata-30.md)
+- [clr-metadata-31.md](clr-metadata-31.md)
+- [clr-metadata-32.md](clr-metadata-32.md)

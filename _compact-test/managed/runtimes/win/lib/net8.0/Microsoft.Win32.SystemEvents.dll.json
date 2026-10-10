@@ -1,0 +1,5389 @@
+{
+  "source": "C:\\Repos\\dll2llm\\bin\\Release\\net10.0\\runtimes\\win\\lib\\net8.0\\Microsoft.Win32.SystemEvents.dll",
+  "format": "decoded-clr-metadata-v2",
+  "note": "Decoded signatures are best-effort; raw ECMA-335 blobs remain authoritative.",
+  "types": [
+    {
+      "namespace": "",
+      "name": "Interop",
+      "attributes": "Abstract, Sealed, BeforeFieldInit",
+      "methods": [],
+      "fields": []
+    },
+    {
+      "namespace": "FxResources.Microsoft.Win32.SystemEvents",
+      "name": "SR",
+      "attributes": "Abstract, Sealed, BeforeFieldInit",
+      "methods": [],
+      "fields": []
+    },
+    {
+      "namespace": "System",
+      "name": "SR",
+      "attributes": "Abstract, Sealed, BeforeFieldInit",
+      "methods": [
+        {
+          "decodedSignature": "bool UsingResourceKeys()",
+          "name": "UsingResourceKeys",
+          "attributes": "Assembly, Static, HideBySig",
+          "signatureHex": "000002",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "string GetResourceString(string)",
+          "name": "GetResourceString",
+          "attributes": "Private, Static, HideBySig",
+          "signatureHex": "00010E0E",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "resourceKey"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "string GetResourceString(string, string)",
+          "name": "GetResourceString",
+          "attributes": "Private, Static, HideBySig",
+          "signatureHex": "00020E0E0E",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "resourceKey"
+            },
+            {
+              "sequence": 2,
+              "name": "defaultString"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "string Format(string, object)",
+          "name": "Format",
+          "attributes": "Assembly, Static, HideBySig",
+          "signatureHex": "00020E0E1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "resourceFormat"
+            },
+            {
+              "sequence": 2,
+              "name": "p1"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "string Format(string, object, object)",
+          "name": "Format",
+          "attributes": "Assembly, Static, HideBySig",
+          "signatureHex": "00030E0E1C1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "resourceFormat"
+            },
+            {
+              "sequence": 2,
+              "name": "p1"
+            },
+            {
+              "sequence": 3,
+              "name": "p2"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "string Format(string, object, object, object)",
+          "name": "Format",
+          "attributes": "Assembly, Static, HideBySig",
+          "signatureHex": "00040E0E1C1C1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "resourceFormat"
+            },
+            {
+              "sequence": 2,
+              "name": "p1"
+            },
+            {
+              "sequence": 3,
+              "name": "p2"
+            },
+            {
+              "sequence": 4,
+              "name": "p3"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "string Format(string, object[])",
+          "name": "Format",
+          "attributes": "Assembly, Static, HideBySig",
+          "signatureHex": "00020E0E1D1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "resourceFormat"
+            },
+            {
+              "sequence": 2,
+              "name": "args"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "string Format(System.IFormatProvider, string, object)",
+          "name": "Format",
+          "attributes": "Assembly, Static, HideBySig",
+          "signatureHex": "00030E1280B50E1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "provider"
+            },
+            {
+              "sequence": 2,
+              "name": "resourceFormat"
+            },
+            {
+              "sequence": 3,
+              "name": "p1"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "string Format(System.IFormatProvider, string, object, object)",
+          "name": "Format",
+          "attributes": "Assembly, Static, HideBySig",
+          "signatureHex": "00040E1280B50E1C1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "provider"
+            },
+            {
+              "sequence": 2,
+              "name": "resourceFormat"
+            },
+            {
+              "sequence": 3,
+              "name": "p1"
+            },
+            {
+              "sequence": 4,
+              "name": "p2"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "string Format(System.IFormatProvider, string, object, object, object)",
+          "name": "Format",
+          "attributes": "Assembly, Static, HideBySig",
+          "signatureHex": "00050E1280B50E1C1C1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "provider"
+            },
+            {
+              "sequence": 2,
+              "name": "resourceFormat"
+            },
+            {
+              "sequence": 3,
+              "name": "p1"
+            },
+            {
+              "sequence": 4,
+              "name": "p2"
+            },
+            {
+              "sequence": 5,
+              "name": "p3"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "string Format(System.IFormatProvider, string, object[])",
+          "name": "Format",
+          "attributes": "Assembly, Static, HideBySig",
+          "signatureHex": "00030E1280B50E1D1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "provider"
+            },
+            {
+              "sequence": 2,
+              "name": "resourceFormat"
+            },
+            {
+              "sequence": 3,
+              "name": "args"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "System.Resources.ResourceManager get_ResourceManager()",
+          "name": "get_ResourceManager",
+          "attributes": "Assembly, Static, HideBySig, SpecialName",
+          "signatureHex": "00001280A9",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "string get_ErrorCreateSystemEvents()",
+          "name": "get_ErrorCreateSystemEvents",
+          "attributes": "Assembly, Static, HideBySig, SpecialName",
+          "signatureHex": "00000E",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "string get_ErrorCreateTimer()",
+          "name": "get_ErrorCreateTimer",
+          "attributes": "Assembly, Static, HideBySig, SpecialName",
+          "signatureHex": "00000E",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "string get_ErrorKillTimer()",
+          "name": "get_ErrorKillTimer",
+          "attributes": "Assembly, Static, HideBySig, SpecialName",
+          "signatureHex": "00000E",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "string get_InvalidLowBoundArgument()",
+          "name": "get_InvalidLowBoundArgument",
+          "attributes": "Assembly, Static, HideBySig, SpecialName",
+          "signatureHex": "00000E",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "string get_PlatformNotSupported_SystemEvents()",
+          "name": "get_PlatformNotSupported_SystemEvents",
+          "attributes": "Assembly, Static, HideBySig, SpecialName",
+          "signatureHex": "00000E",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "void .cctor()",
+          "name": ".cctor",
+          "attributes": "Private, Static, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "000001",
+          "parameters": []
+        }
+      ],
+      "fields": [
+        {
+          "name": "s_usingResourceKeys",
+          "decodedType": "bool",
+          "signatureHex": "0602"
+        },
+        {
+          "name": "s_resourceManager",
+          "decodedType": "System.Resources.ResourceManager",
+          "signatureHex": "061280A9"
+        }
+      ]
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "PowerModeChangedEventArgs",
+      "attributes": "Public, BeforeFieldInit",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(Microsoft.Win32.PowerModes)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "200101111C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "mode"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "Microsoft.Win32.PowerModes get_Mode()",
+          "name": "get_Mode",
+          "attributes": "Public, HideBySig, SpecialName",
+          "signatureHex": "2000111C",
+          "parameters": []
+        }
+      ],
+      "fields": [
+        {
+          "name": "_mode",
+          "decodedType": "Microsoft.Win32.PowerModes",
+          "signatureHex": "06111C"
+        }
+      ]
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "PowerModeChangedEventHandler",
+      "attributes": "Public, Sealed",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(object, nint)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "2002011C18",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "object"
+            },
+            {
+              "sequence": 2,
+              "name": "method"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void Invoke(object, Microsoft.Win32.PowerModeChangedEventArgs)",
+          "name": "Invoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "2002011C1214",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "sender"
+            },
+            {
+              "sequence": 2,
+              "name": "e"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "System.IAsyncResult BeginInvoke(object, Microsoft.Win32.PowerModeChangedEventArgs, System.AsyncCallback, object)",
+          "name": "BeginInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "20041280891C121412808D1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "sender"
+            },
+            {
+              "sequence": 2,
+              "name": "e"
+            },
+            {
+              "sequence": 3,
+              "name": "callback"
+            },
+            {
+              "sequence": 4,
+              "name": "object"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void EndInvoke(System.IAsyncResult)",
+          "name": "EndInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "200101128089",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "result"
+            }
+          ]
+        }
+      ],
+      "fields": []
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "PowerModes",
+      "attributes": "Public, Sealed",
+      "methods": [],
+      "fields": [
+        {
+          "name": "value__",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "Resume",
+          "decodedType": "Microsoft.Win32.PowerModes",
+          "signatureHex": "06111C"
+        },
+        {
+          "name": "StatusChange",
+          "decodedType": "Microsoft.Win32.PowerModes",
+          "signatureHex": "06111C"
+        },
+        {
+          "name": "Suspend",
+          "decodedType": "Microsoft.Win32.PowerModes",
+          "signatureHex": "06111C"
+        }
+      ]
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "SessionEndedEventArgs",
+      "attributes": "Public, BeforeFieldInit",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(Microsoft.Win32.SessionEndReasons)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "2001011130",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "reason"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "Microsoft.Win32.SessionEndReasons get_Reason()",
+          "name": "get_Reason",
+          "attributes": "Public, HideBySig, SpecialName",
+          "signatureHex": "20001130",
+          "parameters": []
+        }
+      ],
+      "fields": [
+        {
+          "name": "_reason",
+          "decodedType": "Microsoft.Win32.SessionEndReasons",
+          "signatureHex": "061130"
+        }
+      ]
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "SessionEndedEventHandler",
+      "attributes": "Public, Sealed",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(object, nint)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "2002011C18",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "object"
+            },
+            {
+              "sequence": 2,
+              "name": "method"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void Invoke(object, Microsoft.Win32.SessionEndedEventArgs)",
+          "name": "Invoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "2002011C1220",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "sender"
+            },
+            {
+              "sequence": 2,
+              "name": "e"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "System.IAsyncResult BeginInvoke(object, Microsoft.Win32.SessionEndedEventArgs, System.AsyncCallback, object)",
+          "name": "BeginInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "20041280891C122012808D1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "sender"
+            },
+            {
+              "sequence": 2,
+              "name": "e"
+            },
+            {
+              "sequence": 3,
+              "name": "callback"
+            },
+            {
+              "sequence": 4,
+              "name": "object"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void EndInvoke(System.IAsyncResult)",
+          "name": "EndInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "200101128089",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "result"
+            }
+          ]
+        }
+      ],
+      "fields": []
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "SessionEndingEventArgs",
+      "attributes": "Public, BeforeFieldInit",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(Microsoft.Win32.SessionEndReasons)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "2001011130",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "reason"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "bool get_Cancel()",
+          "name": "get_Cancel",
+          "attributes": "Public, HideBySig, SpecialName",
+          "signatureHex": "200002",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "void set_Cancel(bool)",
+          "name": "set_Cancel",
+          "attributes": "Public, HideBySig, SpecialName",
+          "signatureHex": "20010102",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "Microsoft.Win32.SessionEndReasons get_Reason()",
+          "name": "get_Reason",
+          "attributes": "Public, HideBySig, SpecialName",
+          "signatureHex": "20001130",
+          "parameters": []
+        }
+      ],
+      "fields": [
+        {
+          "name": "_cancel",
+          "decodedType": "bool",
+          "signatureHex": "0602"
+        },
+        {
+          "name": "_reason",
+          "decodedType": "Microsoft.Win32.SessionEndReasons",
+          "signatureHex": "061130"
+        }
+      ]
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "SessionEndingEventHandler",
+      "attributes": "Public, Sealed",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(object, nint)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "2002011C18",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "object"
+            },
+            {
+              "sequence": 2,
+              "name": "method"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void Invoke(object, Microsoft.Win32.SessionEndingEventArgs)",
+          "name": "Invoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "2002011C1228",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "sender"
+            },
+            {
+              "sequence": 2,
+              "name": "e"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "System.IAsyncResult BeginInvoke(object, Microsoft.Win32.SessionEndingEventArgs, System.AsyncCallback, object)",
+          "name": "BeginInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "20041280891C122812808D1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "sender"
+            },
+            {
+              "sequence": 2,
+              "name": "e"
+            },
+            {
+              "sequence": 3,
+              "name": "callback"
+            },
+            {
+              "sequence": 4,
+              "name": "object"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void EndInvoke(System.IAsyncResult)",
+          "name": "EndInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "200101128089",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "result"
+            }
+          ]
+        }
+      ],
+      "fields": []
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "SessionEndReasons",
+      "attributes": "Public, Sealed",
+      "methods": [],
+      "fields": [
+        {
+          "name": "value__",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "Logoff",
+          "decodedType": "Microsoft.Win32.SessionEndReasons",
+          "signatureHex": "061130"
+        },
+        {
+          "name": "SystemShutdown",
+          "decodedType": "Microsoft.Win32.SessionEndReasons",
+          "signatureHex": "061130"
+        }
+      ]
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "SessionSwitchEventArgs",
+      "attributes": "Public, BeforeFieldInit",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(Microsoft.Win32.SessionSwitchReason)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "200101113C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "reason"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "Microsoft.Win32.SessionSwitchReason get_Reason()",
+          "name": "get_Reason",
+          "attributes": "Public, HideBySig, SpecialName",
+          "signatureHex": "2000113C",
+          "parameters": []
+        }
+      ],
+      "fields": [
+        {
+          "name": "_reason",
+          "decodedType": "Microsoft.Win32.SessionSwitchReason",
+          "signatureHex": "06113C"
+        }
+      ]
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "SessionSwitchEventHandler",
+      "attributes": "Public, Sealed",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(object, nint)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "2002011C18",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "object"
+            },
+            {
+              "sequence": 2,
+              "name": "method"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void Invoke(object, Microsoft.Win32.SessionSwitchEventArgs)",
+          "name": "Invoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "2002011C1234",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "sender"
+            },
+            {
+              "sequence": 2,
+              "name": "e"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "System.IAsyncResult BeginInvoke(object, Microsoft.Win32.SessionSwitchEventArgs, System.AsyncCallback, object)",
+          "name": "BeginInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "20041280891C123412808D1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "sender"
+            },
+            {
+              "sequence": 2,
+              "name": "e"
+            },
+            {
+              "sequence": 3,
+              "name": "callback"
+            },
+            {
+              "sequence": 4,
+              "name": "object"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void EndInvoke(System.IAsyncResult)",
+          "name": "EndInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "200101128089",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "result"
+            }
+          ]
+        }
+      ],
+      "fields": []
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "SessionSwitchReason",
+      "attributes": "Public, Sealed",
+      "methods": [],
+      "fields": [
+        {
+          "name": "value__",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ConsoleConnect",
+          "decodedType": "Microsoft.Win32.SessionSwitchReason",
+          "signatureHex": "06113C"
+        },
+        {
+          "name": "ConsoleDisconnect",
+          "decodedType": "Microsoft.Win32.SessionSwitchReason",
+          "signatureHex": "06113C"
+        },
+        {
+          "name": "RemoteConnect",
+          "decodedType": "Microsoft.Win32.SessionSwitchReason",
+          "signatureHex": "06113C"
+        },
+        {
+          "name": "RemoteDisconnect",
+          "decodedType": "Microsoft.Win32.SessionSwitchReason",
+          "signatureHex": "06113C"
+        },
+        {
+          "name": "SessionLogon",
+          "decodedType": "Microsoft.Win32.SessionSwitchReason",
+          "signatureHex": "06113C"
+        },
+        {
+          "name": "SessionLogoff",
+          "decodedType": "Microsoft.Win32.SessionSwitchReason",
+          "signatureHex": "06113C"
+        },
+        {
+          "name": "SessionLock",
+          "decodedType": "Microsoft.Win32.SessionSwitchReason",
+          "signatureHex": "06113C"
+        },
+        {
+          "name": "SessionUnlock",
+          "decodedType": "Microsoft.Win32.SessionSwitchReason",
+          "signatureHex": "06113C"
+        },
+        {
+          "name": "SessionRemoteControl",
+          "decodedType": "Microsoft.Win32.SessionSwitchReason",
+          "signatureHex": "06113C"
+        }
+      ]
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "SystemEvents",
+      "attributes": "Public, Sealed, BeforeFieldInit",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor()",
+          "name": ".ctor",
+          "attributes": "Private, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "200001",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "bool get_UserInteractive()",
+          "name": "get_UserInteractive",
+          "attributes": "Private, Static, HideBySig, SpecialName",
+          "signatureHex": "000002",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "void add_DisplaySettingsChanging(System.EventHandler)",
+          "name": "add_DisplaySettingsChanging",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011280C9",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void remove_DisplaySettingsChanging(System.EventHandler)",
+          "name": "remove_DisplaySettingsChanging",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011280C9",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void add_DisplaySettingsChanged(System.EventHandler)",
+          "name": "add_DisplaySettingsChanged",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011280C9",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void remove_DisplaySettingsChanged(System.EventHandler)",
+          "name": "remove_DisplaySettingsChanged",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011280C9",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void add_EventsThreadShutdown(System.EventHandler)",
+          "name": "add_EventsThreadShutdown",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011280C9",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void remove_EventsThreadShutdown(System.EventHandler)",
+          "name": "remove_EventsThreadShutdown",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011280C9",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void add_InstalledFontsChanged(System.EventHandler)",
+          "name": "add_InstalledFontsChanged",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011280C9",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void remove_InstalledFontsChanged(System.EventHandler)",
+          "name": "remove_InstalledFontsChanged",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011280C9",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void add_LowMemory(System.EventHandler)",
+          "name": "add_LowMemory",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011280C9",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void remove_LowMemory(System.EventHandler)",
+          "name": "remove_LowMemory",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011280C9",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void add_PaletteChanged(System.EventHandler)",
+          "name": "add_PaletteChanged",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011280C9",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void remove_PaletteChanged(System.EventHandler)",
+          "name": "remove_PaletteChanged",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011280C9",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void add_PowerModeChanged(Microsoft.Win32.PowerModeChangedEventHandler)",
+          "name": "add_PowerModeChanged",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011218",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void remove_PowerModeChanged(Microsoft.Win32.PowerModeChangedEventHandler)",
+          "name": "remove_PowerModeChanged",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011218",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void add_SessionEnded(Microsoft.Win32.SessionEndedEventHandler)",
+          "name": "add_SessionEnded",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011224",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void remove_SessionEnded(Microsoft.Win32.SessionEndedEventHandler)",
+          "name": "remove_SessionEnded",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011224",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void add_SessionEnding(Microsoft.Win32.SessionEndingEventHandler)",
+          "name": "add_SessionEnding",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "000101122C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void remove_SessionEnding(Microsoft.Win32.SessionEndingEventHandler)",
+          "name": "remove_SessionEnding",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "000101122C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void add_SessionSwitch(Microsoft.Win32.SessionSwitchEventHandler)",
+          "name": "add_SessionSwitch",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011238",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void remove_SessionSwitch(Microsoft.Win32.SessionSwitchEventHandler)",
+          "name": "remove_SessionSwitch",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011238",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void add_TimeChanged(System.EventHandler)",
+          "name": "add_TimeChanged",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011280C9",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void remove_TimeChanged(System.EventHandler)",
+          "name": "remove_TimeChanged",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011280C9",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void add_TimerElapsed(Microsoft.Win32.TimerElapsedEventHandler)",
+          "name": "add_TimerElapsed",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011248",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void remove_TimerElapsed(Microsoft.Win32.TimerElapsedEventHandler)",
+          "name": "remove_TimerElapsed",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011248",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void add_UserPreferenceChanged(Microsoft.Win32.UserPreferenceChangedEventHandler)",
+          "name": "add_UserPreferenceChanged",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011254",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void remove_UserPreferenceChanged(Microsoft.Win32.UserPreferenceChangedEventHandler)",
+          "name": "remove_UserPreferenceChanged",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011254",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void add_UserPreferenceChanging(Microsoft.Win32.UserPreferenceChangingEventHandler)",
+          "name": "add_UserPreferenceChanging",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "000101125C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void remove_UserPreferenceChanging(Microsoft.Win32.UserPreferenceChangingEventHandler)",
+          "name": "remove_UserPreferenceChanging",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "000101125C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void AddEventHandler(object, System.Delegate)",
+          "name": "AddEventHandler",
+          "attributes": "Private, Static, HideBySig",
+          "signatureHex": "0002011C1280F1",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "key"
+            },
+            {
+              "sequence": 2,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "bool ConsoleHandlerProc(int)",
+          "name": "ConsoleHandlerProc",
+          "attributes": "Private, HideBySig",
+          "signatureHex": "20010208",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "signalType"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "nint get_DefWndProc()",
+          "name": "get_DefWndProc",
+          "attributes": "Private, Static, HideBySig, SpecialName",
+          "signatureHex": "000018",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "nint CreateTimer(int)",
+          "name": "CreateTimer",
+          "attributes": "Public, Static, HideBySig",
+          "signatureHex": "00011808",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "interval"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void Dispose()",
+          "name": "Dispose",
+          "attributes": "Private, HideBySig",
+          "signatureHex": "200001",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "void EnsureSystemEvents(bool)",
+          "name": "EnsureSystemEvents",
+          "attributes": "Private, Static, HideBySig",
+          "signatureHex": "00010102",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "requireHandle"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void EnsureRegisteredSessionNotification()",
+          "name": "EnsureRegisteredSessionNotification",
+          "attributes": "Private, Static, HideBySig",
+          "signatureHex": "000001",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "Microsoft.Win32.UserPreferenceCategory GetUserPreferenceCategory(int, nint, nint)",
+          "name": "GetUserPreferenceCategory",
+          "attributes": "Private, Static, HideBySig",
+          "signatureHex": "0003114C081818",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "msg"
+            },
+            {
+              "sequence": 2,
+              "name": "wParam"
+            },
+            {
+              "sequence": 3,
+              "name": "lParam"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void Initialize()",
+          "name": "Initialize",
+          "attributes": "Private, HideBySig",
+          "signatureHex": "200001",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "void InvokeMarshaledCallbacks()",
+          "name": "InvokeMarshaledCallbacks",
+          "attributes": "Private, Static, HideBySig",
+          "signatureHex": "000001",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "void InvokeOnEventsThread(System.Delegate)",
+          "name": "InvokeOnEventsThread",
+          "attributes": "Public, Static, HideBySig",
+          "signatureHex": "0001011280F1",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "method"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void KillTimer(nint)",
+          "name": "KillTimer",
+          "attributes": "Public, Static, HideBySig",
+          "signatureHex": "00010118",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "timerId"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "nint OnCreateTimer(nint)",
+          "name": "OnCreateTimer",
+          "attributes": "Private, HideBySig",
+          "signatureHex": "20011818",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "wParam"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void OnDisplaySettingsChanging()",
+          "name": "OnDisplaySettingsChanging",
+          "attributes": "Private, HideBySig",
+          "signatureHex": "200001",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "void OnDisplaySettingsChanged()",
+          "name": "OnDisplaySettingsChanged",
+          "attributes": "Private, HideBySig",
+          "signatureHex": "200001",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "void OnGenericEvent(object)",
+          "name": "OnGenericEvent",
+          "attributes": "Private, HideBySig",
+          "signatureHex": "2001011C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "eventKey"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void OnShutdown(object)",
+          "name": "OnShutdown",
+          "attributes": "Private, HideBySig",
+          "signatureHex": "2001011C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "eventKey"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "bool OnKillTimer(nint)",
+          "name": "OnKillTimer",
+          "attributes": "Private, HideBySig",
+          "signatureHex": "20010218",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "wParam"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void OnPowerModeChanged(nint)",
+          "name": "OnPowerModeChanged",
+          "attributes": "Private, HideBySig",
+          "signatureHex": "20010118",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "wParam"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void OnSessionEnded(nint, nint)",
+          "name": "OnSessionEnded",
+          "attributes": "Private, HideBySig",
+          "signatureHex": "2002011818",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "wParam"
+            },
+            {
+              "sequence": 2,
+              "name": "lParam"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "int OnSessionEnding(nint)",
+          "name": "OnSessionEnding",
+          "attributes": "Private, HideBySig",
+          "signatureHex": "20010818",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "lParam"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void OnSessionSwitch(int)",
+          "name": "OnSessionSwitch",
+          "attributes": "Private, HideBySig",
+          "signatureHex": "20010108",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "wParam"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void OnThemeChanged()",
+          "name": "OnThemeChanged",
+          "attributes": "Private, HideBySig",
+          "signatureHex": "200001",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "void OnUserPreferenceChanged(int, nint, nint)",
+          "name": "OnUserPreferenceChanged",
+          "attributes": "Private, HideBySig",
+          "signatureHex": "200301081818",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "msg"
+            },
+            {
+              "sequence": 2,
+              "name": "wParam"
+            },
+            {
+              "sequence": 3,
+              "name": "lParam"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void OnUserPreferenceChanging(int, nint, nint)",
+          "name": "OnUserPreferenceChanging",
+          "attributes": "Private, HideBySig",
+          "signatureHex": "200301081818",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "msg"
+            },
+            {
+              "sequence": 2,
+              "name": "wParam"
+            },
+            {
+              "sequence": 3,
+              "name": "lParam"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void OnTimerElapsed(nint)",
+          "name": "OnTimerElapsed",
+          "attributes": "Private, HideBySig",
+          "signatureHex": "20010118",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "wParam"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void RaiseEvent(object, object[])",
+          "name": "RaiseEvent",
+          "attributes": "Private, Static, HideBySig",
+          "signatureHex": "0002011C1D1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "key"
+            },
+            {
+              "sequence": 2,
+              "name": "args"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void RaiseEvent(bool, object, object[])",
+          "name": "RaiseEvent",
+          "attributes": "Private, Static, HideBySig",
+          "signatureHex": "000301021C1D1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "checkFinalization"
+            },
+            {
+              "sequence": 2,
+              "name": "key"
+            },
+            {
+              "sequence": 3,
+              "name": "args"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void RemoveEventHandler(object, System.Delegate)",
+          "name": "RemoveEventHandler",
+          "attributes": "Private, Static, HideBySig",
+          "signatureHex": "0002011C1280F1",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "key"
+            },
+            {
+              "sequence": 2,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void Shutdown()",
+          "name": "Shutdown",
+          "attributes": "Private, Static, HideBySig",
+          "signatureHex": "000001",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "void Shutdown(object, System.EventArgs)",
+          "name": "Shutdown",
+          "attributes": "Private, Static, HideBySig",
+          "signatureHex": "0002011C1280B9",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "sender"
+            },
+            {
+              "sequence": 2,
+              "name": "e"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "nint WindowProc(nint, int, nint, nint)",
+          "name": "WindowProc",
+          "attributes": "Private, HideBySig",
+          "signatureHex": "20041818081818",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "hWnd"
+            },
+            {
+              "sequence": 2,
+              "name": "msg"
+            },
+            {
+              "sequence": 3,
+              "name": "wParam"
+            },
+            {
+              "sequence": 4,
+              "name": "lParam"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void WindowThreadProc()",
+          "name": "WindowThreadProc",
+          "attributes": "Private, HideBySig",
+          "signatureHex": "200001",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "void .cctor()",
+          "name": ".cctor",
+          "attributes": "Private, Static, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "000001",
+          "parameters": []
+        }
+      ],
+      "fields": [
+        {
+          "name": "s_eventLockObject",
+          "decodedType": "object",
+          "signatureHex": "061C"
+        },
+        {
+          "name": "s_procLockObject",
+          "decodedType": "object",
+          "signatureHex": "061C"
+        },
+        {
+          "name": "s_systemEvents",
+          "decodedType": "Microsoft.Win32.SystemEvents",
+          "signatureHex": "061F80DD1240"
+        },
+        {
+          "name": "s_windowThread",
+          "decodedType": "System.Threading.Thread",
+          "signatureHex": "061F80DD1280E1"
+        },
+        {
+          "name": "s_eventWindowReady",
+          "decodedType": "System.Threading.ManualResetEvent",
+          "signatureHex": "061F80DD1280E5"
+        },
+        {
+          "name": "s_randomTimerId",
+          "decodedType": "System.Random",
+          "signatureHex": "061280E9"
+        },
+        {
+          "name": "s_registeredSessionNotification",
+          "decodedType": "bool",
+          "signatureHex": "061F80DD02"
+        },
+        {
+          "name": "s_defWindowProc",
+          "decodedType": "nint",
+          "signatureHex": "061F80DD18"
+        },
+        {
+          "name": "s_className",
+          "decodedType": "string",
+          "signatureHex": "061F80DD0E"
+        },
+        {
+          "name": "s_threadCallbackList",
+          "decodedType": "System.Collections.Generic.Queue\u00601\u003CSystem.Delegate\u003E",
+          "signatureHex": "061F80DD151280ED011280F1"
+        },
+        {
+          "name": "s_threadCallbackMessage",
+          "decodedType": "int",
+          "signatureHex": "061F80DD08"
+        },
+        {
+          "name": "_windowHandle",
+          "decodedType": "nint",
+          "signatureHex": "061F80DD18"
+        },
+        {
+          "name": "_windowProc",
+          "decodedType": "WndProc",
+          "signatureHex": "06128088"
+        },
+        {
+          "name": "_consoleHandler",
+          "decodedType": "ConsoleCtrlHandlerRoutine",
+          "signatureHex": "0612808C"
+        },
+        {
+          "name": "s_onUserPreferenceChangingEvent",
+          "decodedType": "object",
+          "signatureHex": "061C"
+        },
+        {
+          "name": "s_onUserPreferenceChangedEvent",
+          "decodedType": "object",
+          "signatureHex": "061C"
+        },
+        {
+          "name": "s_onSessionEndingEvent",
+          "decodedType": "object",
+          "signatureHex": "061C"
+        },
+        {
+          "name": "s_onSessionEndedEvent",
+          "decodedType": "object",
+          "signatureHex": "061C"
+        },
+        {
+          "name": "s_onPowerModeChangedEvent",
+          "decodedType": "object",
+          "signatureHex": "061C"
+        },
+        {
+          "name": "s_onLowMemoryEvent",
+          "decodedType": "object",
+          "signatureHex": "061C"
+        },
+        {
+          "name": "s_onDisplaySettingsChangingEvent",
+          "decodedType": "object",
+          "signatureHex": "061C"
+        },
+        {
+          "name": "s_onDisplaySettingsChangedEvent",
+          "decodedType": "object",
+          "signatureHex": "061C"
+        },
+        {
+          "name": "s_onInstalledFontsChangedEvent",
+          "decodedType": "object",
+          "signatureHex": "061C"
+        },
+        {
+          "name": "s_onTimeChangedEvent",
+          "decodedType": "object",
+          "signatureHex": "061C"
+        },
+        {
+          "name": "s_onTimerElapsedEvent",
+          "decodedType": "object",
+          "signatureHex": "061C"
+        },
+        {
+          "name": "s_onPaletteChangedEvent",
+          "decodedType": "object",
+          "signatureHex": "061C"
+        },
+        {
+          "name": "s_onEventsThreadShutdownEvent",
+          "decodedType": "object",
+          "signatureHex": "061C"
+        },
+        {
+          "name": "s_onSessionSwitchEvent",
+          "decodedType": "object",
+          "signatureHex": "061C"
+        },
+        {
+          "name": "s_handlers",
+          "decodedType": "System.Collections.Generic.Dictionary\u00602\u003Cobject, System.Collections.Generic.List\u00601\u003CSystemEventInvokeInfo\u003E\u003E",
+          "signatureHex": "06151280F5021C151280F9011278"
+        },
+        {
+          "name": "s_processWinStation",
+          "decodedType": "nint",
+          "signatureHex": "061F80DD18"
+        },
+        {
+          "name": "s_isUserInteractive",
+          "decodedType": "bool",
+          "signatureHex": "061F80DD02"
+        }
+      ]
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "TimerElapsedEventArgs",
+      "attributes": "Public, BeforeFieldInit",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(nint)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "20010118",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "timerId"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "nint get_TimerId()",
+          "name": "get_TimerId",
+          "attributes": "Public, HideBySig, SpecialName",
+          "signatureHex": "200018",
+          "parameters": []
+        }
+      ],
+      "fields": [
+        {
+          "name": "_timerId",
+          "decodedType": "nint",
+          "signatureHex": "0618"
+        }
+      ]
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "TimerElapsedEventHandler",
+      "attributes": "Public, Sealed",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(object, nint)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "2002011C18",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "object"
+            },
+            {
+              "sequence": 2,
+              "name": "method"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void Invoke(object, Microsoft.Win32.TimerElapsedEventArgs)",
+          "name": "Invoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "2002011C1244",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "sender"
+            },
+            {
+              "sequence": 2,
+              "name": "e"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "System.IAsyncResult BeginInvoke(object, Microsoft.Win32.TimerElapsedEventArgs, System.AsyncCallback, object)",
+          "name": "BeginInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "20041280891C124412808D1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "sender"
+            },
+            {
+              "sequence": 2,
+              "name": "e"
+            },
+            {
+              "sequence": 3,
+              "name": "callback"
+            },
+            {
+              "sequence": 4,
+              "name": "object"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void EndInvoke(System.IAsyncResult)",
+          "name": "EndInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "200101128089",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "result"
+            }
+          ]
+        }
+      ],
+      "fields": []
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "UserPreferenceCategory",
+      "attributes": "Public, Sealed",
+      "methods": [],
+      "fields": [
+        {
+          "name": "value__",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "Accessibility",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "06114C"
+        },
+        {
+          "name": "Color",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "06114C"
+        },
+        {
+          "name": "Desktop",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "06114C"
+        },
+        {
+          "name": "General",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "06114C"
+        },
+        {
+          "name": "Icon",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "06114C"
+        },
+        {
+          "name": "Keyboard",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "06114C"
+        },
+        {
+          "name": "Menu",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "06114C"
+        },
+        {
+          "name": "Mouse",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "06114C"
+        },
+        {
+          "name": "Policy",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "06114C"
+        },
+        {
+          "name": "Power",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "06114C"
+        },
+        {
+          "name": "Screensaver",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "06114C"
+        },
+        {
+          "name": "Window",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "06114C"
+        },
+        {
+          "name": "Locale",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "06114C"
+        },
+        {
+          "name": "VisualStyle",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "06114C"
+        }
+      ]
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "UserPreferenceChangedEventArgs",
+      "attributes": "Public, BeforeFieldInit",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(Microsoft.Win32.UserPreferenceCategory)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "200101114C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "category"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "Microsoft.Win32.UserPreferenceCategory get_Category()",
+          "name": "get_Category",
+          "attributes": "Public, HideBySig, SpecialName",
+          "signatureHex": "2000114C",
+          "parameters": []
+        }
+      ],
+      "fields": [
+        {
+          "name": "_category",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "06114C"
+        }
+      ]
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "UserPreferenceChangedEventHandler",
+      "attributes": "Public, Sealed",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(object, nint)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "2002011C18",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "object"
+            },
+            {
+              "sequence": 2,
+              "name": "method"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void Invoke(object, Microsoft.Win32.UserPreferenceChangedEventArgs)",
+          "name": "Invoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "2002011C1250",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "sender"
+            },
+            {
+              "sequence": 2,
+              "name": "e"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "System.IAsyncResult BeginInvoke(object, Microsoft.Win32.UserPreferenceChangedEventArgs, System.AsyncCallback, object)",
+          "name": "BeginInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "20041280891C125012808D1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "sender"
+            },
+            {
+              "sequence": 2,
+              "name": "e"
+            },
+            {
+              "sequence": 3,
+              "name": "callback"
+            },
+            {
+              "sequence": 4,
+              "name": "object"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void EndInvoke(System.IAsyncResult)",
+          "name": "EndInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "200101128089",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "result"
+            }
+          ]
+        }
+      ],
+      "fields": []
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "UserPreferenceChangingEventArgs",
+      "attributes": "Public, BeforeFieldInit",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(Microsoft.Win32.UserPreferenceCategory)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "200101114C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "category"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "Microsoft.Win32.UserPreferenceCategory get_Category()",
+          "name": "get_Category",
+          "attributes": "Public, HideBySig, SpecialName",
+          "signatureHex": "2000114C",
+          "parameters": []
+        }
+      ],
+      "fields": [
+        {
+          "name": "_category",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "06114C"
+        }
+      ]
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "UserPreferenceChangingEventHandler",
+      "attributes": "Public, Sealed",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(object, nint)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "2002011C18",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "object"
+            },
+            {
+              "sequence": 2,
+              "name": "method"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void Invoke(object, Microsoft.Win32.UserPreferenceChangingEventArgs)",
+          "name": "Invoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "2002011C1258",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "sender"
+            },
+            {
+              "sequence": 2,
+              "name": "e"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "System.IAsyncResult BeginInvoke(object, Microsoft.Win32.UserPreferenceChangingEventArgs, System.AsyncCallback, object)",
+          "name": "BeginInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "20041280891C125812808D1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "sender"
+            },
+            {
+              "sequence": 2,
+              "name": "e"
+            },
+            {
+              "sequence": 3,
+              "name": "callback"
+            },
+            {
+              "sequence": 4,
+              "name": "object"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void EndInvoke(System.IAsyncResult)",
+          "name": "EndInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "200101128089",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "result"
+            }
+          ]
+        }
+      ],
+      "fields": []
+    },
+    {
+      "namespace": "Microsoft.Win32.SafeHandles",
+      "name": "SafeLibraryHandle",
+      "attributes": "Sealed, BeforeFieldInit",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor()",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "200001",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "void .ctor(nint)",
+          "name": ".ctor",
+          "attributes": "Assembly, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "20010118",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "bool ReleaseHandle()",
+          "name": "ReleaseHandle",
+          "attributes": "Family, Virtual, HideBySig",
+          "signatureHex": "200002",
+          "parameters": []
+        }
+      ],
+      "fields": []
+    },
+    {
+      "namespace": "",
+      "name": "Libraries",
+      "attributes": "NestedAssembly, Abstract, Sealed, BeforeFieldInit",
+      "methods": [],
+      "fields": [
+        {
+          "name": "Activeds",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "Advapi32",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "Authz",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "BCrypt",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "Credui",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "Crypt32",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "CryptUI",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "Dnsapi",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "Dsrole",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "Gdi32",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "HttpApi",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "IpHlpApi",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "Kernel32",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "Logoncli",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "Mswsock",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "NCrypt",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "Netapi32",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "Netutils",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "NtDll",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "Odbc32",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "Ole32",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "OleAut32",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "Pdh",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "Secur32",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "Shell32",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "SspiCli",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "User32",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "Version",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "WebSocket",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "Wevtapi",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "WinHttp",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "WinMM",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "Wkscli",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "Wldap32",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "Ws2_32",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "Wtsapi32",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "CompressionNative",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "GlobalizationNative",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "MsQuic",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "HostPolicy",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "Ucrtbase",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "Xolehlp",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "Comdlg32",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "Gdiplus",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "Oleaut32",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        },
+        {
+          "name": "Winspool",
+          "decodedType": "string",
+          "signatureHex": "060E"
+        }
+      ]
+    },
+    {
+      "namespace": "",
+      "name": "Errors",
+      "attributes": "NestedAssembly, Abstract, Sealed, BeforeFieldInit",
+      "methods": [],
+      "fields": [
+        {
+          "name": "ERROR_SUCCESS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_INVALID_FUNCTION",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_FILE_NOT_FOUND",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_PATH_NOT_FOUND",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_ACCESS_DENIED",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_INVALID_HANDLE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_NOT_ENOUGH_MEMORY",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_INVALID_DATA",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_INVALID_DRIVE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_NO_MORE_FILES",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_NOT_READY",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_BAD_COMMAND",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_BAD_LENGTH",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_SHARING_VIOLATION",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_LOCK_VIOLATION",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_HANDLE_EOF",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_NOT_SUPPORTED",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_BAD_NETPATH",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_NETWORK_ACCESS_DENIED",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_BAD_NET_NAME",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_FILE_EXISTS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_INVALID_PARAMETER",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_BROKEN_PIPE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_DISK_FULL",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_SEM_TIMEOUT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_CALL_NOT_IMPLEMENTED",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_INSUFFICIENT_BUFFER",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_INVALID_NAME",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_MOD_NOT_FOUND",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_NEGATIVE_SEEK",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_DIR_NOT_EMPTY",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_BAD_PATHNAME",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_LOCK_FAILED",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_BUSY",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_ALREADY_EXISTS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_BAD_EXE_FORMAT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_ENVVAR_NOT_FOUND",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_FILENAME_EXCED_RANGE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_EXE_MACHINE_TYPE_MISMATCH",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_FILE_TOO_LARGE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_PIPE_BUSY",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_NO_DATA",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_PIPE_NOT_CONNECTED",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_MORE_DATA",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_NO_MORE_ITEMS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_DIRECTORY",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_NOT_OWNER",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_TOO_MANY_POSTS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_PARTIAL_COPY",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_ARITHMETIC_OVERFLOW",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_PIPE_CONNECTED",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_PIPE_LISTENING",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_MUTANT_LIMIT_EXCEEDED",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_OPERATION_ABORTED",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_IO_INCOMPLETE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_IO_PENDING",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_NO_TOKEN",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_SERVICE_DOES_NOT_EXIST",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_EXCEPTION_IN_SERVICE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_PROCESS_ABORTED",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_NO_UNICODE_TRANSLATION",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_DLL_INIT_FAILED",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_COUNTER_TIMEOUT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_NO_ASSOCIATION",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_DDE_FAIL",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_DLL_NOT_FOUND",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_NOT_FOUND",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_CANCELLED",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_NETWORK_UNREACHABLE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_NON_ACCOUNT_SID",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_NOT_ALL_ASSIGNED",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_UNKNOWN_REVISION",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_INVALID_OWNER",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_INVALID_PRIMARY_GROUP",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_NO_SUCH_PRIVILEGE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_PRIVILEGE_NOT_HELD",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_INVALID_ACL",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_INVALID_SECURITY_DESCR",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_INVALID_SID",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_BAD_IMPERSONATION_LEVEL",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_CANT_OPEN_ANONYMOUS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_NO_SECURITY_ON_OBJECT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_CANNOT_IMPERSONATE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_CLASS_ALREADY_EXISTS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_NO_SYSTEM_RESOURCES",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_TIMEOUT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_EVENTLOG_FILE_CHANGED",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_TRUSTED_RELATIONSHIP_FAILURE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_RESOURCE_TYPE_NOT_FOUND",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_RESOURCE_LANG_NOT_FOUND",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "RPC_S_CALL_CANCELED",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_NOT_A_REPARSE_POINT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_EVT_QUERY_RESULT_STALE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_EVT_QUERY_RESULT_INVALID_POSITION",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_EVT_INVALID_EVENT_DATA",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_EVT_PUBLISHER_METADATA_NOT_FOUND",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_EVT_CHANNEL_NOT_FOUND",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_EVT_MESSAGE_NOT_FOUND",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_EVT_MESSAGE_ID_NOT_FOUND",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ERROR_EVT_PUBLISHER_DISABLED",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        }
+      ]
+    },
+    {
+      "namespace": "",
+      "name": "User32",
+      "attributes": "NestedAssembly, Abstract, Sealed, BeforeFieldInit",
+      "methods": [
+        {
+          "decodedSignature": "nint CreateWindowExW(int, string, string, int, int, int, int, int, nint, nint, nint, nint)",
+          "name": "CreateWindowExW",
+          "attributes": "Public, Static, HideBySig",
+          "signatureHex": "000C18080E0E080808080818181818",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "exStyle"
+            },
+            {
+              "sequence": 2,
+              "name": "lpszClassName"
+            },
+            {
+              "sequence": 3,
+              "name": "lpszWindowName"
+            },
+            {
+              "sequence": 4,
+              "name": "style"
+            },
+            {
+              "sequence": 5,
+              "name": "x"
+            },
+            {
+              "sequence": 6,
+              "name": "y"
+            },
+            {
+              "sequence": 7,
+              "name": "width"
+            },
+            {
+              "sequence": 8,
+              "name": "height"
+            },
+            {
+              "sequence": 9,
+              "name": "hWndParent"
+            },
+            {
+              "sequence": 10,
+              "name": "hMenu"
+            },
+            {
+              "sequence": 11,
+              "name": "hInst"
+            },
+            {
+              "sequence": 12,
+              "name": "pvParam"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "nint DefWindowProcW(nint, int, nint, nint)",
+          "name": "DefWindowProcW",
+          "attributes": "Public, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "00041818081818",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "hWnd"
+            },
+            {
+              "sequence": 2,
+              "name": "msg"
+            },
+            {
+              "sequence": 3,
+              "name": "wParam"
+            },
+            {
+              "sequence": 4,
+              "name": "lParam"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "bool DestroyWindow(nint)",
+          "name": "DestroyWindow",
+          "attributes": "Public, Static, HideBySig",
+          "signatureHex": "00010218",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "hWnd"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "int DispatchMessageW(ref MSG)",
+          "name": "DispatchMessageW",
+          "attributes": "Public, Static, HideBySig",
+          "signatureHex": "00010810117C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "msg"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "bool GetClassInfoW(nint, string, ref WNDCLASS)",
+          "name": "GetClassInfoW",
+          "attributes": "Public, Static, HideBySig",
+          "signatureHex": "000302180E10118084",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "hInst"
+            },
+            {
+              "sequence": 2,
+              "name": "lpszClass"
+            },
+            {
+              "sequence": 3,
+              "name": "wc"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "int GetMessageW(ref MSG, nint, int, int)",
+          "name": "GetMessageW",
+          "attributes": "Public, Static, HideBySig",
+          "signatureHex": "00040810117C180808",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "msg"
+            },
+            {
+              "sequence": 2,
+              "name": "hwnd"
+            },
+            {
+              "sequence": 3,
+              "name": "msgMin"
+            },
+            {
+              "sequence": 4,
+              "name": "msgMax"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "nint GetProcessWindowStation()",
+          "name": "GetProcessWindowStation",
+          "attributes": "Assembly, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "000018",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "bool GetUserObjectInformationW(nint, int, void*, uint, ref uint)",
+          "name": "GetUserObjectInformationW",
+          "attributes": "Public, Static, HideBySig",
+          "signatureHex": "00050218080F01091009",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "hObj"
+            },
+            {
+              "sequence": 2,
+              "name": "nIndex"
+            },
+            {
+              "sequence": 3,
+              "name": "pvBuffer"
+            },
+            {
+              "sequence": 4,
+              "name": "nLength"
+            },
+            {
+              "sequence": 5,
+              "name": "lpnLengthNeeded"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "int GetWindowThreadProcessId(nint, int*)",
+          "name": "GetWindowThreadProcessId",
+          "attributes": "Public, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "000208180F08",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "handle"
+            },
+            {
+              "sequence": 2,
+              "name": "processId"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "bool IsWindow(nint)",
+          "name": "IsWindow",
+          "attributes": "Public, Static, HideBySig",
+          "signatureHex": "00010218",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "hWnd"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "bool KillTimer(nint, nint)",
+          "name": "KillTimer",
+          "attributes": "Public, Static, HideBySig",
+          "signatureHex": "0002021818",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "hwnd"
+            },
+            {
+              "sequence": 2,
+              "name": "idEvent"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "int MsgWaitForMultipleObjectsEx(int, nint, int, int, int)",
+          "name": "MsgWaitForMultipleObjectsEx",
+          "attributes": "Public, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "0005080818080808",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "nCount"
+            },
+            {
+              "sequence": 2,
+              "name": "pHandles"
+            },
+            {
+              "sequence": 3,
+              "name": "dwMilliseconds"
+            },
+            {
+              "sequence": 4,
+              "name": "dwWakeMask"
+            },
+            {
+              "sequence": 5,
+              "name": "dwFlags"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "int PostMessageW(nint, int, nint, nint)",
+          "name": "PostMessageW",
+          "attributes": "Public, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "00040818081818",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "hwnd"
+            },
+            {
+              "sequence": 2,
+              "name": "msg"
+            },
+            {
+              "sequence": 3,
+              "name": "wparam"
+            },
+            {
+              "sequence": 4,
+              "name": "lparam"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void PostQuitMessage(int)",
+          "name": "PostQuitMessage",
+          "attributes": "Public, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "00010108",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "exitCode"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "short RegisterClassW(ref WNDCLASS)",
+          "name": "RegisterClassW",
+          "attributes": "Public, Static, HideBySig",
+          "signatureHex": "00010610118084",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "wc"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "int RegisterWindowMessageW(string)",
+          "name": "RegisterWindowMessageW",
+          "attributes": "Public, Static, HideBySig",
+          "signatureHex": "0001080E",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "msg"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "nint SendMessageW(nint, int, nint, nint)",
+          "name": "SendMessageW",
+          "attributes": "Public, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "00041818081818",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "hWnd"
+            },
+            {
+              "sequence": 2,
+              "name": "msg"
+            },
+            {
+              "sequence": 3,
+              "name": "wParam"
+            },
+            {
+              "sequence": 4,
+              "name": "lParam"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "nint SetClassLongW(nint, int, nint)",
+          "name": "SetClassLongW",
+          "attributes": "Public, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "000318180818",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "hwnd"
+            },
+            {
+              "sequence": 2,
+              "name": "nIndex"
+            },
+            {
+              "sequence": 3,
+              "name": "dwNewLong"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "nint SetClassLongPtrW(nint, int, nint)",
+          "name": "SetClassLongPtrW",
+          "attributes": "Public, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "000318180818",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "hwnd"
+            },
+            {
+              "sequence": 2,
+              "name": "nIndex"
+            },
+            {
+              "sequence": 3,
+              "name": "dwNewLong"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "nint SetTimer(nint, nint, int, nint)",
+          "name": "SetTimer",
+          "attributes": "Public, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "00041818180818",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "hWnd"
+            },
+            {
+              "sequence": 2,
+              "name": "nIDEvent"
+            },
+            {
+              "sequence": 3,
+              "name": "uElapse"
+            },
+            {
+              "sequence": 4,
+              "name": "lpTimerProc"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "nint SetWindowLongW(nint, int, nint)",
+          "name": "SetWindowLongW",
+          "attributes": "Public, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "000318180818",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "hWnd"
+            },
+            {
+              "sequence": 2,
+              "name": "nIndex"
+            },
+            {
+              "sequence": 3,
+              "name": "dwNewLong"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "nint SetWindowLongPtrW(nint, int, nint)",
+          "name": "SetWindowLongPtrW",
+          "attributes": "Public, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "000318180818",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "hWnd"
+            },
+            {
+              "sequence": 2,
+              "name": "nIndex"
+            },
+            {
+              "sequence": 3,
+              "name": "dwNewLong"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "bool TranslateMessage(ref MSG)",
+          "name": "TranslateMessage",
+          "attributes": "Public, Static, HideBySig",
+          "signatureHex": "00010210117C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "msg"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "short UnregisterClassW(string, nint)",
+          "name": "UnregisterClassW",
+          "attributes": "Public, Static, HideBySig",
+          "signatureHex": "0002060E18",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "lpClassName"
+            },
+            {
+              "sequence": 2,
+              "name": "hInstance"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "nint \u003CCreateWindowExW\u003Eg____PInvoke|207_0(int, ushort*, ushort*, int, int, int, int, int, nint, nint, nint, nint)",
+          "name": "\u003CCreateWindowExW\u003Eg____PInvoke|207_0",
+          "attributes": "Assembly, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "000C18080F070F07080808080818181818",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "__exStyle_native"
+            },
+            {
+              "sequence": 2,
+              "name": "__lpszClassName_native"
+            },
+            {
+              "sequence": 3,
+              "name": "__lpszWindowName_native"
+            },
+            {
+              "sequence": 4,
+              "name": "__style_native"
+            },
+            {
+              "sequence": 5,
+              "name": "__x_native"
+            },
+            {
+              "sequence": 6,
+              "name": "__y_native"
+            },
+            {
+              "sequence": 7,
+              "name": "__width_native"
+            },
+            {
+              "sequence": 8,
+              "name": "__height_native"
+            },
+            {
+              "sequence": 9,
+              "name": "__hWndParent_native"
+            },
+            {
+              "sequence": 10,
+              "name": "__hMenu_native"
+            },
+            {
+              "sequence": 11,
+              "name": "__hInst_native"
+            },
+            {
+              "sequence": 12,
+              "name": "__pvParam_native"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "int \u003CDestroyWindow\u003Eg____PInvoke|209_0(nint)",
+          "name": "\u003CDestroyWindow\u003Eg____PInvoke|209_0",
+          "attributes": "Assembly, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "00010818",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "__hWnd_native"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "int \u003CDispatchMessageW\u003Eg____PInvoke|210_0(MSG*)",
+          "name": "\u003CDispatchMessageW\u003Eg____PInvoke|210_0",
+          "attributes": "Assembly, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "0001080F117C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "__msg_native"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "int \u003CGetClassInfoW\u003Eg____PInvoke|211_0(nint, ushort*, WNDCLASS*)",
+          "name": "\u003CGetClassInfoW\u003Eg____PInvoke|211_0",
+          "attributes": "Assembly, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "000308180F070F118084",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "__hInst_native"
+            },
+            {
+              "sequence": 2,
+              "name": "__lpszClass_native"
+            },
+            {
+              "sequence": 3,
+              "name": "__wc_native"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "int \u003CGetMessageW\u003Eg____PInvoke|212_0(MSG*, nint, int, int)",
+          "name": "\u003CGetMessageW\u003Eg____PInvoke|212_0",
+          "attributes": "Assembly, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "0004080F117C180808",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "__msg_native"
+            },
+            {
+              "sequence": 2,
+              "name": "__hwnd_native"
+            },
+            {
+              "sequence": 3,
+              "name": "__msgMin_native"
+            },
+            {
+              "sequence": 4,
+              "name": "__msgMax_native"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "int \u003CGetUserObjectInformationW\u003Eg____PInvoke|214_0(nint, int, void*, uint, uint*)",
+          "name": "\u003CGetUserObjectInformationW\u003Eg____PInvoke|214_0",
+          "attributes": "Assembly, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "00050818080F01090F09",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "__hObj_native"
+            },
+            {
+              "sequence": 2,
+              "name": "__nIndex_native"
+            },
+            {
+              "sequence": 3,
+              "name": "__pvBuffer_native"
+            },
+            {
+              "sequence": 4,
+              "name": "__nLength_native"
+            },
+            {
+              "sequence": 5,
+              "name": "__lpnLengthNeeded_native"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "int \u003CIsWindow\u003Eg____PInvoke|216_0(nint)",
+          "name": "\u003CIsWindow\u003Eg____PInvoke|216_0",
+          "attributes": "Assembly, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "00010818",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "__hWnd_native"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "int \u003CKillTimer\u003Eg____PInvoke|217_0(nint, nint)",
+          "name": "\u003CKillTimer\u003Eg____PInvoke|217_0",
+          "attributes": "Assembly, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "0002081818",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "__hwnd_native"
+            },
+            {
+              "sequence": 2,
+              "name": "__idEvent_native"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "short \u003CRegisterClassW\u003Eg____PInvoke|222_0(WNDCLASS*)",
+          "name": "\u003CRegisterClassW\u003Eg____PInvoke|222_0",
+          "attributes": "Assembly, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "0001060F118084",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "__wc_native"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "int \u003CRegisterWindowMessageW\u003Eg____PInvoke|223_0(ushort*)",
+          "name": "\u003CRegisterWindowMessageW\u003Eg____PInvoke|223_0",
+          "attributes": "Assembly, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "0001080F07",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "__msg_native"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "int \u003CTranslateMessage\u003Eg____PInvoke|230_0(MSG*)",
+          "name": "\u003CTranslateMessage\u003Eg____PInvoke|230_0",
+          "attributes": "Assembly, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "0001080F117C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "__msg_native"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "short \u003CUnregisterClassW\u003Eg____PInvoke|231_0(ushort*, nint)",
+          "name": "\u003CUnregisterClassW\u003Eg____PInvoke|231_0",
+          "attributes": "Assembly, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "0002060F0718",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "__lpClassName_native"
+            },
+            {
+              "sequence": 2,
+              "name": "__hInstance_native"
+            }
+          ]
+        }
+      ],
+      "fields": [
+        {
+          "name": "COLOR_WINDOW",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "CTRL_LOGOFF_EVENT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "CTRL_SHUTDOWN_EVENT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ENDSESSION_CLOSEAPP",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ENDSESSION_CRITICAL",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ENDSESSION_LOGOFF",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "GCL_WNDPROC",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "GWL_WNDPROC",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "MWMO_INPUTAVAILABLE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "PBT_APMQUERYSUSPEND",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "PBT_APMQUERYSTANDBY",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "PBT_APMQUERYSUSPENDFAILED",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "PBT_APMQUERYSTANDBYFAILED",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "PBT_APMSUSPEND",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "PBT_APMSTANDBY",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "PBT_APMRESUMECRITICAL",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "PBT_APMRESUMESUSPEND",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "PBT_APMRESUMESTANDBY",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "PBT_APMBATTERYLOW",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "PBT_APMPOWERSTATUSCHANGE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "PBT_APMOEMEVENT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "PM_REMOVE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "QS_KEY",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "QS_MOUSEMOVE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "QS_MOUSEBUTTON",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "QS_POSTMESSAGE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "QS_TIMER",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "QS_PAINT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "QS_SENDMESSAGE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "QS_HOTKEY",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "QS_ALLPOSTMESSAGE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "QS_MOUSE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "QS_INPUT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "QS_ALLEVENTS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "QS_ALLINPUT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETBEEP",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETBEEP",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETMOUSE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETMOUSE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETBORDER",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETBORDER",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETKEYBOARDSPEED",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETKEYBOARDSPEED",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_LANGDRIVER",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_ICONHORIZONTALSPACING",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETSCREENSAVETIMEOUT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETSCREENSAVETIMEOUT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETSCREENSAVEACTIVE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETSCREENSAVEACTIVE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETGRIDGRANULARITY",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETGRIDGRANULARITY",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETDESKWALLPAPER",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETDESKPATTERN",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETKEYBOARDDELAY",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETKEYBOARDDELAY",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_ICONVERTICALSPACING",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETICONTITLEWRAP",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETICONTITLEWRAP",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETMENUDROPALIGNMENT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETMENUDROPALIGNMENT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETDOUBLECLKWIDTH",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETDOUBLECLKHEIGHT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETICONTITLELOGFONT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETDOUBLECLICKTIME",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETMOUSEBUTTONSWAP",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETICONTITLELOGFONT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETFASTTASKSWITCH",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETFASTTASKSWITCH",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETDRAGFULLWINDOWS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETDRAGFULLWINDOWS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETNONCLIENTMETRICS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETNONCLIENTMETRICS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETMINIMIZEDMETRICS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETMINIMIZEDMETRICS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETICONMETRICS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETICONMETRICS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETWORKAREA",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETWORKAREA",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETPENWINDOWS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETHIGHCONTRAST",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETHIGHCONTRAST",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETKEYBOARDPREF",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETKEYBOARDPREF",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETSCREENREADER",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETSCREENREADER",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETANIMATION",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETANIMATION",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETFONTSMOOTHING",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETFONTSMOOTHING",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETDRAGWIDTH",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETDRAGHEIGHT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETHANDHELD",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETLOWPOWERTIMEOUT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETPOWEROFFTIMEOUT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETLOWPOWERTIMEOUT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETPOWEROFFTIMEOUT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETLOWPOWERACTIVE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETPOWEROFFACTIVE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETLOWPOWERACTIVE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETPOWEROFFACTIVE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETCURSORS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETICONS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETDEFAULTINPUTLANG",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETDEFAULTINPUTLANG",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETLANGTOGGLE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETWINDOWSEXTENSION",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETMOUSETRAILS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETMOUSETRAILS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETSCREENSAVERRUNNING",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SCREENSAVERRUNNING",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETFILTERKEYS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETFILTERKEYS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETTOGGLEKEYS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETTOGGLEKEYS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETMOUSEKEYS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETMOUSEKEYS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETSHOWSOUNDS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETSHOWSOUNDS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETSTICKYKEYS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETSTICKYKEYS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETACCESSTIMEOUT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETACCESSTIMEOUT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETSERIALKEYS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETSERIALKEYS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETSOUNDSENTRY",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETSOUNDSENTRY",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETSNAPTODEFBUTTON",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETSNAPTODEFBUTTON",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETMOUSEHOVERWIDTH",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETMOUSEHOVERWIDTH",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETMOUSEHOVERHEIGHT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETMOUSEHOVERHEIGHT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETMOUSEHOVERTIME",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETMOUSEHOVERTIME",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETWHEELSCROLLLINES",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETWHEELSCROLLLINES",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETMENUSHOWDELAY",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETMENUSHOWDELAY",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETSHOWIMEUI",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETSHOWIMEUI",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETMOUSESPEED",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETMOUSESPEED",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETSCREENSAVERRUNNING",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETDESKWALLPAPER",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETACTIVEWINDOWTRACKING",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETACTIVEWINDOWTRACKING",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETMENUANIMATION",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETMENUANIMATION",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETCOMBOBOXANIMATION",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETCOMBOBOXANIMATION",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETLISTBOXSMOOTHSCROLLING",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETLISTBOXSMOOTHSCROLLING",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETGRADIENTCAPTIONS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETGRADIENTCAPTIONS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETKEYBOARDCUES",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETKEYBOARDCUES",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETMENUUNDERLINES",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETMENUUNDERLINES",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETACTIVEWNDTRKZORDER",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETACTIVEWNDTRKZORDER",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETHOTTRACKING",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETHOTTRACKING",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETMENUFADE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETMENUFADE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETSELECTIONFADE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETSELECTIONFADE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETTOOLTIPANIMATION",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETTOOLTIPANIMATION",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETTOOLTIPFADE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETTOOLTIPFADE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETCURSORSHADOW",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETCURSORSHADOW",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETUIEFFECTS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETUIEFFECTS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETFOREGROUNDLOCKTIMEOUT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETFOREGROUNDLOCKTIMEOUT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETACTIVEWNDTRKTIMEOUT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETACTIVEWNDTRKTIMEOUT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETFOREGROUNDFLASHCOUNT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETFOREGROUNDFLASHCOUNT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_GETCARETWIDTH",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "SPI_SETCARETWIDTH",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WAIT_TIMEOUT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WM_DESTROY",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WM_CLOSE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WM_QUERYENDSESSION",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WM_QUIT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WM_SYSCOLORCHANGE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WM_ENDSESSION",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WM_SETTINGCHANGE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WM_FONTCHANGE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WM_TIMECHANGE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WM_COMPACTING",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WM_DISPLAYCHANGE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WM_TIMER",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WM_POWERBROADCAST",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WM_WTSSESSION_CHANGE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WM_PALETTECHANGED",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WM_THEMECHANGED",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WM_USER",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WM_CREATETIMER",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WM_KILLTIMER",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WM_REFLECT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WS_POPUP",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WSF_VISIBLE",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "UOI_FLAGS",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "HWND_BROADCAST",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        }
+      ]
+    },
+    {
+      "namespace": "",
+      "name": "Kernel32",
+      "attributes": "NestedAssembly, Abstract, Sealed, BeforeFieldInit",
+      "methods": [
+        {
+          "decodedSignature": "int GetCurrentThreadId()",
+          "name": "GetCurrentThreadId",
+          "attributes": "Public, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "000008",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "nint GetModuleHandle(string)",
+          "name": "GetModuleHandle",
+          "attributes": "Assembly, Static, HideBySig",
+          "signatureHex": "0001180E",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "moduleName"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "nint GetProcAddress(Microsoft.Win32.SafeHandles.SafeLibraryHandle, string)",
+          "name": "GetProcAddress",
+          "attributes": "Public, Static, HideBySig",
+          "signatureHex": "00021812600E",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "hModule"
+            },
+            {
+              "sequence": 2,
+              "name": "lpProcName"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "nint GetProcAddress(nint, string)",
+          "name": "GetProcAddress",
+          "attributes": "Public, Static, HideBySig",
+          "signatureHex": "000218180E",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "hModule"
+            },
+            {
+              "sequence": 2,
+              "name": "lpProcName"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "nint LoadLibrary(string)",
+          "name": "LoadLibrary",
+          "attributes": "Public, Static, HideBySig",
+          "signatureHex": "0001180E",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "libFilename"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "bool FreeLibrary(nint)",
+          "name": "FreeLibrary",
+          "attributes": "Assembly, Static, HideBySig",
+          "signatureHex": "00010218",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "hModule"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "bool SetConsoleCtrlHandler(ConsoleCtrlHandlerRoutine, bool)",
+          "name": "SetConsoleCtrlHandler",
+          "attributes": "Assembly, Static, HideBySig",
+          "signatureHex": "00020212808C02",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "handler"
+            },
+            {
+              "sequence": 2,
+              "name": "addOrRemove"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "nint \u003CGetModuleHandle\u003Eg____PInvoke|1_0(ushort*)",
+          "name": "\u003CGetModuleHandle\u003Eg____PInvoke|1_0",
+          "attributes": "Assembly, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "0001180F07",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "__moduleName_native"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "nint \u003CGetProcAddress\u003Eg____PInvoke|2_0(nint, byte*)",
+          "name": "\u003CGetProcAddress\u003Eg____PInvoke|2_0",
+          "attributes": "Assembly, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "000218180F05",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "__hModule_native"
+            },
+            {
+              "sequence": 2,
+              "name": "__lpProcName_native"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "nint \u003CGetProcAddress\u003Eg____PInvoke|3_0(nint, byte*)",
+          "name": "\u003CGetProcAddress\u003Eg____PInvoke|3_0",
+          "attributes": "Assembly, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "000218180F05",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "__hModule_native"
+            },
+            {
+              "sequence": 2,
+              "name": "__lpProcName_native"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "nint \u003CLoadLibrary\u003Eg____PInvoke|4_0(ushort*)",
+          "name": "\u003CLoadLibrary\u003Eg____PInvoke|4_0",
+          "attributes": "Assembly, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "0001180F07",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "__libFilename_native"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "int \u003CFreeLibrary\u003Eg____PInvoke|5_0(nint)",
+          "name": "\u003CFreeLibrary\u003Eg____PInvoke|5_0",
+          "attributes": "Assembly, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "00010818",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "__hModule_native"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "int \u003CSetConsoleCtrlHandler\u003Eg____PInvoke|7_0(nint, int)",
+          "name": "\u003CSetConsoleCtrlHandler\u003Eg____PInvoke|7_0",
+          "attributes": "Assembly, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "0002081808",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "__handler_native"
+            },
+            {
+              "sequence": 2,
+              "name": "__addOrRemove_native"
+            }
+          ]
+        }
+      ],
+      "fields": []
+    },
+    {
+      "namespace": "",
+      "name": "Wtsapi32",
+      "attributes": "NestedAssembly, Abstract, Sealed, BeforeFieldInit",
+      "methods": [
+        {
+          "decodedSignature": "bool WTSRegisterSessionNotification(nint, int)",
+          "name": "WTSRegisterSessionNotification",
+          "attributes": "Public, Static, HideBySig",
+          "signatureHex": "0002021808",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "hWnd"
+            },
+            {
+              "sequence": 2,
+              "name": "dwFlags"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "bool WTSUnRegisterSessionNotification(nint)",
+          "name": "WTSUnRegisterSessionNotification",
+          "attributes": "Public, Static, HideBySig",
+          "signatureHex": "00010218",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "hWnd"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "int \u003CWTSRegisterSessionNotification\u003Eg____PInvoke|10_0(nint, int)",
+          "name": "\u003CWTSRegisterSessionNotification\u003Eg____PInvoke|10_0",
+          "attributes": "Assembly, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "0002081808",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "__hWnd_native"
+            },
+            {
+              "sequence": 2,
+              "name": "__dwFlags_native"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "int \u003CWTSUnRegisterSessionNotification\u003Eg____PInvoke|11_0(nint)",
+          "name": "\u003CWTSUnRegisterSessionNotification\u003Eg____PInvoke|11_0",
+          "attributes": "Assembly, Static, HideBySig, PinvokeImpl",
+          "signatureHex": "00010818",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "__hWnd_native"
+            }
+          ]
+        }
+      ],
+      "fields": [
+        {
+          "name": "NOTIFY_FOR_THIS_SESSION",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WTS_CONSOLE_CONNECT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WTS_CONSOLE_DISCONNECT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WTS_REMOTE_CONNECT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WTS_REMOTE_DISCONNECT",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WTS_SESSION_LOGON",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WTS_SESSION_LOGOFF",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WTS_SESSION_LOCK",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WTS_SESSION_UNLOCK",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "WTS_SESSION_REMOTE_CONTROL",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        }
+      ]
+    },
+    {
+      "namespace": "",
+      "name": "SystemEventInvokeInfo",
+      "attributes": "NestedPrivate, Sealed, BeforeFieldInit",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(System.Delegate)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "2001011280F1",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "d"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void Invoke(bool, object[])",
+          "name": "Invoke",
+          "attributes": "Public, HideBySig",
+          "signatureHex": "200201021D1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "checkFinalization"
+            },
+            {
+              "sequence": 2,
+              "name": "args"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void InvokeCallback(object)",
+          "name": "InvokeCallback",
+          "attributes": "Private, HideBySig",
+          "signatureHex": "2001011C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "arg"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "bool Equals(object)",
+          "name": "Equals",
+          "attributes": "Public, Virtual, HideBySig",
+          "signatureHex": "2001021C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "other"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "int GetHashCode()",
+          "name": "GetHashCode",
+          "attributes": "Public, Virtual, HideBySig",
+          "signatureHex": "200008",
+          "parameters": []
+        }
+      ],
+      "fields": [
+        {
+          "name": "_syncContext",
+          "decodedType": "System.Threading.SynchronizationContext",
+          "signatureHex": "06128105"
+        },
+        {
+          "name": "_delegate",
+          "decodedType": "System.Delegate",
+          "signatureHex": "061280F1"
+        }
+      ]
+    },
+    {
+      "namespace": "",
+      "name": "MSG",
+      "attributes": "NestedPublic, SequentialLayout, Sealed, BeforeFieldInit",
+      "methods": [],
+      "fields": [
+        {
+          "name": "hwnd",
+          "decodedType": "nint",
+          "signatureHex": "0618"
+        },
+        {
+          "name": "message",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "wParam",
+          "decodedType": "nint",
+          "signatureHex": "0618"
+        },
+        {
+          "name": "lParam",
+          "decodedType": "nint",
+          "signatureHex": "0618"
+        },
+        {
+          "name": "time",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "pt_x",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "pt_y",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        }
+      ]
+    },
+    {
+      "namespace": "",
+      "name": "USEROBJECTFLAGS",
+      "attributes": "NestedAssembly, SequentialLayout, Sealed, BeforeFieldInit",
+      "methods": [],
+      "fields": [
+        {
+          "name": "fInherit",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "fReserved",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "dwFlags",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        }
+      ]
+    },
+    {
+      "namespace": "",
+      "name": "WNDCLASS",
+      "attributes": "NestedAssembly, SequentialLayout, Sealed, UnicodeClass, BeforeFieldInit",
+      "methods": [],
+      "fields": [
+        {
+          "name": "style",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "lpfnWndProc",
+          "decodedType": "nint",
+          "signatureHex": "0618"
+        },
+        {
+          "name": "cbClsExtra",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "cbWndExtra",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "hInstance",
+          "decodedType": "nint",
+          "signatureHex": "0618"
+        },
+        {
+          "name": "hIcon",
+          "decodedType": "nint",
+          "signatureHex": "0618"
+        },
+        {
+          "name": "hCursor",
+          "decodedType": "nint",
+          "signatureHex": "0618"
+        },
+        {
+          "name": "hbrBackground",
+          "decodedType": "nint",
+          "signatureHex": "0618"
+        },
+        {
+          "name": "lpszMenuName",
+          "decodedType": "char*",
+          "signatureHex": "060F03"
+        },
+        {
+          "name": "lpszClassName",
+          "decodedType": "char*",
+          "signatureHex": "060F03"
+        }
+      ]
+    },
+    {
+      "namespace": "",
+      "name": "WndProc",
+      "attributes": "NestedPublic, Sealed",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(object, nint)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "2002011C18",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "object"
+            },
+            {
+              "sequence": 2,
+              "name": "method"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "nint Invoke(nint, int, nint, nint)",
+          "name": "Invoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "20041818081818",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "hWnd"
+            },
+            {
+              "sequence": 2,
+              "name": "msg"
+            },
+            {
+              "sequence": 3,
+              "name": "wParam"
+            },
+            {
+              "sequence": 4,
+              "name": "lParam"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "System.IAsyncResult BeginInvoke(nint, int, nint, nint, System.AsyncCallback, object)",
+          "name": "BeginInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "20061280891808181812808D1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "hWnd"
+            },
+            {
+              "sequence": 2,
+              "name": "msg"
+            },
+            {
+              "sequence": 3,
+              "name": "wParam"
+            },
+            {
+              "sequence": 4,
+              "name": "lParam"
+            },
+            {
+              "sequence": 5,
+              "name": "callback"
+            },
+            {
+              "sequence": 6,
+              "name": "object"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "nint EndInvoke(System.IAsyncResult)",
+          "name": "EndInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "200118128089",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "result"
+            }
+          ]
+        }
+      ],
+      "fields": []
+    },
+    {
+      "namespace": "",
+      "name": "ConsoleCtrlHandlerRoutine",
+      "attributes": "NestedAssembly, Sealed",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(object, nint)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "2002011C18",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "object"
+            },
+            {
+              "sequence": 2,
+              "name": "method"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "bool Invoke(int)",
+          "name": "Invoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "20010208",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "controlType"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "System.IAsyncResult BeginInvoke(int, System.AsyncCallback, object)",
+          "name": "BeginInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "20031280890812808D1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "controlType"
+            },
+            {
+              "sequence": 2,
+              "name": "callback"
+            },
+            {
+              "sequence": 3,
+              "name": "object"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "bool EndInvoke(System.IAsyncResult)",
+          "name": "EndInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "200102128089",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "result"
+            }
+          ]
+        }
+      ],
+      "fields": []
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "source": "C:\\Repos\\dll2llm",
+  "generatedUtc": "2026-10-09T19:20:40.3883577+00:00",
+  "binaries": [
+    {
+      "path": "C:\\Repos\\dll2llm\\bin\\Debug\\net10.0\\dll2llm.dll",
+      "kind": "managed",
+      "machine": "Amd64",
+      "hasMetadata": true,
+      "error": null
+    },
+    {
+      "path": "C:\\Repos\\dll2llm\\bin\\Debug\\net10.0\\Microsoft.Win32.SystemEvents.dll",
+      "kind": "managed",
+      "machine": "I386",
+      "hasMetadata": true,
+      "error": null
+    },
+    {
+      "path": "C:\\Repos\\dll2llm\\bin\\Debug\\net10.0\\runtimes\\win\\lib\\net8.0\\Microsoft.Win32.SystemEvents.dll",
+      "kind": "managed",
+      "machine": "I386",
+      "hasMetadata": true,
+      "error": null
+    },
+    {
+      "path": "C:\\Repos\\dll2llm\\bin\\Debug\\net10.0\\System.Drawing.Common.dll",
+      "kind": "managed",
+      "machine": "I386",
+      "hasMetadata": true,
+      "error": null
+    },
+    {
+      "path": "C:\\Repos\\dll2llm\\bin\\Release\\net10.0\\dll2llm.dll",
+      "kind": "managed",
+      "machine": "Amd64",
+      "hasMetadata": true,
+      "error": null
+    },
+    {
+      "path": "C:\\Repos\\dll2llm\\bin\\Release\\net10.0\\Microsoft.Win32.SystemEvents.dll",
+      "kind": "managed",
+      "machine": "I386",
+      "hasMetadata": true,
+      "error": null
+    },
+    {
+      "path": "C:\\Repos\\dll2llm\\bin\\Release\\net10.0\\runtimes\\win\\lib\\net8.0\\Microsoft.Win32.SystemEvents.dll",
+      "kind": "managed",
+      "machine": "I386",
+      "hasMetadata": true,
+      "error": null
+    },
+    {
+      "path": "C:\\Repos\\dll2llm\\bin\\Release\\net10.0\\System.Drawing.Common.dll",
+      "kind": "managed",
+      "machine": "I386",
+      "hasMetadata": true,
+      "error": null
+    },
+    {
+      "path": "C:\\Repos\\dll2llm\\obj\\Debug\\net10.0\\dll2llm.dll",
+      "kind": "managed",
+      "machine": "Amd64",
+      "hasMetadata": true,
+      "error": null
+    },
+    {
+      "path": "C:\\Repos\\dll2llm\\obj\\Debug\\net10.0\\refint\\dll2llm.dll",
+      "kind": "managed",
+      "machine": "Amd64",
+      "hasMetadata": true,
+      "error": null
+    },
+    {
+      "path": "C:\\Repos\\dll2llm\\obj\\Debug\\net10.0\\ref\\dll2llm.dll",
+      "kind": "managed",
+      "machine": "Amd64",
+      "hasMetadata": true,
+      "error": null
+    },
+    {
+      "path": "C:\\Repos\\dll2llm\\obj\\Release\\net10.0\\dll2llm.dll",
+      "kind": "managed",
+      "machine": "Amd64",
+      "hasMetadata": true,
+      "error": null
+    },
+    {
+      "path": "C:\\Repos\\dll2llm\\obj\\Release\\net10.0\\refint\\dll2llm.dll",
+      "kind": "managed",
+      "machine": "Amd64",
+      "hasMetadata": true,
+      "error": null
+    },
+    {
+      "path": "C:\\Repos\\dll2llm\\obj\\Release\\net10.0\\ref\\dll2llm.dll",
+      "kind": "managed",
+      "machine": "Amd64",
+      "hasMetadata": true,
+      "error": null
+    }
+  ]
+}

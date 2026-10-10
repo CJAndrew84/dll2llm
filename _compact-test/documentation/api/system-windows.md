@@ -1,0 +1,17 @@
+# System.Windows
+
+Exact extracted records. Verify version and API support before calling native symbols.
+- System.Windows.Forms.DpiHelper | type | clr-metadata
+- System.Windows.Forms.DpiHelper.Initialize | method | clr-metadata
+- System.Windows.Forms.DpiHelper.get_LogicalToDeviceUnitsScalingFactorX | method | clr-metadata
+- System.Windows.Forms.DpiHelper.get_LogicalToDeviceUnitsScalingFactorY | method | clr-metadata
+- System.Windows.Forms.DpiHelper.get_InterpolationMode | method | clr-metadata
+- System.Windows.Forms.DpiHelper.ScaleBitmapToSize | method | clr-metadata
+- System.Windows.Forms.DpiHelper.CreateScaledBitmap | method | clr-metadata
+- System.Windows.Forms.DpiHelper.get_IsScalingRequired | method | clr-metadata
+- System.Windows.Forms.DpiHelper.LogicalToDeviceUnitsX | method | clr-metadata
+- System.Windows.Forms.DpiHelper.LogicalToDeviceUnitsY | method | clr-metadata
+- System.Windows.Forms.DpiHelper.LogicalToDeviceUnits | method | clr-metadata
+- System.Windows.Forms.DpiHelper.CreateResizedBitmap | method | clr-metadata
+- System.Windows.Forms.DpiHelper.ScaleBitmapLogicalToDevice | method | clr-metadata
+- System.Windows.Forms.DpiHelper..cctor | method | clr-metadata

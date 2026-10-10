@@ -1,0 +1,395 @@
+# API catalog 10
+
+Exact extracted records. Verify version and API support before calling native symbols.
+
+<a id="dlltollmdoc-clangastnormalizer"></a>
+## DllToLLMDoc.ClangAstNormalizer
+
+- DllToLLMDoc.ClangAstNormalizer.Extract | method | clr-metadata
+- DllToLLMDoc.ClangAstNormalizer.Walk | method | clr-metadata
+- DllToLLMDoc.ClangAstNormalizer.TypeName | method | clr-metadata
+- DllToLLMDoc.ClangAstNormalizer.Read | method | clr-metadata
+
+<a id="dlltollmdoc-nativeexports"></a>
+## DllToLLMDoc.NativeExports
+
+- DllToLLMDoc.NativeExports.Read | method | clr-metadata
+- DllToLLMDoc.NativeExports.WriteJson | method | clr-metadata
+
+<a id="dlltollmdoc-xmldocumentation"></a>
+## DllToLLMDoc.XmlDocumentation.
+
+- DllToLLMDoc.XmlDocumentation..ctor | method | clr-metadata
+
+<a id="symbol"></a>
+## Symbol
+
+- Symbol.get_EqualityContract | method | clr-metadata
+- Symbol.get_Name | method | clr-metadata
+- Symbol.set_Name | method | clr-metadata
+- Symbol.get_Kind | method | clr-metadata
+- Symbol.set_Kind | method | clr-metadata
+- Symbol.get_Origin | method | clr-metadata
+- Symbol.set_Origin | method | clr-metadata
+- Symbol.get_Source | method | clr-metadata
+- Symbol.set_Source | method | clr-metadata
+- Symbol.get_Signature | method | clr-metadata
+- Symbol.set_Signature | method | clr-metadata
+- Symbol.ToString | method | clr-metadata
+- Symbol.PrintMembers | method | clr-metadata
+- Symbol.op_Inequality | method | clr-metadata
+- Symbol.op_Equality | method | clr-metadata
+- Symbol.GetHashCode | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Deconstruct | method | clr-metadata
+- Symbol.get_EqualityContract | method | clr-metadata
+- Symbol.get_Name | method | clr-metadata
+- Symbol.set_Name | method | clr-metadata
+- Symbol.get_Kind | method | clr-metadata
+- Symbol.set_Kind | method | clr-metadata
+- Symbol.get_Source | method | clr-metadata
+- Symbol.set_Source | method | clr-metadata
+- Symbol.get_Evidence | method | clr-metadata
+- Symbol.set_Evidence | method | clr-metadata
+- Symbol.ToString | method | clr-metadata
+- Symbol.PrintMembers | method | clr-metadata
+- Symbol.op_Inequality | method | clr-metadata
+- Symbol.op_Equality | method | clr-metadata
+- Symbol.GetHashCode | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Deconstruct | method | clr-metadata
+
+<a id="declaration"></a>
+## Declaration.
+
+- Declaration..ctor | method | clr-metadata
+- Declaration..ctor | method | clr-metadata
+
+<a id="domainbucket"></a>
+## DomainBucket
+
+- DomainBucket.get_Samples | method | clr-metadata
+
+<a id="getthumbnailimageabort"></a>
+## GetThumbnailImageAbort
+
+- GetThumbnailImageAbort.Invoke | method | clr-metadata
+- GetThumbnailImageAbort.BeginInvoke | method | clr-metadata
+- GetThumbnailImageAbort.EndInvoke | method | clr-metadata
+
+<a id="imageinfo"></a>
+## ImageInfo
+
+- ImageInfo.get_Animated | method | clr-metadata
+- ImageInfo.get_FrameDirty | method | clr-metadata
+- ImageInfo.get_FrameChangedHandler | method | clr-metadata
+- ImageInfo.set_FrameChangedHandler | method | clr-metadata
+- ImageInfo.get_TotalAnimationTime | method | clr-metadata
+- ImageInfo.get_ShouldAnimate | method | clr-metadata
+- ImageInfo.AdvanceAnimationBy | method | clr-metadata
+- ImageInfo.get_Image | method | clr-metadata
+- ImageInfo.UpdateFrame | method | clr-metadata
+- ImageInfo.OnFrameChanged | method | clr-metadata
+
+<a id="printerresolutioncollection-system"></a>
+## PrinterResolutionCollection.System
+
+- PrinterResolutionCollection.System.Collections.ICollection.get_Count | method | clr-metadata
+- PrinterResolutionCollection.System.Collections.ICollection.get_IsSynchronized | method | clr-metadata
+- PrinterResolutionCollection.System.Collections.ICollection.get_SyncRoot | method | clr-metadata
+- PrinterResolutionCollection.System.Collections.ICollection.CopyTo | method | clr-metadata
+- PrinterResolutionCollection.System.Collections.IEnumerable.GetEnumerator | method | clr-metadata
+- DllToLLMDoc.ClangAstNormalizer.Extract | method | clr-metadata
+- DllToLLMDoc.ClangAstNormalizer.Walk | method | clr-metadata
+- DllToLLMDoc.ClangAstNormalizer.TypeName | method | clr-metadata
+- DllToLLMDoc.ClangAstNormalizer.Read | method | clr-metadata
+- DllToLLMDoc.NativeExports.Read | method | clr-metadata
+- DllToLLMDoc.NativeExports.WriteJson | method | clr-metadata
+- DllToLLMDoc.XmlDocumentation..ctor | method | clr-metadata
+- Symbol.get_EqualityContract | method | clr-metadata
+- Symbol.get_Name | method | clr-metadata
+- Symbol.set_Name | method | clr-metadata
+- Symbol.get_Kind | method | clr-metadata
+- Symbol.set_Kind | method | clr-metadata
+- Symbol.get_Origin | method | clr-metadata
+- Symbol.set_Origin | method | clr-metadata
+- Symbol.get_Source | method | clr-metadata
+- Symbol.set_Source | method | clr-metadata
+- Symbol.get_Signature | method | clr-metadata
+- Symbol.set_Signature | method | clr-metadata
+- Symbol.ToString | method | clr-metadata
+- Symbol.PrintMembers | method | clr-metadata
+- Symbol.op_Inequality | method | clr-metadata
+- Symbol.op_Equality | method | clr-metadata
+- Symbol.GetHashCode | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Deconstruct | method | clr-metadata
+- Symbol.get_EqualityContract | method | clr-metadata
+- Symbol.get_Name | method | clr-metadata
+- Symbol.set_Name | method | clr-metadata
+- Symbol.get_Kind | method | clr-metadata
+- Symbol.set_Kind | method | clr-metadata
+- Symbol.get_Source | method | clr-metadata
+- Symbol.set_Source | method | clr-metadata
+- Symbol.get_Evidence | method | clr-metadata
+- Symbol.set_Evidence | method | clr-metadata
+- Symbol.ToString | method | clr-metadata
+- Symbol.PrintMembers | method | clr-metadata
+- Symbol.op_Inequality | method | clr-metadata
+- Symbol.op_Equality | method | clr-metadata
+- Symbol.GetHashCode | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Deconstruct | method | clr-metadata
+- Declaration..ctor | method | clr-metadata
+- Declaration..ctor | method | clr-metadata
+- DomainBucket.get_Samples | method | clr-metadata
+- GetThumbnailImageAbort.Invoke | method | clr-metadata
+- GetThumbnailImageAbort.BeginInvoke | method | clr-metadata
+- GetThumbnailImageAbort.EndInvoke | method | clr-metadata
+- ImageInfo.get_Animated | method | clr-metadata
+- ImageInfo.get_FrameDirty | method | clr-metadata
+- ImageInfo.get_FrameChangedHandler | method | clr-metadata
+- ImageInfo.set_FrameChangedHandler | method | clr-metadata
+- ImageInfo.get_TotalAnimationTime | method | clr-metadata
+- ImageInfo.get_ShouldAnimate | method | clr-metadata
+- ImageInfo.AdvanceAnimationBy | method | clr-metadata
+- ImageInfo.get_Image | method | clr-metadata
+- ImageInfo.UpdateFrame | method | clr-metadata
+- ImageInfo.OnFrameChanged | method | clr-metadata
+- PrinterResolutionCollection.System.Collections.ICollection.get_Count | method | clr-metadata
+- PrinterResolutionCollection.System.Collections.ICollection.get_IsSynchronized | method | clr-metadata
+- PrinterResolutionCollection.System.Collections.ICollection.get_SyncRoot | method | clr-metadata
+- PrinterResolutionCollection.System.Collections.ICollection.CopyTo | method | clr-metadata
+- PrinterResolutionCollection.System.Collections.IEnumerable.GetEnumerator | method | clr-metadata
+- DllToLLMDoc.ClangAstNormalizer.Extract | method | clr-metadata
+- DllToLLMDoc.ClangAstNormalizer.Walk | method | clr-metadata
+- DllToLLMDoc.ClangAstNormalizer.TypeName | method | clr-metadata
+- DllToLLMDoc.ClangAstNormalizer.Read | method | clr-metadata
+- DllToLLMDoc.NativeExports.Read | method | clr-metadata
+- DllToLLMDoc.NativeExports.WriteJson | method | clr-metadata
+- DllToLLMDoc.XmlDocumentation..ctor | method | clr-metadata
+- Symbol.get_EqualityContract | method | clr-metadata
+- Symbol.get_Name | method | clr-metadata
+- Symbol.set_Name | method | clr-metadata
+- Symbol.get_Kind | method | clr-metadata
+- Symbol.set_Kind | method | clr-metadata
+- Symbol.get_Origin | method | clr-metadata
+- Symbol.set_Origin | method | clr-metadata
+- Symbol.get_Source | method | clr-metadata
+- Symbol.set_Source | method | clr-metadata
+- Symbol.get_Signature | method | clr-metadata
+- Symbol.set_Signature | method | clr-metadata
+- Symbol.ToString | method | clr-metadata
+- Symbol.PrintMembers | method | clr-metadata
+- Symbol.op_Inequality | method | clr-metadata
+- Symbol.op_Equality | method | clr-metadata
+- Symbol.GetHashCode | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Deconstruct | method | clr-metadata
+- Symbol.get_EqualityContract | method | clr-metadata
+- Symbol.get_Name | method | clr-metadata
+- Symbol.set_Name | method | clr-metadata
+- Symbol.get_Kind | method | clr-metadata
+- Symbol.set_Kind | method | clr-metadata
+- Symbol.get_Source | method | clr-metadata
+- Symbol.set_Source | method | clr-metadata
+- Symbol.get_Evidence | method | clr-metadata
+- Symbol.set_Evidence | method | clr-metadata
+- Symbol.ToString | method | clr-metadata
+- Symbol.PrintMembers | method | clr-metadata
+- Symbol.op_Inequality | method | clr-metadata
+- Symbol.op_Equality | method | clr-metadata
+- Symbol.GetHashCode | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Deconstruct | method | clr-metadata
+- Declaration..ctor | method | clr-metadata
+- Declaration..ctor | method | clr-metadata
+- DomainBucket.get_Samples | method | clr-metadata
+- DllToLLMDoc.ClangAstNormalizer.Extract | method | clr-metadata
+- DllToLLMDoc.ClangAstNormalizer.Walk | method | clr-metadata
+- DllToLLMDoc.ClangAstNormalizer.TypeName | method | clr-metadata
+- DllToLLMDoc.ClangAstNormalizer.Read | method | clr-metadata
+- DllToLLMDoc.NativeExports.Read | method | clr-metadata
+- DllToLLMDoc.NativeExports.WriteJson | method | clr-metadata
+- DllToLLMDoc.XmlDocumentation..ctor | method | clr-metadata
+- Symbol.get_EqualityContract | method | clr-metadata
+- Symbol.get_Name | method | clr-metadata
+- Symbol.set_Name | method | clr-metadata
+- Symbol.get_Kind | method | clr-metadata
+- Symbol.set_Kind | method | clr-metadata
+- Symbol.get_Origin | method | clr-metadata
+- Symbol.set_Origin | method | clr-metadata
+- Symbol.get_Source | method | clr-metadata
+- Symbol.set_Source | method | clr-metadata
+- Symbol.get_Signature | method | clr-metadata
+- Symbol.set_Signature | method | clr-metadata
+- Symbol.ToString | method | clr-metadata
+- Symbol.PrintMembers | method | clr-metadata
+- Symbol.op_Inequality | method | clr-metadata
+- Symbol.op_Equality | method | clr-metadata
+- Symbol.GetHashCode | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Deconstruct | method | clr-metadata
+- Symbol.get_EqualityContract | method | clr-metadata
+- Symbol.get_Name | method | clr-metadata
+- Symbol.set_Name | method | clr-metadata
+- Symbol.get_Kind | method | clr-metadata
+- Symbol.set_Kind | method | clr-metadata
+- Symbol.get_Source | method | clr-metadata
+- Symbol.set_Source | method | clr-metadata
+- Symbol.get_Evidence | method | clr-metadata
+- Symbol.set_Evidence | method | clr-metadata
+- Symbol.ToString | method | clr-metadata
+- Symbol.PrintMembers | method | clr-metadata
+- Symbol.op_Inequality | method | clr-metadata
+- Symbol.op_Equality | method | clr-metadata
+- Symbol.GetHashCode | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Deconstruct | method | clr-metadata
+- Declaration..ctor | method | clr-metadata
+- Declaration..ctor | method | clr-metadata
+- DomainBucket.get_Samples | method | clr-metadata
+- DllToLLMDoc.XmlDocumentation..ctor | method | clr-metadata
+- Symbol.get_Name | method | clr-metadata
+- Symbol.set_Name | method | clr-metadata
+- Symbol.get_Kind | method | clr-metadata
+- Symbol.set_Kind | method | clr-metadata
+- Symbol.get_Origin | method | clr-metadata
+- Symbol.set_Origin | method | clr-metadata
+- Symbol.get_Source | method | clr-metadata
+- Symbol.set_Source | method | clr-metadata
+- Symbol.get_Signature | method | clr-metadata
+- Symbol.set_Signature | method | clr-metadata
+- Symbol.ToString | method | clr-metadata
+- Symbol.op_Inequality | method | clr-metadata
+- Symbol.op_Equality | method | clr-metadata
+- Symbol.GetHashCode | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Deconstruct | method | clr-metadata
+- Symbol.get_Name | method | clr-metadata
+- Symbol.set_Name | method | clr-metadata
+- Symbol.get_Kind | method | clr-metadata
+- Symbol.set_Kind | method | clr-metadata
+- Symbol.get_Source | method | clr-metadata
+- Symbol.set_Source | method | clr-metadata
+- Symbol.get_Evidence | method | clr-metadata
+- Symbol.set_Evidence | method | clr-metadata
+- Symbol.ToString | method | clr-metadata
+- Symbol.op_Inequality | method | clr-metadata
+- Symbol.op_Equality | method | clr-metadata
+- Symbol.GetHashCode | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Deconstruct | method | clr-metadata
+- Declaration..ctor | method | clr-metadata
+- DllToLLMDoc.XmlDocumentation..ctor | method | clr-metadata
+- Symbol.get_Name | method | clr-metadata
+- Symbol.set_Name | method | clr-metadata
+- Symbol.get_Kind | method | clr-metadata
+- Symbol.set_Kind | method | clr-metadata
+- Symbol.get_Origin | method | clr-metadata
+- Symbol.set_Origin | method | clr-metadata
+- Symbol.get_Source | method | clr-metadata
+- Symbol.set_Source | method | clr-metadata
+- Symbol.get_Signature | method | clr-metadata
+- Symbol.set_Signature | method | clr-metadata
+- Symbol.ToString | method | clr-metadata
+- Symbol.op_Inequality | method | clr-metadata
+- Symbol.op_Equality | method | clr-metadata
+- Symbol.GetHashCode | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Deconstruct | method | clr-metadata
+- Symbol.get_Name | method | clr-metadata
+- Symbol.set_Name | method | clr-metadata
+- Symbol.get_Kind | method | clr-metadata
+- Symbol.set_Kind | method | clr-metadata
+- Symbol.get_Source | method | clr-metadata
+- Symbol.set_Source | method | clr-metadata
+- Symbol.get_Evidence | method | clr-metadata
+- Symbol.set_Evidence | method | clr-metadata
+- Symbol.ToString | method | clr-metadata
+- Symbol.op_Inequality | method | clr-metadata
+- Symbol.op_Equality | method | clr-metadata
+- Symbol.GetHashCode | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Deconstruct | method | clr-metadata
+- Declaration..ctor | method | clr-metadata
+- DllToLLMDoc.XmlDocumentation..ctor | method | clr-metadata
+- Symbol.get_Name | method | clr-metadata
+- Symbol.set_Name | method | clr-metadata
+- Symbol.get_Kind | method | clr-metadata
+- Symbol.set_Kind | method | clr-metadata
+- Symbol.get_Origin | method | clr-metadata
+- Symbol.set_Origin | method | clr-metadata
+- Symbol.get_Source | method | clr-metadata
+- Symbol.set_Source | method | clr-metadata
+- Symbol.get_Signature | method | clr-metadata
+- Symbol.set_Signature | method | clr-metadata
+- Symbol.ToString | method | clr-metadata
+- Symbol.op_Inequality | method | clr-metadata
+- Symbol.op_Equality | method | clr-metadata
+- Symbol.GetHashCode | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Deconstruct | method | clr-metadata
+- Symbol.get_Name | method | clr-metadata
+- Symbol.set_Name | method | clr-metadata
+- Symbol.get_Kind | method | clr-metadata
+- Symbol.set_Kind | method | clr-metadata
+- Symbol.get_Source | method | clr-metadata
+- Symbol.set_Source | method | clr-metadata
+- Symbol.get_Evidence | method | clr-metadata
+- Symbol.set_Evidence | method | clr-metadata
+- Symbol.ToString | method | clr-metadata
+- Symbol.op_Inequality | method | clr-metadata
+- Symbol.op_Equality | method | clr-metadata
+- Symbol.GetHashCode | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Deconstruct | method | clr-metadata
+- Declaration..ctor | method | clr-metadata
+- DllToLLMDoc.XmlDocumentation..ctor | method | clr-metadata
+- Symbol.get_Name | method | clr-metadata
+- Symbol.set_Name | method | clr-metadata
+- Symbol.get_Kind | method | clr-metadata
+- Symbol.set_Kind | method | clr-metadata
+- Symbol.get_Origin | method | clr-metadata
+- Symbol.set_Origin | method | clr-metadata
+- Symbol.get_Source | method | clr-metadata
+- Symbol.set_Source | method | clr-metadata
+- Symbol.get_Signature | method | clr-metadata
+- Symbol.set_Signature | method | clr-metadata
+- Symbol.ToString | method | clr-metadata
+- Symbol.op_Inequality | method | clr-metadata
+- Symbol.op_Equality | method | clr-metadata
+- Symbol.GetHashCode | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Deconstruct | method | clr-metadata
+- Symbol.get_Name | method | clr-metadata
+- Symbol.set_Name | method | clr-metadata
+- Symbol.get_Kind | method | clr-metadata
+- Symbol.set_Kind | method | clr-metadata
+- Symbol.get_Source | method | clr-metadata
+- Symbol.set_Source | method | clr-metadata
+- Symbol.get_Evidence | method | clr-metadata
+- Symbol.set_Evidence | method | clr-metadata
+- Symbol.ToString | method | clr-metadata
+- Symbol.op_Inequality | method | clr-metadata
+- Symbol.op_Equality | method | clr-metadata
+- Symbol.GetHashCode | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Equals | method | clr-metadata
+- Symbol.Deconstruct | method | clr-metadata
+- Declaration..ctor | method | clr-metadata

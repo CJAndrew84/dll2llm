@@ -1,0 +1,113 @@
+# API catalog 7
+
+Exact extracted records. Verify version and API support before calling native symbols.
+
+<a id="gdi32"></a>
+## Gdi32
+
+- Gdi32.AbortDoc | method | clr-metadata
+- Gdi32.AddFontResourceEx | method | clr-metadata
+- Gdi32.AddFontFile | method | clr-metadata
+- Gdi32.CombineRgn | method | clr-metadata
+- Gdi32.CombineRgn | method | clr-metadata
+- Gdi32.CreateCompatibleBitmap | method | clr-metadata
+- Gdi32.CreateCompatibleDC | method | clr-metadata
+- Gdi32.CreateDCW | method | clr-metadata
+- Gdi32.CreateDIBSection | method | clr-metadata
+- Gdi32.CreateICW | method | clr-metadata
+- Gdi32.CreateFontIndirectW | method | clr-metadata
+- Gdi32.CreateRectRgn | method | clr-metadata
+- Gdi32.DeleteDC | method | clr-metadata
+- Gdi32.DeleteDC | method | clr-metadata
+- Gdi32.DeleteObject | method | clr-metadata
+- Gdi32.DeleteObject | method | clr-metadata
+- Gdi32.EndDoc | method | clr-metadata
+- Gdi32.EndPage | method | clr-metadata
+- Gdi32.ExtEscape | method | clr-metadata
+- Gdi32.ExtEscape | method | clr-metadata
+- Gdi32.GetClipRgn | method | clr-metadata
+- Gdi32.GetClipRgn | method | clr-metadata
+- Gdi32.GetClipRgn | method | clr-metadata
+- Gdi32.GetCurrentObject | method | clr-metadata
+- Gdi32.GetCurrentObject | method | clr-metadata
+- Gdi32.GetDeviceCaps | method | clr-metadata
+- Gdi32.GetDeviceCaps | method | clr-metadata
+- Gdi32.GetDIBits | method | clr-metadata
+- Gdi32.GetObject | method | clr-metadata
+- Gdi32.GetObject | method | clr-metadata
+- Gdi32.GetObject | method | clr-metadata
+- Gdi32.GetObjectType | method | clr-metadata
+- Gdi32.GetPaletteEntries | method | clr-metadata
+- Gdi32.GetRgnBox | method | clr-metadata
+- Gdi32.GetRgnBox | method | clr-metadata
+- Gdi32.GetStockObject | method | clr-metadata
+- Gdi32.IntersectClipRect | method | clr-metadata
+- Gdi32.ResetDC | method | clr-metadata
+- Gdi32.StartDoc | method | clr-metadata
+- Gdi32.StartPage | method | clr-metadata
+- Gdi32.OffsetViewportOrgEx | method | clr-metadata
+- Gdi32.OffsetViewportOrgEx | method | clr-metadata
+- Gdi32.RestoreDC | method | clr-metadata
+- Gdi32.RestoreDC | method | clr-metadata
+- Gdi32.SaveDC | method | clr-metadata
+- Gdi32.SaveDC | method | clr-metadata
+- Gdi32.SelectClipRgn | method | clr-metadata
+- Gdi32.SelectClipRgn | method | clr-metadata
+- Gdi32.BitBlt | method | clr-metadata
+- Gdi32.BitBlt | method | clr-metadata
+
+<a id="weakrefobject"></a>
+## WeakRefObject.
+
+- WeakRefObject..ctor | method | clr-metadata
+- Gdi32.AbortDoc | method | clr-metadata
+- Gdi32.AddFontResourceEx | method | clr-metadata
+- Gdi32.AddFontFile | method | clr-metadata
+- Gdi32.CombineRgn | method | clr-metadata
+- Gdi32.CombineRgn | method | clr-metadata
+- Gdi32.CreateCompatibleBitmap | method | clr-metadata
+- Gdi32.CreateCompatibleDC | method | clr-metadata
+- Gdi32.CreateDCW | method | clr-metadata
+- Gdi32.CreateDIBSection | method | clr-metadata
+- Gdi32.CreateICW | method | clr-metadata
+- Gdi32.CreateFontIndirectW | method | clr-metadata
+- Gdi32.CreateRectRgn | method | clr-metadata
+- Gdi32.DeleteDC | method | clr-metadata
+- Gdi32.DeleteDC | method | clr-metadata
+- Gdi32.DeleteObject | method | clr-metadata
+- Gdi32.DeleteObject | method | clr-metadata
+- Gdi32.EndDoc | method | clr-metadata
+- Gdi32.EndPage | method | clr-metadata
+- Gdi32.ExtEscape | method | clr-metadata
+- Gdi32.ExtEscape | method | clr-metadata
+- Gdi32.GetClipRgn | method | clr-metadata
+- Gdi32.GetClipRgn | method | clr-metadata
+- Gdi32.GetClipRgn | method | clr-metadata
+- Gdi32.GetCurrentObject | method | clr-metadata
+- Gdi32.GetCurrentObject | method | clr-metadata
+- Gdi32.GetDeviceCaps | method | clr-metadata
+- Gdi32.GetDeviceCaps | method | clr-metadata
+- Gdi32.GetDIBits | method | clr-metadata
+- Gdi32.GetObject | method | clr-metadata
+- Gdi32.GetObject | method | clr-metadata
+- Gdi32.GetObject | method | clr-metadata
+- Gdi32.GetObjectType | method | clr-metadata
+- Gdi32.GetPaletteEntries | method | clr-metadata
+- Gdi32.GetRgnBox | method | clr-metadata
+- Gdi32.GetRgnBox | method | clr-metadata
+- Gdi32.GetStockObject | method | clr-metadata
+- Gdi32.IntersectClipRect | method | clr-metadata
+- Gdi32.ResetDC | method | clr-metadata
+- Gdi32.StartDoc | method | clr-metadata
+- Gdi32.StartPage | method | clr-metadata
+- Gdi32.OffsetViewportOrgEx | method | clr-metadata
+- Gdi32.OffsetViewportOrgEx | method | clr-metadata
+- Gdi32.RestoreDC | method | clr-metadata
+- Gdi32.RestoreDC | method | clr-metadata
+- Gdi32.SaveDC | method | clr-metadata
+- Gdi32.SaveDC | method | clr-metadata
+- Gdi32.SelectClipRgn | method | clr-metadata
+- Gdi32.SelectClipRgn | method | clr-metadata
+- Gdi32.BitBlt | method | clr-metadata
+- Gdi32.BitBlt | method | clr-metadata
+- WeakRefObject..ctor | method | clr-metadata

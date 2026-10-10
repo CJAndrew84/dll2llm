@@ -1,0 +1,46 @@
+{
+  "format": "dll2llm-file-manifest-v1",
+  "source": "C:\\Repos\\dll2llm\\bin\\Release\\net10.0",
+  "files": [
+    {
+      "path": "dll2llm.dll",
+      "size": 171008,
+      "sha256": "7DDB54282307A5DC956F1C6D3B2FF92DC4B9F3F3E661D51D58F135C929241B70",
+      "error": null
+    },
+    {
+      "path": "dll2llm.pdb",
+      "size": 45784,
+      "sha256": "E3A488F64F0E1DA883130C5D5A2B6F863706A3290D481FA6043F34EA9F8133FC",
+      "error": null
+    },
+    {
+      "path": "Microsoft.Win32.SystemEvents.dll",
+      "size": 25880,
+      "sha256": "D27ECC9DF37937AE9B703692F0997573727AB44FF8989B91C0ADBF32894A5E5B",
+      "error": null
+    },
+    {
+      "path": "runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.dll",
+      "size": 58632,
+      "sha256": "B3327CD3A71A4CC2A246AA5BD36C23C738D88F1724D0EA2F4F550623C9DAF55E",
+      "error": null
+    },
+    {
+      "path": "System.Drawing.Common.dll",
+      "size": 610992,
+      "sha256": "9033CE87D2307CBC102B23E4096E61E504DCE0EB4E56FF045BD779C6E7D0C094",
+      "error": null
+    }
+  ],
+  "delta": {
+    "changed": [
+      "dll2llm.dll",
+      "dll2llm.pdb",
+      "Microsoft.Win32.SystemEvents.dll",
+      "runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.dll",
+      "System.Drawing.Common.dll"
+    ],
+    "deleted": []
+  }
+}

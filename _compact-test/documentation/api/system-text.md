@@ -1,0 +1,32 @@
+# System.Text
+
+Exact extracted records. Verify version and API support before calling native symbols.
+- System.Text.ValueStringBuilder | type | clr-metadata
+- System.Text.ValueStringBuilder..ctor | method | clr-metadata
+- System.Text.ValueStringBuilder..ctor | method | clr-metadata
+- System.Text.ValueStringBuilder.get_Length | method | clr-metadata
+- System.Text.ValueStringBuilder.set_Length | method | clr-metadata
+- System.Text.ValueStringBuilder.get_Capacity | method | clr-metadata
+- System.Text.ValueStringBuilder.EnsureCapacity | method | clr-metadata
+- System.Text.ValueStringBuilder.GetPinnableReference | method | clr-metadata
+- System.Text.ValueStringBuilder.GetPinnableReference | method | clr-metadata
+- System.Text.ValueStringBuilder.get_Item | method | clr-metadata
+- System.Text.ValueStringBuilder.ToString | method | clr-metadata
+- System.Text.ValueStringBuilder.get_RawChars | method | clr-metadata
+- System.Text.ValueStringBuilder.AsSpan | method | clr-metadata
+- System.Text.ValueStringBuilder.AsSpan | method | clr-metadata
+- System.Text.ValueStringBuilder.AsSpan | method | clr-metadata
+- System.Text.ValueStringBuilder.AsSpan | method | clr-metadata
+- System.Text.ValueStringBuilder.TryCopyTo | method | clr-metadata
+- System.Text.ValueStringBuilder.Insert | method | clr-metadata
+- System.Text.ValueStringBuilder.Insert | method | clr-metadata
+- System.Text.ValueStringBuilder.Append | method | clr-metadata
+- System.Text.ValueStringBuilder.Append | method | clr-metadata
+- System.Text.ValueStringBuilder.AppendSlow | method | clr-metadata
+- System.Text.ValueStringBuilder.Append | method | clr-metadata
+- System.Text.ValueStringBuilder.Append | method | clr-metadata
+- System.Text.ValueStringBuilder.Append | method | clr-metadata
+- System.Text.ValueStringBuilder.AppendSpan | method | clr-metadata
+- System.Text.ValueStringBuilder.GrowAndAppend | method | clr-metadata
+- System.Text.ValueStringBuilder.Grow | method | clr-metadata
+- System.Text.ValueStringBuilder.Dispose | method | clr-metadata

@@ -149,12 +149,305 @@ namespace DllToLLMDoc
         // Maximum types per split topic file before alphabetical sub-splitting kicks in.
         const int MaxTypesPerFile = 50;
 
+        static void SafeGeneratedWrite(string path, string content)
+        {
+            long bytes = Encoding.UTF8.GetByteCount(content) + 3;
+            if (bytes > CatalogOutput.MaximumBytes)
+                throw new InvalidDataException($"Output exceeds 95 MB: {path}");
+            File.WriteAllText(path, content, Encoding.UTF8);
+        }
+
         static void Main(string[] args)
         {
+            if (args.Length > 0 && args[0] == "restore-shards")
+            {
+                if (args.Length != 3)
+                {
+                    Console.Error.WriteLine("Usage: dll2llm restore-shards <file.parts.json> <destination>");
+                    Environment.ExitCode = 2;
+                    return;
+                }
+                try { OutputSizeAudit.Restore(args[1], args[2]); }
+                catch (Exception ex) { Console.Error.WriteLine(ex.Message); Environment.ExitCode = 1; }
+                return;
+            }
+            if (args.Length > 0 && args[0].Equals("catalog", StringComparison.OrdinalIgnoreCase))
+            {
+                Environment.ExitCode = ProductCatalog.Run(args);
+                return;
+            }
+
+            if (args.Length > 0 && args[0] == "analyze")
+            {
+                string? Option(string key)
+                {
+                    var i = Array.IndexOf(args, key);
+                    return i >= 0 && i + 1 < args.Length ? args[i + 1] : null;
+                }
+                var source = Option("--source");
+                var output = Option("--output");
+                if (string.IsNullOrWhiteSpace(source) || string.IsNullOrWhiteSpace(output))
+                {
+                    Console.Error.WriteLine("Usage: dll2llm analyze --source <product-root> --output <output-dir> [--sdk <sdk-root>] [--catalog-output <separate-folder>]");
+                    Environment.ExitCode = 2;
+                    return;
+                }
+                try { ProductAnalyzer.Run(source, output, Option("--sdk"), Option("--catalog-output")); }
+                catch (Exception ex) { Console.Error.WriteLine(ex); Environment.ExitCode = 1; }
+                return;
+            }
+
+            if (args.Length > 0 && args[0] == "compose")
+            {
+                if (args.Length < 2)
+                {
+                    Console.Error.WriteLine("Usage: dll2llm compose <output-dir>");
+                    Environment.ExitCode = 2;
+                    return;
+                }
+                try
+                {
+                    var failures = AnalysisComposer.Compose(args[1]);
+                    if (failures != 0)
+                    {
+                        Console.Error.WriteLine($"Composition completed with {failures} input errors; see composition-report.json.");
+                        Environment.ExitCode = 1;
+                    }
+                }
+                catch (Exception ex) { Console.Error.WriteLine(ex); Environment.ExitCode = 1; }
+                return;
+            }
+
+            if (args.Length > 0 && args[0] == "merge-headers")
+            {
+                if (args.Length < 5)
+                {
+                    Console.Error.WriteLine("Usage: dll2llm merge-headers <previous.json> <delta.json> <manifest.json> <output.json>");
+                    Environment.ExitCode = 2;
+                    return;
+                }
+                try { HeaderCatalogueMerge.Merge(args[1], args[2], args[3], args[4]); }
+                catch (Exception ex) { Console.Error.WriteLine(ex); Environment.ExitCode = 1; }
+                return;
+            }
+
+            if (args.Length > 0 && args[0] == "audit-recovery")
+            {
+                if (args.Length < 2)
+                {
+                    Console.Error.WriteLine("Usage: dll2llm audit-recovery <skills-dir> [--output audit.json] [--baseline prior-audit.json]");
+                    Environment.ExitCode = 2;
+                    return;
+                }
+                string? Option(string key)
+                {
+                    var i = Array.IndexOf(args, key);
+                    return i >= 0 && i + 1 < args.Length ? args[i + 1] : null;
+                }
+                try { RecoveryAudit.Write(args[1], Option("--output") ?? "dll2llm-recovery-audit.json", Option("--baseline")); }
+                catch (Exception ex) { Console.Error.WriteLine(ex); Environment.ExitCode = 1; }
+                return;
+            }
+
+            if (args.Length > 0 && args[0] == "manifest")
+            {
+                if (args.Length < 2)
+                {
+                    Console.Error.WriteLine("Usage: dll2llm manifest <directory> [--output manifest.json] [--previous old.json]");
+                    Environment.ExitCode = 2;
+                    return;
+                }
+                string? Option(string key)
+                {
+                    var i = Array.IndexOf(args, key);
+                    return i >= 0 && i + 1 < args.Length ? args[i + 1] : null;
+                }
+                try { IncrementalManifest.Write(args[1], Option("--output") ?? "dll2llm-manifest.json", Option("--previous")); }
+                catch (Exception ex) { Console.Error.WriteLine(ex); Environment.ExitCode = 1; }
+                return;
+            }
+
+            if (args.Length > 0 && (args[0] == "pdb" || args[0] == "demangle"))
+            {
+                if (args.Length < 2)
+                {
+                    Console.Error.WriteLine("Usage: dll2llm pdb <directory> [--tool llvm-pdbutil] [--output file.json] OR demangle <exports.json> [--tool llvm-undname] [--output file.json]");
+                    Environment.ExitCode = 2;
+                    return;
+                }
+                string Option(string key, string fallback)
+                {
+                    var i = Array.IndexOf(args, key);
+                    return i >= 0 && i + 1 < args.Length ? args[i + 1] : fallback;
+                }
+                var pdb = args[0] == "pdb";
+                var output = Option("--output", pdb ? "dll2llm-pdb.json" : "dll2llm-demangled.json");
+                var tool = Option("--tool", pdb ? "llvm-pdbutil" : "llvm-undname");
+                try
+                {
+                    if (pdb) NativeDebugSymbols.Inspect(args[1], output, tool, "llvm-undname");
+                    else NativeDebugSymbols.Demangle(args[1], output, tool);
+                }
+                catch (Exception ex) { Console.Error.WriteLine(ex); Environment.ExitCode = 1; }
+                return;
+            }
+
+            if (args.Length > 0 && args[0] == "index")
+            {
+                if (args.Length < 5)
+                {
+                    Console.Error.WriteLine("Usage: dll2llm index <managed.json> <headers.json> <exports.json> <output-dir>");
+                    Environment.ExitCode = 2;
+                    return;
+                }
+                try { UnifiedApiIndex.Build(args[1], args[2], args[3], args[4]); }
+                catch (Exception ex) { Console.Error.WriteLine(ex); Environment.ExitCode = 1; }
+                return;
+            }
+            if (args.Length > 0 && args[0] == "search-index")
+            {
+                if (args.Length < 3)
+                {
+                    Console.Error.WriteLine("Usage: dll2llm search-index <api-index.json> <query> [--limit <number>]");
+                    Environment.ExitCode = 2;
+                    return;
+                }
+                var limitFlag = Array.IndexOf(args, "--limit");
+                var limit = limitFlag >= 0 && limitFlag + 1 < args.Length && int.TryParse(args[limitFlag + 1], out var parsed)
+                    ? parsed : 50;
+                try { UnifiedApiIndex.Search(args[1], args[2], limit); }
+                catch (Exception ex) { Console.Error.WriteLine(ex); Environment.ExitCode = 1; }
+                return;
+            }
+
+            if (args.Length > 0 && args[0] == "correlate")
+            {
+                if (args.Length < 4)
+                {
+                    Console.Error.WriteLine("Usage: dll2llm correlate <managed.json> <headers.json> <exports.json> [--output <correlation.json>]");
+                    Environment.ExitCode = 2;
+                    return;
+                }
+                var index = Array.IndexOf(args, "--output");
+                var output = index >= 0 && index + 1 < args.Length ? args[index + 1] : "dll2llm-correlation.json";
+                try { ApiCorrelation.Write(args[1], args[2], args[3], output); }
+                catch (Exception ex) { Console.Error.WriteLine(ex); Environment.ExitCode = 1; }
+                return;
+            }
+
+            if (args.Length > 0 && args[0] == "self-test")
+            {
+                try { SmokeTests.Run(); }
+                catch (Exception ex)
+                {
+                    Console.Error.WriteLine(ex);
+                    Environment.ExitCode = 1;
+                }
+                return;
+            }
+
+            if (args.Length > 0 && (args[0] == "headers" || args[0] == "import-libs"))
+            {
+                if (args.Length < 2)
+                {
+                    Console.Error.WriteLine("Usage: dll2llm headers|import-libs <sdk-directory> [--output <file.json>] [--tool <clang++|llvm-readobj>] [--include <directory>]...");
+                    Environment.ExitCode = 2;
+                    return;
+                }
+                string Option(string name, string fallback)
+                {
+                    var i = Array.IndexOf(args, name);
+                    return i >= 0 && i + 1 < args.Length ? args[i + 1] : fallback;
+                }
+                var includeDirs = new List<string>();
+                for (int i = 2; i < args.Length - 1; i++)
+                    if (args[i] == "--include") includeDirs.Add(args[++i]);
+                var headers = args[0] == "headers";
+                var tool = Option("--tool", headers ? "clang++" : "llvm-readobj");
+                var destination = Option("--output", headers ? "dll2llm-headers.json" : "dll2llm-import-libs.json");
+                try
+                {
+                    if (headers) CppSdkInventory.WriteHeaders(args[1], destination, tool, includeDirs.ToArray(), Option("--delta-manifest", "" ) is string delta && delta.Length > 0 ? delta : null);
+                    else CppSdkInventory.WriteLibraries(args[1], destination, tool);
+                }
+                catch (Exception ex)
+                {
+                    Console.Error.WriteLine(ex.Message);
+                    Environment.ExitCode = 1;
+                }
+                return;
+            }
+
+            if (args.Length > 0 && args[0] == "exports")
+            {
+                if (args.Length < 2)
+                {
+                    Console.Error.WriteLine("Usage: dll2llm exports <native.dll> [--output <exports.json>]");
+                    Environment.ExitCode = 2;
+                    return;
+                }
+                var outputFlag = Array.IndexOf(args, "--output");
+                var exportPath = outputFlag >= 0 && outputFlag + 1 < args.Length
+                    ? args[outputFlag + 1]
+                    : Path.Combine(Environment.CurrentDirectory, "dll2llm-exports.json");
+                try { NativeExports.WriteJson(args[1], exportPath); }
+                catch (Exception ex)
+                {
+                    Console.Error.WriteLine(ex.Message);
+                    Environment.ExitCode = 1;
+                }
+                return;
+            }
+
+            if (args.Length > 0 && args[0] == "metadata")
+            {
+                if (args.Length < 2)
+                {
+                    Console.Error.WriteLine("Usage: dll2llm metadata <managed.dll> [--output <metadata.json>]");
+                    Environment.ExitCode = 2;
+                    return;
+                }
+                var outputFlag = Array.IndexOf(args, "--output");
+                var metadataPath = outputFlag >= 0 && outputFlag + 1 < args.Length
+                    ? args[outputFlag + 1]
+                    : Path.Combine(Environment.CurrentDirectory, "dll2llm-metadata.json");
+                try { MetadataInventory.WriteJson(args[1], metadataPath); }
+                catch (Exception ex)
+                {
+                    Console.Error.WriteLine(ex.Message);
+                    Environment.ExitCode = 1;
+                }
+                return;
+            }
+
+            if (args.Length > 0 && args[0] == "scan")
+            {
+                if (args.Length < 2)
+                {
+                    Console.Error.WriteLine("Usage: dll2llm scan <directory> [--output <inventory.json>]");
+                    Environment.ExitCode = 2;
+                    return;
+                }
+                var scanDirectory = args[1];
+                var outputFlag = Array.IndexOf(args, "--output");
+                var inventoryPath = outputFlag >= 0 && outputFlag + 1 < args.Length
+                    ? args[outputFlag + 1]
+                    : Path.Combine(Environment.CurrentDirectory, "dll2llm-inventory.json");
+                try { BinaryInventory.WriteJson(scanDirectory, inventoryPath); }
+                catch (Exception ex)
+                {
+                    Console.Error.WriteLine(ex.Message);
+                    Environment.ExitCode = 1;
+                }
+                return;
+            }
+
             var dllPaths = new List<string>();
             string installDir = null;
             string outputPath = null;
             string extraXmlPath = null;
+            var referenceDirs = new List<string>();
+            string resolutionReport = null;
 
             for (int i = 0; i < args.Length; i++)
             {
@@ -165,6 +458,12 @@ namespace DllToLLMDoc
                         break;
                     case "--output":
                         if (i + 1 < args.Length) outputPath = args[++i].Trim('"');
+                        break;
+                    case "--reference-dir":
+                        if (i + 1 < args.Length) referenceDirs.Add(args[++i].Trim('"'));
+                        break;
+                    case "--resolution-report":
+                        if (i + 1 < args.Length) resolutionReport = args[++i].Trim('"');
                         break;
                     case "--xml":
                         if (i + 1 < args.Length) extraXmlPath = args[++i].Trim('"');
@@ -203,10 +502,13 @@ namespace DllToLLMDoc
 
             try
             {
-                RegisterAssemblyResolver(dllPaths);
+                using var resolver = new AssemblyDependencyResolver(dllPaths, referenceDirs);
                 LoadXmlDocs(dllPaths, extraXmlPath);
-
-                GenerateSplitSkill(dllPaths, outputPath);
+                try { GenerateSplitSkill(dllPaths, outputPath); }
+                finally
+                {
+                    if (resolutionReport != null) resolver.WriteReport(resolutionReport);
+                }
                 if (installDir != null)
                     InstallSkill(outputPath, installDir);
             }
@@ -433,7 +735,7 @@ namespace DllToLLMDoc
                         sb.AppendLine();
                     }
                 }
-                File.WriteAllText(Path.Combine(outputDir, filename), sb.ToString(), Encoding.UTF8);
+                SafeGeneratedWrite(Path.Combine(outputDir, filename), sb.ToString());
                 Console.WriteLine($"  Written: {filename} ({bucketTypes.Count} types)");
             }
 
@@ -498,7 +800,7 @@ namespace DllToLLMDoc
                     sb.AppendLine($"| {type.Name} | {kind} | [{filename}]({filename}) |");
                 }
             }
-            File.WriteAllText(Path.Combine(outputDir, "INDEX.md"), sb.ToString(), Encoding.UTF8);
+            SafeGeneratedWrite(Path.Combine(outputDir, "INDEX.md"), sb.ToString());
             Console.WriteLine($"  Written: INDEX.md ({types.Count} types indexed)");
         }
 
@@ -534,7 +836,7 @@ namespace DllToLLMDoc
             foreach (var (label, filename, bucketTypes) in buckets)
                 sb.AppendLine($"- [{filename}]({filename}) — {label} ({bucketTypes.Count} types)");
 
-            File.WriteAllText(Path.Combine(outputDir, "SKILL.md"), sb.ToString(), Encoding.UTF8);
+            SafeGeneratedWrite(Path.Combine(outputDir, "SKILL.md"), sb.ToString());
             Console.WriteLine($"  Written: SKILL.md");
         }
 
@@ -738,7 +1040,10 @@ namespace DllToLLMDoc
                     }
                     catch (Exception ex)
                     {
-                        sb.AppendLine($"    [SKIPPED PROPERTY] {prop.Name}: {ex.Message}");
+                        var recovered = ReflectionSignatureRecovery.Property(prop);
+                        sb.AppendLine(recovered is null
+                            ? $"    [SKIPPED PROPERTY] {prop.Name}: {ex.Message}"
+                            : $"    {recovered} [RECOVERED: CLR metadata]");
                     }
                 }
                 sb.AppendLine();
@@ -767,7 +1072,10 @@ namespace DllToLLMDoc
                     }
                     catch (Exception ex)
                     {
-                        sb.AppendLine($"    [SKIPPED METHOD] {method.Name}: {ex.Message}");
+                        var recovered = ReflectionSignatureRecovery.Method(method);
+                        sb.AppendLine(recovered is null
+                            ? $"    [SKIPPED METHOD] {method.Name}: {ex.Message}"
+                            : $"    {recovered} [RECOVERED: CLR metadata]");
                     }
                 }
                 sb.AppendLine();
