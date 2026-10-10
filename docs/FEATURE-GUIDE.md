@@ -46,9 +46,12 @@ ProductAPI/
   skills/
     SKILL.md               Evidence-source skill entry point
     INDEX.md
-    clr-metadata.md
-    pe-export-table.md
-    clang-ast.md            Only when declarations are available
+    clr-metadata.md         Small manifest for sharded CLR skill summaries
+    clr-metadata-*.md       Sharded CLR skill summaries
+    pe-export-table.md      Small manifest for sharded export summaries
+    pe-export-table-*.md    Sharded native export summaries
+    clang-ast.md            Small manifest when declarations are available
+    clang-ast-*.md          Sharded C++ declaration summaries
   documentation/
     README.md              Human entry point
     SKILL.md               AI agent navigation and evidence rules
@@ -56,7 +59,8 @@ ProductAPI/
     domains/               Heuristically classified capability guides
     api/                   Namespace-grouped exact reference pages
     relationships/         Limitations; verified graph not yet implemented
-    search/api-index.json
+    search/api-index.json   Small manifest for sharded symbol search data
+    search/api-index-*.ndjson
     reports/composition-report.json
     sources/README.md
 ```

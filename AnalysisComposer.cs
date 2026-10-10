@@ -13,6 +13,9 @@ internal static class AnalysisComposer
 {
     internal sealed record Symbol(string Name, string Kind, string Origin, string Source, string? Signature);
 
+    private const int IndexShardCount = 32;
+    private const int SkillShardCount = 32;
+
     internal static int Compose(string outputRoot)
     {
         var errors = new List<string>();
@@ -134,40 +137,86 @@ internal static class AnalysisComposer
 
     private static void WriteIndex(string destination, string symbolStream)
     {
-        using var file = File.Create(destination);
-        using var writer = new Utf8JsonWriter(file, new JsonWriterOptions { Indented = true });
-        writer.WriteStartObject();
-        writer.WriteString("format", "unified-api-index-v1");
-        writer.WritePropertyName("symbols");
-        writer.WriteStartArray();
-        foreach (var symbol in ReadSymbols(symbolStream))
-            JsonSerializer.Serialize(writer, symbol);
-        writer.WriteEndArray();
-        writer.WriteEndObject();
+        var indexDir = Path.GetDirectoryName(destination) ?? throw new InvalidOperationException("Missing index directory.");
+        Directory.CreateDirectory(indexDir);
+
+        var shardWriters = new StreamWriter[IndexShardCount];
+        var shardFiles = new string[IndexShardCount];
+        var shardCounts = new long[IndexShardCount];
+
+        try
+        {
+            for (var i = 0; i < IndexShardCount; i++)
+            {
+                shardFiles[i] = $"api-index-{i + 1:D2}.ndjson";
+                shardWriters[i] = new StreamWriter(Path.Combine(indexDir, shardFiles[i]), false, Encoding.UTF8);
+            }
+
+            foreach (var symbol in ReadSymbols(symbolStream))
+            {
+                var shard = SelectShard(symbol.Name, IndexShardCount);
+                shardCounts[shard]++;
+                shardWriters[shard].WriteLine(JsonSerializer.Serialize(new
+                {
+                    name = symbol.Name,
+                    kind = symbol.Kind,
+                    origin = symbol.Origin
+                }));
+            }
+        }
+        finally
+        {
+            foreach (var writer in shardWriters)
+                writer?.Dispose();
+        }
+
+        File.WriteAllText(destination,
+            JsonSerializer.Serialize(new
+            {
+                format = "unified-api-index-v2",
+                shardFormat = "ndjson",
+                shardCount = IndexShardCount,
+                shards = shardFiles,
+                counts = shardCounts
+            }, new JsonSerializerOptions { WriteIndented = true }));
     }
 
     private static void WriteSkills(string skillsDir, string symbolStream, IReadOnlyDictionary<string, long> sourceCounts)
     {
+        var manifestCounts = new Dictionary<string, long>(StringComparer.Ordinal);
+        var manifestShards = new Dictionary<string, List<string>>(StringComparer.Ordinal);
         var writers = new Dictionary<string, StreamWriter>(StringComparer.Ordinal);
         try
         {
             foreach (var symbol in ReadSymbols(symbolStream))
             {
-                if (!writers.TryGetValue(symbol.Origin, out var writer))
+                var shardIndex = SelectShard(symbol.Name, SkillShardCount);
+                var shardKey = symbol.Origin + "-" + (shardIndex + 1).ToString("D2");
+
+                if (!writers.TryGetValue(shardKey, out var writer))
                 {
-                    writer = new StreamWriter(Path.Combine(skillsDir, symbol.Origin + ".md"));
-                    writer.WriteLine("# " + symbol.Origin);
+                    writer = new StreamWriter(Path.Combine(skillsDir, shardKey + ".md"), false, Encoding.UTF8);
+                    writer.WriteLine("# " + symbol.Origin + " shard " + (shardIndex + 1).ToString("D2"));
                     writer.WriteLine();
-                    writers[symbol.Origin] = writer;
+                    writer.WriteLine("Compact symbol summary. Use the API index for exhaustive machine-readable lookup.");
+                    writer.WriteLine();
+                    writers[shardKey] = writer;
+
+                    if (!manifestShards.TryGetValue(symbol.Origin, out var shardList))
+                    {
+                        shardList = new List<string>();
+                        manifestShards[symbol.Origin] = shardList;
+                    }
+
+                    shardList.Add(shardKey + ".md");
                 }
 
                 writer.WriteLine("## " + Clean(symbol.Name));
                 writer.WriteLine();
                 writer.WriteLine("- Kind: " + Clean(symbol.Kind));
-                writer.WriteLine("- Source: `" + Clean(symbol.Source).Replace("`", "'") + "`");
-                if (symbol.Signature is not null)
-                    writer.WriteLine("- Signature: `" + Clean(symbol.Signature).Replace("`", "'") + "`");
                 writer.WriteLine();
+
+                manifestCounts[symbol.Origin] = manifestCounts.TryGetValue(symbol.Origin, out var count) ? count + 1 : 1;
             }
         }
         finally
@@ -175,11 +224,27 @@ internal static class AnalysisComposer
             foreach (var writer in writers.Values) writer.Dispose();
         }
 
-        foreach (var source in sourceCounts.Keys)
+        foreach (var source in sourceCounts.Keys.OrderBy(x => x, StringComparer.Ordinal))
         {
             var path = Path.Combine(skillsDir, source + ".md");
-            if (File.Exists(path)) continue;
-            File.WriteAllText(path, "# " + source + "\n\n");
+            manifestShards.TryGetValue(source, out var shards);
+            shards ??= new List<string>();
+
+            var content = new StringBuilder();
+            content.AppendLine("# " + source);
+            content.AppendLine();
+            content.AppendLine("Symbols: " + (manifestCounts.TryGetValue(source, out var count) ? count : 0));
+            content.AppendLine();
+
+            if (shards.Count > 0)
+            {
+                content.AppendLine("## Shards");
+                content.AppendLine();
+                foreach (var shard in shards.OrderBy(x => x, StringComparer.OrdinalIgnoreCase))
+                    content.AppendLine("- [" + shard + "](" + shard + ")");
+            }
+
+            File.WriteAllText(path, content.ToString());
         }
     }
 
@@ -194,6 +259,14 @@ internal static class AnalysisComposer
             var symbol = JsonSerializer.Deserialize<Symbol>(line);
             if (symbol is not null) yield return symbol;
         }
+    }
+
+    private static int SelectShard(string value, int shardCount)
+    {
+        var hash = StringComparer.Ordinal.GetHashCode(value);
+        if (hash == int.MinValue) hash = 0;
+        hash = Math.Abs(hash);
+        return hash % shardCount;
     }
 
     private static FileStream OpenReadWithRetry(string filePath)

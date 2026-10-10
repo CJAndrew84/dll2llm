@@ -37,8 +37,9 @@ ProductAPI/
     search/api-index.json    Searchable symbol index
     reports/
     sources/
-  skills/                    Origin-grouped Agent Skill files
-  index/api-index.json       Unified machine-readable index
+  skills/                    Origin manifests plus sharded skill summaries
+  index/api-index.json       Small manifest for sharded machine-readable index
+  index/api-index-*.ndjson   Sharded symbol records
   managed/                   Per-assembly CLR metadata
   native/                    Per-DLL native exports
   inventory.json

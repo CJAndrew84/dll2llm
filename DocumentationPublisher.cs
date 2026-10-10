@@ -163,8 +163,9 @@ internal static class DocumentationPublisher
             }
         }
 
-        var index = Path.Combine(outputRoot, "index", "api-index.json");
-        if (File.Exists(index)) File.Copy(index, Path.Combine(search, "api-index.json"), true);
+        var indexDir = Path.Combine(outputRoot, "index");
+        foreach (var file in Directory.EnumerateFiles(indexDir, "api-index*", SearchOption.TopDirectoryOnly))
+            File.Copy(file, Path.Combine(search, Path.GetFileName(file)), true);
         var report = Path.Combine(outputRoot, "composition-report.json");
         if (File.Exists(report)) File.Copy(report, Path.Combine(reports, "composition-report.json"), true);
         File.WriteAllText(Path.Combine(sources, "README.md"),
