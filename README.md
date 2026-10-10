@@ -6,6 +6,23 @@ This fork extends the original DLL2LLM with recursive product scanning, CLR meta
 
 > Native unmanaged DLLs **are supported for static PE export analysis**. This is not full C++ decompilation: internal non-exported classes and callable ABI contracts cannot be reliably reconstructed from exports alone.
 
+## Integrated PR1 + PR2 catalogue (development branch)
+
+The `feature/native-pe-inventory` branch now includes the metadata-first `catalog` command, human-readable reference pages, 64 MiB JSONL shards, and the 95,000,000-byte output audit. The original `analyze` command is retained.
+
+To generate both the original analysis and the new catalogue in one run, provide a **separate sibling** output folder:
+
+```powershell
+dotnet run --project dll2llm.csproj -c Release -- analyze `
+  --source "C:\\Program Files\\Bentley\\OpenRoads Designer 2024.00" `
+  --output "C:\\Repos\\AR-ORDSDK\\2024" `
+  --catalog-output "C:\\Repos\\AR-ORDSDK\\2024-catalog"
+```
+
+`--catalog-output` is optional. It imports the analysis's managed/native JSON into a symbol-level catalogue. For direct CLR inspection instead, run `catalog --mode managed --source <install> --output <separate-folder>`. The size audit **rejects** oversized legacy `analyze` outputs; it does not yet dynamically split every legacy writer. Never push an analysis that fails the audit. Check `analysis-report.json` for failed stages. Git LFS and proprietary redistribution permissions still apply.
+
+See [catalogue usage](docs/catalogue.md) and [P0 progress](docs/implementation-progress.md).
+
 ## Quick start
 
 Windows x64 and the .NET 10 SDK are required to build the fork.
