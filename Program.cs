@@ -151,6 +151,12 @@ namespace DllToLLMDoc
 
         static void Main(string[] args)
         {
+            if (args.Length > 0 && args[0].Equals("catalog", StringComparison.OrdinalIgnoreCase))
+            {
+                Environment.ExitCode = ProductCatalog.Run(args);
+                return;
+            }
+
             var dllPaths = new List<string>();
             string installDir = null;
             string outputPath = null;
