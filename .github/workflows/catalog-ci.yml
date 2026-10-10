@@ -1,0 +1,26 @@
+name: Catalogue build and regression tests
+on:
+  push:
+    branches: [main, feature/git-readable-navigation]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  catalog:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Build application
+        run: dotnet build dll2llm.csproj -c Release
+      - name: Build missing-dependency fixture
+        run: dotnet build tests/Fixtures/Target/Target.csproj -c Release
+      - name: Run regression suite
+        run: dotnet run --project tests/dll2llm.Tests.csproj -c Release -- tests/Fixtures/Target/bin/Release/net10.0/Target.dll
