@@ -134,7 +134,7 @@ internal static class SmokeTests
                 throw new InvalidOperationException("Composition reported input failures.");
             if (!File.Exists(Path.Combine(combinedRoot, "index", "api-index.json")) ||
                 !File.Exists(Path.Combine(combinedRoot, "skills", "SKILL.md")) ||
-                !File.ReadAllText(Path.Combine(combinedRoot, "skills", "clang-ast.md")).Contains("Example::Value"))
+                !Directory.EnumerateFiles(Path.Combine(combinedRoot, "skills"), "clang-ast-*.md").Any(p => File.ReadAllText(p).Contains("Example::Value")))
                 throw new InvalidOperationException("Automatic skill composition failed.");
             var docsRoot = Path.Combine(combinedRoot, "documentation");
             if (!File.Exists(Path.Combine(docsRoot, "README.md")) ||
