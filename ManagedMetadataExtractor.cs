@@ -31,10 +31,33 @@ internal static class ManagedMetadataExtractor
             {
                 var p = r.GetGenericParameter(h);
                 return p.GetConstraints().Select(c => r.GetGenericParameterConstraint(c))
-                    .Select(c => r.GetString(p.Name) + " : " + TypeName(c.Type, new Context([], [])));
+                    .Select(c => r.GetString(p.Name) + " : " + TypeName(c.Type, new Context([], [])))
+                    .Concat(new[] { r.GetString(p.Name) + " flags: " + p.Attributes });
             }).ToArray();
         string[] AttributeTokens(CustomAttributeHandleCollection handles) =>
-            handles.Select(h => "0x" + MetadataTokens.GetToken(h).ToString("X8")).ToArray();
+            handles.Select(h =>
+            {
+                var attribute = r.GetCustomAttribute(h);
+                string owner = attribute.Constructor.Kind switch
+                {
+                    HandleKind.MethodDefinition => provider.GetTypeFromDefinition(r,
+                        r.GetMethodDefinition((MethodDefinitionHandle)attribute.Constructor).GetDeclaringType(), 0),
+                    HandleKind.MemberReference => AttributeOwner((MemberReferenceHandle)attribute.Constructor),
+                    _ => "unknown-constructor"
+                };
+                return owner + " [token:0x" + MetadataTokens.GetToken(h).ToString("X8") + "]";
+            }).ToArray();
+        string AttributeOwner(MemberReferenceHandle handle)
+        {
+            var member = r.GetMemberReference(handle);
+            return member.Parent.Kind switch
+            {
+                HandleKind.TypeReference => provider.GetTypeFromReference(r, (TypeReferenceHandle)member.Parent, 0),
+                HandleKind.TypeDefinition => provider.GetTypeFromDefinition(r, (TypeDefinitionHandle)member.Parent, 0),
+                HandleKind.TypeSpecification => provider.GetTypeFromSpecification(r, new Context([], []), (TypeSpecificationHandle)member.Parent, 0),
+                _ => "unknown-parent"
+            };
+        }
 
         foreach (var handle in r.TypeDefinitions)
         {
@@ -93,7 +116,8 @@ internal static class ManagedMetadataExtractor
                         sig.ReturnType + " " + name + (sig.ParameterTypes.Length > 0 ? "[" + string.Join(", ", sig.ParameterTypes) + "]" : "") + " { " + string.Join("; ", acc) + "; }") with
                     {
                         Namespace = ns, ReturnType = sig.ReturnType, Attributes = p.Attributes.ToString(), SignatureHex = Hex(p.Signature), Accessors = acc,
-                        Parameters = sig.ParameterTypes.Select((x, i) => new Parameter(i + 1, "index" + i, x, null)).ToArray(), Constant = ConstantValue(p.GetDefaultValue())
+                        Parameters = sig.ParameterTypes.Select((x, i) => new Parameter(i + 1, "index" + i, x, null)).ToArray(), Constant = ConstantValue(p.GetDefaultValue()),
+                        CustomAttributes = AttributeTokens(p.GetCustomAttributes())
                     };
                 });
             }
@@ -106,7 +130,7 @@ internal static class ManagedMetadataExtractor
                     var type = f.DecodeSignature(provider, ctx);
                     var name = r.GetString(f.Name);
                     return Make(fh, name, "field", full, full + "." + name, type + " " + name) with
-                    { Namespace = ns, ReturnType = type, Visibility = (f.Attributes & FieldAttributes.FieldAccessMask).ToString(), Attributes = f.Attributes.ToString(), SignatureHex = Hex(f.Signature), Constant = ConstantValue(f.GetDefaultValue()) };
+                    { Namespace = ns, ReturnType = type, Visibility = (f.Attributes & FieldAttributes.FieldAccessMask).ToString(), Attributes = f.Attributes.ToString(), SignatureHex = Hex(f.Signature), Constant = ConstantValue(f.GetDefaultValue()), CustomAttributes = AttributeTokens(f.GetCustomAttributes()) };
                 });
             }
             foreach (var eh in t.GetEvents())
@@ -119,7 +143,8 @@ internal static class ManagedMetadataExtractor
                     var name = r.GetString(e.Name);
                     var type = TypeName(e.Type, ctx);
                     return Make(eh, name, "event", full, full + "." + name, type + " " + name) with
-                    { Namespace = ns, ReturnType = type, Attributes = e.Attributes.ToString(), Accessors = new[] { Accessor("add", access.Adder), Accessor("remove", access.Remover), Accessor("raise", access.Raiser) }.Where(x => x != null).Cast<string>().ToArray() };
+                    { Namespace = ns, ReturnType = type, Attributes = e.Attributes.ToString(), Accessors = new[] { Accessor("add", access.Adder), Accessor("remove", access.Remover), Accessor("raise", access.Raiser) }.Where(x => x != null).Cast<string>().ToArray(),
+                        CustomAttributes = AttributeTokens(e.GetCustomAttributes()) };
                 });
             }
         }
