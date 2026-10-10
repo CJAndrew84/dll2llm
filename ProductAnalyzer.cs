@@ -13,12 +13,48 @@ internal static class ProductAnalyzer
     internal static void Run(string source, string output, string? sdk, string? catalogOutput = null)
     {
         if (!Directory.Exists(source)) throw new DirectoryNotFoundException(source);
-        Directory.CreateDirectory(output);
+        source = Path.GetFullPath(source);
+        output = Path.GetFullPath(output);
+        if (output.StartsWith(source + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase))
+            throw new IOException("Output must be outside the product installation.");
+        var parent = Path.GetDirectoryName(output) ?? throw new IOException("Invalid output path.");
+        Directory.CreateDirectory(parent);
+        var stage = Path.Combine(parent, "." + Path.GetFileName(output) + ".staging-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(stage);
+        try
+        {
+            RunStages(source, stage, sdk);
+            if (!string.IsNullOrWhiteSpace(catalogOutput))
+            {
+                catalogOutput = Path.GetFullPath(catalogOutput);
+                if (catalogOutput == output || catalogOutput.StartsWith(output + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase))
+                    throw new IOException("Catalogue output must be separate from analysis output.");
+                var result = ProductCatalog.Run(["catalog", "--mode", "metadata", "--source", stage, "--output", catalogOutput]);
+                if (result != 0) throw new InvalidDataException("Catalogue generation failed.");
+            }
+            Publish(stage, output);
+        }
+        finally { if (Directory.Exists(stage)) Directory.Delete(stage, true); }
+    }
+
+    private static void Publish(string stage, string output)
+    {
+        if (!Directory.Exists(output)) { Directory.Move(stage, output); return; }
+        var backup = output + ".previous-" + Guid.NewGuid().ToString("N");
+        Directory.Move(output, backup);
+        try { Directory.Move(stage, output); }
+        catch { Directory.Move(backup, output); throw; }
+        try { Directory.Delete(backup, true); }
+        catch (IOException) { Console.Error.WriteLine("Previous analysis retained at " + backup); }
+    }
+
+    private static void RunStages(string source, string output, string? sdk)
+    {
         var stages = new List<Stage>();
         void StageRun(string name, Action action)
         {
             try { action(); stages.Add(new Stage(name, "success", null)); }
-            catch (Exception ex) { stages.Add(new Stage(name, "failed", ex.Message)); }
+            catch (Exception ex) { stages.Add(new Stage(name, "failed", ex.Message)); throw new InvalidDataException("Stage " + name + " failed: " + ex.Message, ex); }
         }
         var inventoryFile = Path.Combine(output, "inventory.json");
         StageRun("inventory", () => BinaryInventory.WriteJson(source, inventoryFile));
@@ -67,14 +103,6 @@ internal static class ProductAnalyzer
             if (failures != 0) throw new InvalidDataException($"Composition had {failures} input errors; see composition-report.json");
         });
         StageRun("output-size-audit", () => OutputSizeAudit.Verify(output));
-        if (!string.IsNullOrWhiteSpace(catalogOutput))
-        {
-            StageRun("catalog", () =>
-            {
-                var result = ProductCatalog.Run(["catalog", "--mode", "metadata", "--source", output, "--output", catalogOutput]);
-                if (result != 0) throw new InvalidDataException("Catalogue generation failed. Inspect its diagnostics.");
-            });
-        }
         File.WriteAllText(Path.Combine(output, "analysis-report.json"),
             JsonSerializer.Serialize(new
             {
@@ -87,6 +115,6 @@ internal static class ProductAnalyzer
             }, new JsonSerializerOptions { WriteIndented = true }));
         Console.WriteLine($"Analysis complete: {managed.Count} managed, {native.Count} native. " +
                           $"{stages.Count(x => x.Status == "failed")} failed stages.");
-        if (stages.Any(x => x.Status == "failed")) Environment.ExitCode = 1;
+        OutputSizeAudit.Verify(output);
     }
 }
