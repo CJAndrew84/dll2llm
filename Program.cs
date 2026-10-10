@@ -149,6 +149,16 @@ namespace DllToLLMDoc
         // Maximum types per split topic file before alphabetical sub-splitting kicks in.
         const int MaxTypesPerFile = 50;
 
+        // All legacy skill output must respect the same Git/LFS distribution ceiling.
+        // Fail explicitly rather than writing an oversized or truncated reference.
+        static void SafeGeneratedWrite(string path, string content)
+        {
+            long bytes = Encoding.UTF8.GetByteCount(content) + 3; // legacy UTF-8 BOM
+            if (bytes > CatalogOutput.MaximumBytes)
+                throw new InvalidDataException($"Generated output exceeds {CatalogOutput.MaximumBytes} bytes: {path}");
+            File.WriteAllText(path, content, Encoding.UTF8);
+        }
+
         static void Main(string[] args)
         {
             if (args.Length > 0 && args[0].Equals("catalog", StringComparison.OrdinalIgnoreCase))
@@ -439,7 +449,7 @@ namespace DllToLLMDoc
                         sb.AppendLine();
                     }
                 }
-                File.WriteAllText(Path.Combine(outputDir, filename), sb.ToString(), Encoding.UTF8);
+                SafeGeneratedWrite(Path.Combine(outputDir, filename), sb.ToString());
                 Console.WriteLine($"  Written: {filename} ({bucketTypes.Count} types)");
             }
 
@@ -504,7 +514,7 @@ namespace DllToLLMDoc
                     sb.AppendLine($"| {type.Name} | {kind} | [{filename}]({filename}) |");
                 }
             }
-            File.WriteAllText(Path.Combine(outputDir, "INDEX.md"), sb.ToString(), Encoding.UTF8);
+            SafeGeneratedWrite(Path.Combine(outputDir, "INDEX.md"), sb.ToString());
             Console.WriteLine($"  Written: INDEX.md ({types.Count} types indexed)");
         }
 
@@ -540,7 +550,7 @@ namespace DllToLLMDoc
             foreach (var (label, filename, bucketTypes) in buckets)
                 sb.AppendLine($"- [{filename}]({filename}) — {label} ({bucketTypes.Count} types)");
 
-            File.WriteAllText(Path.Combine(outputDir, "SKILL.md"), sb.ToString(), Encoding.UTF8);
+            SafeGeneratedWrite(Path.Combine(outputDir, "SKILL.md"), sb.ToString());
             Console.WriteLine($"  Written: SKILL.md");
         }
 
