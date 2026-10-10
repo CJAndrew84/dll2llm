@@ -31,6 +31,7 @@ internal static class ProductCatalog
         }
         var entries = new List<Entry>();
         int scanned = 0, invalid = 0;
+        var symbols = new List<SymbolCatalog.Symbol>();
         foreach (var file in Directory.EnumerateFiles(source, "*.json", SearchOption.AllDirectories)
                      .Where(p => p.Contains(Path.DirectorySeparatorChar + "managed" + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase)
                               || p.Contains(Path.DirectorySeparatorChar + "native" + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase))
@@ -45,18 +46,21 @@ internal static class ProductCatalog
                 var kind = relative.StartsWith("native/", StringComparison.OrdinalIgnoreCase) ? "native-symbol" : "managed-metadata";
                 // Use source filename as a guaranteed provenance record. Never fabricate types or methods.
                 entries.Add(new Entry(Path.GetFileNameWithoutExtension(file), kind, relative, "metadata-file"));
+                symbols.AddRange(SymbolCatalog.Extract(doc.RootElement, relative, kind == "native-symbol"));
             }
             catch (JsonException) { invalid++; }
             catch (IOException) { invalid++; }
         }
         Directory.CreateDirectory(output);
+        symbols = symbols.OrderBy(x => x.Id, StringComparer.Ordinal).ToList();
         var opts = new JsonSerializerOptions { WriteIndented = false };
         var ndjson = entries.Select(e => JsonSerializer.Serialize(e, opts));
         WriteIfChanged(Path.Combine(output, "catalog.jsonl"), string.Join("\n", ndjson) + (entries.Count > 0 ? "\n" : ""));
+        WriteIfChanged(Path.Combine(output, "symbols.jsonl"), string.Join("\\n", symbols.Select(x => JsonSerializer.Serialize(x))) + (symbols.Count > 0 ? "\\n" : ""));
         var sb = new StringBuilder("# Product API navigation\n\n");
         sb.AppendLine("Generated from extracted metadata. Entries are source-file records, **not verified callable APIs**.");
         sb.AppendLine("Native exports do not establish C++ method signatures. Consult SDK headers and PDBs.");
-        sb.AppendLine().AppendLine($"Scanned: {scanned}; indexed: {entries.Count}; invalid/unreadable: {invalid}.").AppendLine();
+        sb.AppendLine().AppendLine($"Scanned: {scanned}; indexed files: {entries.Count}; extracted symbols: {symbols.Count}; invalid/unreadable: {invalid}.").AppendLine();
         sb.AppendLine("## Source files").AppendLine();
         foreach (var group in entries.GroupBy(e => e.Kind).OrderBy(g => g.Key, StringComparer.Ordinal))
         {
@@ -65,6 +69,9 @@ internal static class ProductCatalog
                 sb.AppendLine($"- `{Escape(entry.Name)}` — `{Escape(entry.Source)}`");
             sb.AppendLine();
         }
+        sb.AppendLine("## Extracted symbols").AppendLine();
+        foreach (var symbol in symbols)
+            sb.AppendLine($"- `{Escape(symbol.Kind)}` `{Escape(symbol.Name)}` — `{Escape(symbol.Source)}` ({symbol.Evidence})");
         // Split large human-readable navigation into bounded chunks, keep entrypoint small.
         var lines = sb.ToString().Split('\n');
         var chunks = new List<string>();
@@ -90,7 +97,7 @@ internal static class ProductCatalog
         Console.WriteLine($"Indexed {entries.Count} metadata files; {invalid} invalid/unreadable.");
         return invalid == 0 ? 0 : 1;
     }
-    private static string Escape(string s) => s.Replace("`", "\\`").Replace("\r", " ").Replace("\n", " ");
+    private static string Escape(string s) => s.Replace("`", "&#96;").Replace("\r", " ").Replace("\n", " ");
     private static void WriteIfChanged(string path, string content)
     {
         if (File.Exists(path) && File.ReadAllText(path) == content) return;
