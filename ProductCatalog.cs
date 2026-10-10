@@ -116,7 +116,7 @@ internal static class ProductCatalog
     private const int ShardBytes = 64 * 1024 * 1024;
     private static void WriteShards(string output, string prefix, IEnumerable<string> records)
     {
-        var index = new StringBuilder("# " + prefix + " shards\\n\\n");
+        var index = new StringBuilder("# " + prefix + " shards\n\n");
         var buffer = new StringBuilder();
         int shard = 0;
         void Flush()
@@ -132,7 +132,7 @@ internal static class ProductCatalog
             int bytes = Encoding.UTF8.GetByteCount(record) + 1;
             if (bytes > ShardBytes) throw new InvalidDataException("Single record exceeds 64 MiB: " + prefix);
             if (Encoding.UTF8.GetByteCount(buffer.ToString()) + bytes > ShardBytes) Flush();
-            buffer.Append(record).Append('\\n');
+            buffer.Append(record).Append('\n');
         }
         Flush();
         WriteIfChanged(Path.Combine(output, prefix + "-INDEX.md"), index.ToString());
