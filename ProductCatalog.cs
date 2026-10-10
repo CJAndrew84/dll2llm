@@ -1,150 +1,176 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+using System.Reflection.PortableExecutable;
 using System.Text.Json;
+using static DllToLLMDoc.SymbolCatalog;
 
 namespace DllToLLMDoc;
 
-// Builds Git-readable navigation from existing product metadata without loading vendor DLLs.
-// Deliberately does not infer signatures or semantics from native export names.
 internal static class ProductCatalog
 {
-    private sealed record Entry(string Name, string Kind, string Source, string Evidence);
+    private const string Usage = "dll2llm catalog --source <folder-or-file> --output <separate-generated-folder> [--mode metadata|managed] [--include-nonpublic]\n" +
+        "dll2llm catalog --source <catalogue-folder> --search <text> [--kind <kind>] [--limit 20] [--json]\n" +
+        "dll2llm catalog --source <catalogue-folder> --validate";
+    internal sealed record SourceRecord(string Source, long Bytes, string? Sha256, string Status, string? Format, string? Assembly, long Symbols);
+    internal sealed record Diagnostic(string Source, string Status, string Message);
+
     public static int Run(string[] args)
     {
-        string? source = null, output = null;
+        try { return Execute(args); }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException or ArgumentException or InvalidOperationException or BadImageFormatException)
+        { Console.Error.WriteLine(ex.GetType().Name + ": " + ex.Message); return 1; }
+    }
+    private static int Execute(string[] args)
+    {
+        string? source = null, output = null, search = null, kind = null;
+        string mode = "metadata";
+        int limit = 20;
+        bool includeNonPublic = false, validate = false, json = false;
         for (int i = 1; i < args.Length; i++)
         {
-            if (args[i] == "--source" && i + 1 < args.Length) source = args[++i];
-            else if (args[i] == "--output" && i + 1 < args.Length) output = args[++i];
-            else { Console.Error.WriteLine("Usage: dll2llm catalog --source <product-analysis-folder> --output <folder>"); return 2; }
+            var arg = args[i];
+            if (arg is "--help" or "-h") { Console.WriteLine(Usage); return 0; }
+            if (arg == "--include-nonpublic") { includeNonPublic = true; continue; }
+            if (arg == "--validate") { validate = true; continue; }
+            if (arg == "--json") { json = true; continue; }
+            if (i + 1 >= args.Length || args[i + 1].StartsWith("--", StringComparison.Ordinal)) return BadUsage();
+            var value = args[++i];
+            switch (arg)
+            {
+                case "--source": source = value; break;
+                case "--output": output = value; break;
+                case "--mode": mode = value; break;
+                case "--search": search = value; break;
+                case "--kind": kind = value; break;
+                case "--limit": if (!int.TryParse(value, out limit) || limit < 1 || limit > 1000) return BadUsage(); break;
+                default: return BadUsage();
+            }
         }
-        if (source is null || output is null || !Directory.Exists(source)) return 2;
+        if (string.IsNullOrWhiteSpace(source) || mode is not ("metadata" or "managed") || (includeNonPublic && mode != "managed")) return BadUsage();
         source = Path.GetFullPath(source);
-        output = Path.GetFullPath(output);
-        if (output.StartsWith(source + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase))
+        CatalogOutput.EnsureNoLinks(source);
+        if (search != null || validate)
         {
-            Console.Error.WriteLine("Output must be outside source to avoid recursive indexing.");
-            return 2;
+            if (output != null || (search != null && validate) || !Directory.Exists(source)) return BadUsage();
+            if (validate) { CatalogOutput.Validate(source); Console.WriteLine("Catalogue integrity, sizes, hashes and record counts passed."); return 0; }
+            if (string.IsNullOrWhiteSpace(search)) return BadUsage();
+            return Search(source, search!, kind, limit, json);
         }
-        var entries = new List<Entry>();
-        int scanned = 0, invalid = 0, lfsPointers = 0;
-        var symbols = new List<SymbolCatalog.Symbol>();
-        foreach (var file in Directory.EnumerateFiles(source, "*.json", SearchOption.AllDirectories)
-                     .Where(p => p.Contains(Path.DirectorySeparatorChar + "managed" + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase)
-                              || p.Contains(Path.DirectorySeparatorChar + "native" + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase))
-                     .OrderBy(p => p, StringComparer.Ordinal))
+        if (string.IsNullOrWhiteSpace(output) || (kind != null) || json || (!Directory.Exists(source) && !File.Exists(source))) return BadUsage();
+        output = Path.GetFullPath(output);
+        var sourceRoot = Directory.Exists(source) ? source : Path.GetDirectoryName(source)!;
+        if (Overlap(sourceRoot, output)) throw new IOException("Source and output must not overlap. Choose a separate generated folder.");
+        return Build(source, sourceRoot, output, mode, includeNonPublic);
+    }
+    private static int BadUsage() { Console.Error.WriteLine(Usage); return 2; }
+    private static bool Overlap(string a, string b)
+    {
+        var compare = OperatingSystem.IsWindows() ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
+        a = Path.TrimEndingDirectorySeparator(Path.GetFullPath(a)); b = Path.TrimEndingDirectorySeparator(Path.GetFullPath(b));
+        return a.Equals(b, compare) || a.StartsWith(b + Path.DirectorySeparatorChar, compare) || b.StartsWith(a + Path.DirectorySeparatorChar, compare);
+    }
+    private static IEnumerable<string> Inputs(string source, string mode)
+    {
+        if (File.Exists(source)) return [source];
+        var roots = mode == "metadata" ? new[] { "managed", "native" }.Select(x => Path.Combine(source, x)).Where(Directory.Exists).ToArray() : [];
+        if (roots.Length == 0) roots = [source];
+        var options = new EnumerationOptions { RecurseSubdirectories = true, IgnoreInaccessible = false, AttributesToSkip = FileAttributes.ReparsePoint };
+        return roots.SelectMany(root => Directory.EnumerateFiles(root, "*", options)).Where(p => mode == "managed"
+            ? Path.GetExtension(p).Equals(".dll", StringComparison.OrdinalIgnoreCase) || Path.GetExtension(p).Equals(".exe", StringComparison.OrdinalIgnoreCase)
+            : Path.GetExtension(p).Equals(".json", StringComparison.OrdinalIgnoreCase)).OrderBy(p => p, StringComparer.Ordinal);
+    }
+    private static int Build(string source, string sourceRoot, string output, string mode, bool includeNonPublic)
+    {
+        using var package = new CatalogOutput(output);
+        var symbols = package.Open("symbols", ".jsonl", "symbols", CatalogOutput.ShardBytes);
+        var sources = package.Open("sources", ".jsonl", "sources", CatalogOutput.ShardBytes);
+        var problems = package.Open("diagnostics", ".jsonl", "diagnostics", CatalogOutput.ShardBytes);
+        var docs = package.Open("reference", ".md", "reference", CatalogOutput.MarkdownBytes, "# API reference\n\n[Catalogue](README.md) | [All reference pages](reference-INDEX.md)\n\n");
+        int scanned = 0, processed = 0, failed = 0, pointers = 0, nativeSkipped = 0;
+        long total = 0;
+        foreach (var path in Inputs(source, mode))
         {
             scanned++;
-            string relative = Path.GetRelativePath(source, file).Replace('\\', '/');
+            var relative = Path.GetRelativePath(sourceRoot, path).Replace('\\', '/');
+            Extraction? extraction = null;
+            long bytes = 0;
+            string? hash = null;
+            string? problem = null, status = null;
             try
             {
-                // Git LFS pointer files are not JSON; report them explicitly instead of silently treating them as corrupt metadata.
-                using var stream = File.OpenRead(file);
-                if (stream.Length < 512)
+                CatalogOutput.EnsureNoLinks(path);
+                bytes = new FileInfo(path).Length;
+                hash = CatalogOutput.Hash(path);
+                if (CatalogOutput.IsLfsPointer(path))
+                { pointers++; status = "lfs-pointer"; problem = "Hydrate this source with git lfs pull; a pointer is not metadata."; }
+                else if (mode == "managed")
                 {
-                    using var probe = new StreamReader(stream, Encoding.UTF8, true, 128, leaveOpen: true);
-                    string firstLine = probe.ReadLine() ?? "";
-                    if (firstLine == "version https://git-lfs.github.com/spec/v1") { lfsPointers++; continue; }
-                    stream.Position = 0;
+                    bool managed;
+                    using (var f = File.OpenRead(path)) using (var pe = new PEReader(f)) managed = pe.HasMetadata;
+                    if (!managed) { nativeSkipped++; status = "native-skipped"; problem = "Outside managed extraction scope; no CLR metadata. Native header/PDB extraction remains separate."; }
+                    else extraction = ManagedMetadataExtractor.Extract(path, relative, includeNonPublic);
                 }
-                using var doc = JsonDocument.Parse(stream);
-                if (doc.RootElement.ValueKind != JsonValueKind.Object) { invalid++; continue; }
-                var kind = relative.StartsWith("native/", StringComparison.OrdinalIgnoreCase) ? "native-symbol" : "managed-metadata";
-                // Use source filename as a guaranteed provenance record. Never fabricate types or methods.
-                entries.Add(new Entry(Path.GetFileNameWithoutExtension(file), kind, relative, "metadata-file"));
-                symbols.AddRange(SymbolCatalog.Extract(doc.RootElement, relative, kind == "native-symbol"));
+                else
+                {
+                    using var f = File.OpenRead(path);
+                    // System.Text.Json does not consume a UTF-8 BOM itself.
+                    if (f.ReadByte() != 0xEF || f.ReadByte() != 0xBB || f.ReadByte() != 0xBF) f.Position = 0;
+                    using var doc = JsonDocument.Parse(f);
+                    bool native = doc.RootElement.ValueKind == JsonValueKind.Object && doc.RootElement.TryGetProperty("kind", out var k) && k.GetString() == "pe-export-table";
+                    extraction = SymbolCatalog.Extract(doc.RootElement, relative, native);
+                }
+                if (CatalogOutput.Hash(path) != hash) throw new IOException("Source changed during extraction; retry with a stable installation snapshot.");
             }
-            catch (JsonException) { invalid++; }
-            catch (IOException) { invalid++; }
-        }
-        Directory.CreateDirectory(output);
-        symbols = symbols.OrderBy(x => x.Id, StringComparer.Ordinal).ToList();
-        var opts = new JsonSerializerOptions { WriteIndented = false };
-        var ndjson = entries.Select(e => JsonSerializer.Serialize(e, opts));
-        WriteShards(output, "catalog", ndjson);
-        WriteShards(output, "symbols", symbols.Select(x => JsonSerializer.Serialize(x)));
-        var sb = new StringBuilder("# Product API navigation\n\n");
-        sb.AppendLine("Generated from extracted metadata. Entries are source-file records, **not verified callable APIs**.");
-        sb.AppendLine("Native exports do not establish C++ method signatures. Consult SDK headers and PDBs.");
-        sb.AppendLine().AppendLine($"Scanned: {scanned}; indexed files: {entries.Count}; extracted symbols: {symbols.Count}; invalid/unreadable: {invalid}; LFS pointers: {lfsPointers}.").AppendLine();
-        sb.AppendLine("## Source files").AppendLine();
-        foreach (var group in entries.GroupBy(e => e.Kind).OrderBy(g => g.Key, StringComparer.Ordinal))
-        {
-            sb.AppendLine($"### {group.Key}").AppendLine();
-            foreach (var entry in group)
-                sb.AppendLine($"- `{Escape(entry.Name)}` — `{Escape(entry.Source)}`");
-            sb.AppendLine();
-        }
-        sb.AppendLine("## Extracted symbols").AppendLine();
-        foreach (var symbol in symbols)
-            sb.AppendLine($"- `{Escape(symbol.Kind)}` `{Escape(symbol.Name)}` — `{Escape(symbol.Source)}` ({symbol.Evidence})");
-        // Split large human-readable navigation into bounded chunks, keep entrypoint small.
-        var lines = sb.ToString().Split('\n');
-        var chunks = new List<string>();
-        var current = new StringBuilder();
-        foreach (var line in lines)
-        {
-            if (Encoding.UTF8.GetByteCount(line) > 48_000)
+            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException or BadImageFormatException or ArgumentException or InvalidOperationException or OverflowException)
+            { failed++; status = "failed"; problem = ex.GetType().Name + ": " + ex.Message; }
+            if (status != null)
             {
-                Console.Error.WriteLine("Navigation entry exceeds 48 KB; refusing to silently truncate.");
-                return 1;
+                problems.Add(JsonSerializer.Serialize(new Diagnostic(relative, status, problem!), Json));
+                sources.Add(JsonSerializer.Serialize(new SourceRecord(relative, bytes, hash, status, null, null, 0), Json));
+                continue;
             }
-            if (current.Length > 0 && current.Length + line.Length + 1 > 48_000)
+            if (extraction == null) throw new InvalidDataException("Extractor produced no result.");
+            processed++;
+            if (extraction.Diagnostics.Count > 0) failed++;
+            foreach (var message in extraction.Diagnostics) problems.Add(JsonSerializer.Serialize(new Diagnostic(relative, "partial", message), Json));
+            foreach (var symbol in extraction.Symbols.OrderBy(x => x.Id, StringComparer.Ordinal))
             {
-                chunks.Add(current.ToString()); current.Clear();
+                var reference = docs.Add(CatalogOutput.Reference(symbol)) + "#" + symbol.Id;
+                symbols.Add(JsonSerializer.Serialize(symbol with { Documentation = reference }, Json));
+                total++;
             }
-            current.AppendLine(line);
+            sources.Add(JsonSerializer.Serialize(new SourceRecord(relative, bytes, hash, extraction.Diagnostics.Count == 0 ? "processed" : "partial",
+                extraction.Format, extraction.Assembly, extraction.Symbols.Count), Json));
         }
-        if (current.Length > 0) chunks.Add(current.ToString());
-        var index = new StringBuilder("# API catalogue\n\nThis is an inventory of metadata files, not a validated API reference.\n\n");
-        for (int i = 0; i < chunks.Count; i++)
+        if (scanned == 0 || (processed == 0 && nativeSkipped > 0))
         {
-            string name = $"navigation-{i + 1:D3}.md";
-            WriteIfChanged(Path.Combine(output, name), chunks[i]);
-            index.AppendLine($"- [Part {i + 1}]({name})");
+            failed++;
+            problems.Add(JsonSerializer.Serialize(new Diagnostic(".", "empty", "No matching supported inputs were processed."), Json));
         }
-        WriteIfChanged(Path.Combine(output, "README.md"), index.ToString());
-        WriteIfChanged(Path.Combine(output, "SKILL.md"), "---\nname: product-api-catalog\ndescription: Navigate extracted managed and native API metadata with provenance\n---\n\nRead [README.md](README.md) first. Consult source JSON for exact symbols; never infer signatures from native exports.\n");
-        Console.WriteLine($"Indexed {entries.Count} metadata files; {invalid} invalid/unreadable.");
-        return invalid == 0 && lfsPointers == 0 ? 0 : 1;
+        var complete = failed == 0 && pointers == 0;
+        package.Finish(new CatalogOutput.Report(scanned, processed, total, failed, pointers, nativeSkipped, complete));
+        Console.WriteLine($"Scanned {scanned}; processed {processed}; symbols {total}; failures {failed}; LFS pointers {pointers}; native skipped {nativeSkipped}; complete {complete}.");
+        return complete ? 0 : 1;
     }
-    // Hard ceiling is below Git LFS 100 MB maximum; shard at 64 MiB for headroom.
-    private const long MaxOutputBytes = 95_000_000;
-    private const int ShardBytes = 64 * 1024 * 1024;
-    private static void WriteShards(string output, string prefix, IEnumerable<string> records)
+    private static int Search(string source, string query, string? kind, int limit, bool json)
     {
-        var index = new StringBuilder("# " + prefix + " shards\n\n");
-        var buffer = new StringBuilder();
-        int shard = 0;
-        void Flush()
+        var manifest = CatalogOutput.ReadManifest(source);
+        if (!manifest.Complete) throw new InvalidDataException("Catalogue is incomplete; inspect diagnostics before using it for code generation.");
+        int count = 0;
+        foreach (var artifact in manifest.Artifacts.Where(x => x.Role == "symbols").OrderBy(x => x.Path, StringComparer.Ordinal))
         {
-            if (buffer.Length == 0) return;
-            string name = prefix + "-" + (++shard).ToString("D3") + ".jsonl";
-            WriteIfChanged(Path.Combine(output, name), buffer.ToString());
-            index.AppendLine("- [" + name + "](" + name + ")");
-            buffer.Clear();
+            var path = CatalogOutput.SafePath(source, artifact.Path);
+            if (CatalogOutput.IsLfsPointer(path)) throw new InvalidDataException("Hydrate LFS symbol shards with git lfs pull before local search.");
+            if (artifact.Bytes > CatalogOutput.MaximumBytes || new FileInfo(path).Length != artifact.Bytes || CatalogOutput.Hash(path) != artifact.Sha256)
+                throw new InvalidDataException("Symbol shard failed integrity check: " + artifact.Path);
+            foreach (var line in File.ReadLines(path))
+            {
+                var symbol = JsonSerializer.Deserialize<Symbol>(line, Json) ?? throw new InvalidDataException("Invalid symbol record.");
+                if (kind != null && !symbol.Kind.Equals(kind, StringComparison.OrdinalIgnoreCase)) continue;
+                if (!(symbol.FullName ?? symbol.Name).Contains(query, StringComparison.OrdinalIgnoreCase) && !(symbol.Signature?.Contains(query, StringComparison.OrdinalIgnoreCase) ?? false)) continue;
+                Console.WriteLine(json ? JsonSerializer.Serialize(symbol, Json) : $"{symbol.FullName ?? symbol.Name} [{symbol.Kind}]\n  {symbol.Signature ?? "Signature unknown"}\n  {symbol.Source} ({symbol.Evidence})\n  {symbol.Documentation}");
+                if (++count >= limit) return 0;
+            }
         }
-        foreach (string record in records)
-        {
-            int bytes = Encoding.UTF8.GetByteCount(record) + 1;
-            if (bytes > ShardBytes) throw new InvalidDataException("Single record exceeds 64 MiB: " + prefix);
-            if (Encoding.UTF8.GetByteCount(buffer.ToString()) + bytes > ShardBytes) Flush();
-            buffer.Append(record).Append('\n');
-        }
-        Flush();
-        WriteIfChanged(Path.Combine(output, prefix + "-INDEX.md"), index.ToString());
-    }
-    private static string Escape(string s) => s.Replace("`", "&#96;").Replace("\r", " ").Replace("\n", " ");
-    private static void WriteIfChanged(string path, string content)
-    {
-        if (Encoding.UTF8.GetByteCount(content) > MaxOutputBytes)
-            throw new InvalidDataException("Generated file exceeds 95 MB safety limit: " + path);
-        if (File.Exists(path) && File.ReadAllText(path) == content) return;
-        var temp = path + ".tmp";
-        File.WriteAllText(temp, content, new UTF8Encoding(false));
-        File.Move(temp, path, true);
+        if (count == 0 && !json) Console.WriteLine("No matches.");
+        return 0;
     }
 }
