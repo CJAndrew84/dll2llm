@@ -102,6 +102,17 @@ internal static class ProductAnalyzer
             var failures = AnalysisComposer.Compose(output);
             if (failures != 0) throw new InvalidDataException($"Composition had {failures} input errors; see composition-report.json");
         });
+        StageRun("reconcile", () =>
+        {
+            var extractedManaged = Directory.EnumerateFiles(managedDir, "*.json", SearchOption.AllDirectories).Count();
+            var extractedNative = Directory.EnumerateFiles(nativeDir, "*.json", SearchOption.AllDirectories).Count();
+            if (extractedManaged != managed.Count || extractedNative != native.Count)
+                throw new InvalidDataException($"Extraction mismatch: managed {extractedManaged}/{managed.Count}, native {extractedNative}/{native.Count}.");
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(output, "composition-report.json")));
+            var errors = report.RootElement.GetProperty("errors");
+            if (errors.GetArrayLength() != 0)
+                throw new InvalidDataException($"Composition has {errors.GetArrayLength()} errors.");
+        });
         StageRun("output-size-audit", () => OutputSizeAudit.Verify(output));
         File.WriteAllText(Path.Combine(output, "analysis-report.json"),
             JsonSerializer.Serialize(new
