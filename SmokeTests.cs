@@ -143,6 +143,17 @@ internal static class SmokeTests
                 !File.Exists(Path.Combine(docsRoot, "domains", "other.md")) ||
                 !Directory.EnumerateFiles(Path.Combine(docsRoot, "api"), "*.md").Any())
                 throw new InvalidOperationException("Domain-organized documentation was not generated.");
+            var budgetRoot = Path.Combine(temp, "budget-test");
+            Directory.CreateDirectory(budgetRoot);
+            var oversized = Path.Combine(budgetRoot, "oversized.ndjson");
+            using (var sparse = new FileStream(oversized, FileMode.CreateNew, FileAccess.Write))
+                sparse.SetLength(CatalogOutput.MaximumBytes + 1);
+            bool rejected = false;
+            try { OutputSizeAudit.Verify(budgetRoot); }
+            catch (InvalidDataException) { rejected = true; }
+            if (!rejected) throw new InvalidOperationException("Oversized output was not rejected.");
+            File.Delete(oversized);
+            OutputSizeAudit.Verify(budgetRoot);
             Console.WriteLine("PASS: metadata decoding, managed inventory, C++ AST normalization, unified index, correlation");
         }
         finally { Directory.Delete(temp, recursive: true); }
