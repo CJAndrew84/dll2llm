@@ -21,6 +21,21 @@ internal static class ManagedMetadataExtractor
         var provider = new TypeNames();
         var symbols = new List<Symbol>();
         var diagnostics = new List<string>();
+        var assemblyReferences = r.AssemblyReferences.Select(h =>
+        {
+            var ar = r.GetAssemblyReference(h);
+            return r.GetString(ar.Name) + ", Version=" + ar.Version;
+        }).OrderBy(x => x, StringComparer.Ordinal).ToArray();
+        string[] Constraints(GenericParameterHandleCollection handles) =>
+            handles.SelectMany(h =>
+            {
+                var p = r.GetGenericParameter(h);
+                return p.GetConstraints().Select(c => r.GetGenericParameterConstraint(c))
+                    .Select(c => r.GetString(p.Name) + " : " + TypeName(c.Type, new Context([], [])));
+            }).ToArray();
+        string[] AttributeTokens(CustomAttributeHandleCollection handles) =>
+            handles.Select(h => "0x" + MetadataTokens.GetToken(h).ToString("X8")).ToArray();
+
         foreach (var handle in r.TypeDefinitions)
         {
             var t = r.GetTypeDefinition(handle);
@@ -35,7 +50,8 @@ internal static class ManagedMetadataExtractor
             {
                 Namespace = ns, Visibility = (t.Attributes & TypeAttributes.VisibilityMask).ToString(), Attributes = t.Attributes.ToString(),
                 BaseType = baseType, Interfaces = t.GetInterfaceImplementations().Select(x => TypeName(r.GetInterfaceImplementation(x).Interface, ctx)).ToArray(),
-                GenericParameters = ctx.TypeParameters.ToArray()
+                GenericParameters = ctx.TypeParameters.ToArray(), GenericConstraints = Constraints(t.GetGenericParameters()),
+                CustomAttributes = AttributeTokens(t.GetCustomAttributes()), AssemblyReferences = assemblyReferences
             });
             foreach (var mh in t.GetMethods())
             {
@@ -58,7 +74,8 @@ internal static class ManagedMetadataExtractor
                     return Make(mh, name, name is ".ctor" or ".cctor" ? "constructor" : "method", full, full + "." + name, display) with
                     {
                         Namespace = ns, Visibility = (m.Attributes & MethodAttributes.MemberAccessMask).ToString(), Attributes = m.Attributes.ToString(),
-                        ReturnType = sig.ReturnType, Parameters = parameters, GenericParameters = mc.MethodParameters.ToArray(), SignatureHex = Hex(m.Signature)
+                        ReturnType = sig.ReturnType, Parameters = parameters, GenericParameters = mc.MethodParameters.ToArray(), SignatureHex = Hex(m.Signature), GenericConstraints = Constraints(m.GetGenericParameters()),
+                        CustomAttributes = AttributeTokens(m.GetCustomAttributes())
                     };
                 });
             }
