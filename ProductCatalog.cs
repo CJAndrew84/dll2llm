@@ -64,8 +64,8 @@ internal static class ProductCatalog
         symbols = symbols.OrderBy(x => x.Id, StringComparer.Ordinal).ToList();
         var opts = new JsonSerializerOptions { WriteIndented = false };
         var ndjson = entries.Select(e => JsonSerializer.Serialize(e, opts));
-        WriteIfChanged(Path.Combine(output, "catalog.jsonl"), string.Join("\n", ndjson) + (entries.Count > 0 ? "\n" : ""));
-        WriteIfChanged(Path.Combine(output, "symbols.jsonl"), string.Join("\n", symbols.Select(x => JsonSerializer.Serialize(x))) + (symbols.Count > 0 ? "\n" : ""));
+        WriteShards(output, "catalog", ndjson);
+        WriteShards(output, "symbols", symbols.Select(x => JsonSerializer.Serialize(x)));
         var sb = new StringBuilder("# Product API navigation\n\n");
         sb.AppendLine("Generated from extracted metadata. Entries are source-file records, **not verified callable APIs**.");
         sb.AppendLine("Native exports do not establish C++ method signatures. Consult SDK headers and PDBs.");
@@ -111,9 +111,37 @@ internal static class ProductCatalog
         Console.WriteLine($"Indexed {entries.Count} metadata files; {invalid} invalid/unreadable.");
         return invalid == 0 && lfsPointers == 0 ? 0 : 1;
     }
+    // Hard ceiling is below Git LFS 100 MB maximum; shard at 64 MiB for headroom.
+    private const long MaxOutputBytes = 95_000_000;
+    private const int ShardBytes = 64 * 1024 * 1024;
+    private static void WriteShards(string output, string prefix, IEnumerable<string> records)
+    {
+        var index = new StringBuilder("# " + prefix + " shards\\n\\n");
+        var buffer = new StringBuilder();
+        int shard = 0;
+        void Flush()
+        {
+            if (buffer.Length == 0) return;
+            string name = prefix + "-" + (++shard).ToString("D3") + ".jsonl";
+            WriteIfChanged(Path.Combine(output, name), buffer.ToString());
+            index.AppendLine("- [" + name + "](" + name + ")");
+            buffer.Clear();
+        }
+        foreach (string record in records)
+        {
+            int bytes = Encoding.UTF8.GetByteCount(record) + 1;
+            if (bytes > ShardBytes) throw new InvalidDataException("Single record exceeds 64 MiB: " + prefix);
+            if (Encoding.UTF8.GetByteCount(buffer.ToString()) + bytes > ShardBytes) Flush();
+            buffer.Append(record).Append('\\n');
+        }
+        Flush();
+        WriteIfChanged(Path.Combine(output, prefix + "-INDEX.md"), index.ToString());
+    }
     private static string Escape(string s) => s.Replace("`", "&#96;").Replace("\r", " ").Replace("\n", " ");
     private static void WriteIfChanged(string path, string content)
     {
+        if (Encoding.UTF8.GetByteCount(content) > MaxOutputBytes)
+            throw new InvalidDataException("Generated file exceeds 95 MB safety limit: " + path);
         if (File.Exists(path) && File.ReadAllText(path) == content) return;
         var temp = path + ".tmp";
         File.WriteAllText(temp, content, new UTF8Encoding(false));
