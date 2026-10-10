@@ -64,3 +64,11 @@ If a new run has invalid/missing inputs, it cannot replace an existing complete 
 - Legacy `Program.cs` now checks generated file sizes against the 95,000,000-byte ceiling and splits oversized `INDEX.md` into smaller pages. This is not equivalent to the catalogue pipeline's atomic publication.
 - The separate historical `analyze` implementation is **not present in this GitHub repository**. Its output-size compliance cannot be audited or fixed here until its source is available. Do not report that pipeline as verified.
 - The OpenRoads installation corpus remains for laptop validation.
+
+## P0 hardening of original analyze (2026-10-10)
+
+- Added staging under the destination's parent, then directory swap with rollback on publish failure. Existing output remains untouched if a stage fails. The old directory is backed up during replacement.
+- Extraction stage failures now abort instead of continuing into a misleading partially successful report. Managed/native output counts reconcile with the inventory and composition error list.
+- The existing output-size audit rejects files above 95,000,000 bytes, with a new sparse-file regression check. **Automatic size-based sharding is still NOT implemented for all legacy analyze writers** (including fixed 32-way NDJSON and 16-way documentation partitions); the audit fails closed instead. Do not mark that P0 item complete until adaptive sharding is implemented and tested.
+- The catalogue is generated from the staging analysis; its output remains a separate directory. Two-directory publication is not a single transaction.
+- OpenRoads installation validation remains a laptop acceptance test. Check latest CI on PR #1 before claiming these new commits passed.
