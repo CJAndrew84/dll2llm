@@ -181,6 +181,9 @@ internal sealed class CatalogOutput : IDisposable
         if (symbol.BaseType != null) b.Append("Base type: ").Append(E(symbol.BaseType)).Append("\n\n");
         if (symbol.Interfaces.Length > 0) b.Append("Interfaces: ").Append(E(string.Join(", ", symbol.Interfaces))).Append("\n\n");
         if (symbol.GenericParameters.Length > 0) b.Append("Generic parameters: ").Append(E(string.Join(", ", symbol.GenericParameters))).Append("\n\n");
+        if (symbol.GenericConstraints.Length > 0) b.Append("Generic constraints: ").Append(E(string.Join("; ", symbol.GenericConstraints))).Append("\n\n");
+        if (symbol.CustomAttributes.Length > 0) b.Append("Custom attributes: ").Append(E(string.Join("; ", symbol.CustomAttributes))).Append("\n\n");
+        if (symbol.AssemblyReferences.Length > 0) b.Append("Assembly references: ").Append(E(string.Join("; ", symbol.AssemblyReferences))).Append("\n\n");
         foreach (var p in symbol.Parameters) b.Append("Parameter ").Append(p.Sequence).Append(": ").Append(E(p.Name)).Append("; type: ").Append(E(p.Type)).Append("; attributes: ").Append(E(p.Attributes)).Append("; default: ").Append(E(p.DefaultValue)).Append("<br>\n");
         if (symbol.Accessors.Length > 0) b.Append("\nAccessors: ").Append(E(string.Join("; ", symbol.Accessors))).Append("\n\n");
         if (symbol.Constant != null) b.Append("Constant (metadata encoding): ").Append(E(symbol.Constant)).Append("\n\n");
