@@ -1,3 +1,4 @@
+using System.Net;
 using System.Reflection.PortableExecutable;
 using System.Text.Json;
 using static DllToLLMDoc.SymbolCatalog;
@@ -15,7 +16,7 @@ internal static class ProductCatalog
     public static int Run(string[] args)
     {
         try { return Execute(args); }
-        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException or ArgumentException or InvalidOperationException or BadImageFormatException)
+        catch (Exception ex) when (ex is InvalidDataException or IOException or UnauthorizedAccessException or JsonException or ArgumentException or InvalidOperationException or BadImageFormatException or OverflowException)
         { Console.Error.WriteLine(ex.GetType().Name + ": " + ex.Message); return 1; }
     }
     private static int Execute(string[] args)
@@ -65,7 +66,8 @@ internal static class ProductCatalog
     {
         var compare = OperatingSystem.IsWindows() ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
         a = Path.TrimEndingDirectorySeparator(Path.GetFullPath(a)); b = Path.TrimEndingDirectorySeparator(Path.GetFullPath(b));
-        return a.Equals(b, compare) || a.StartsWith(b + Path.DirectorySeparatorChar, compare) || b.StartsWith(a + Path.DirectorySeparatorChar, compare);
+        string Prefix(string p) => Path.EndsInDirectorySeparator(p) ? p : p + Path.DirectorySeparatorChar;
+        return a.Equals(b, compare) || a.StartsWith(Prefix(b), compare) || b.StartsWith(Prefix(a), compare);
     }
     private static IEnumerable<string> Inputs(string source, string mode)
     {
@@ -111,29 +113,41 @@ internal static class ProductCatalog
                 else
                 {
                     using var f = File.OpenRead(path);
-                    // System.Text.Json does not consume a UTF-8 BOM itself.
                     if (f.ReadByte() != 0xEF || f.ReadByte() != 0xBB || f.ReadByte() != 0xBF) f.Position = 0;
                     using var doc = JsonDocument.Parse(f);
-                    bool native = doc.RootElement.ValueKind == JsonValueKind.Object && doc.RootElement.TryGetProperty("kind", out var k) && k.GetString() == "pe-export-table";
+                    bool native = doc.RootElement.ValueKind == JsonValueKind.Object && doc.RootElement.TryGetProperty("kind", out var k) && k.ValueKind == JsonValueKind.String && k.GetString() == "pe-export-table";
                     extraction = SymbolCatalog.Extract(doc.RootElement, relative, native);
                 }
                 if (CatalogOutput.Hash(path) != hash) throw new IOException("Source changed during extraction; retry with a stable installation snapshot.");
             }
-            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException or BadImageFormatException or ArgumentException or InvalidOperationException or OverflowException)
+            catch (Exception ex) when (ex is InvalidDataException or IOException or UnauthorizedAccessException or JsonException or BadImageFormatException or ArgumentException or InvalidOperationException or OverflowException)
             { failed++; status = "failed"; problem = ex.GetType().Name + ": " + ex.Message; }
             if (status != null)
             {
                 problems.Add(JsonSerializer.Serialize(new Diagnostic(relative, status, problem!), Json));
                 sources.Add(JsonSerializer.Serialize(new SourceRecord(relative, bytes, hash, status, null, null, 0), Json));
+                Console.Error.WriteLine(relative + ": " + problem);
                 continue;
             }
             if (extraction == null) throw new InvalidDataException("Extractor produced no result.");
             processed++;
             if (extraction.Diagnostics.Count > 0) failed++;
-            foreach (var message in extraction.Diagnostics) problems.Add(JsonSerializer.Serialize(new Diagnostic(relative, "partial", message), Json));
-            foreach (var symbol in extraction.Symbols.OrderBy(x => x.Id, StringComparer.Ordinal))
+            foreach (var message in extraction.Diagnostics)
             {
-                var reference = docs.Add(CatalogOutput.Reference(symbol)) + "#" + symbol.Id;
+                problems.Add(JsonSerializer.Serialize(new Diagnostic(relative, "partial", message), Json));
+                Console.Error.WriteLine(relative + ": " + message);
+            }
+            // Keep a type and its members together in the human reference; the hash ID is not a reading order.
+            var ordered = extraction.Symbols.OrderBy(x => x.Namespace, StringComparer.Ordinal)
+                .ThenBy(x => x.Container ?? x.FullName ?? x.Name, StringComparer.Ordinal)
+                .ThenBy(x => x.Container == null ? 0 : 1).ThenBy(x => x.Name, StringComparer.Ordinal)
+                .ThenBy(x => x.Kind, StringComparer.Ordinal).ThenBy(x => x.Signature, StringComparer.Ordinal).ThenBy(x => x.Id, StringComparer.Ordinal);
+            foreach (var symbol in ordered)
+            {
+                var human = CatalogOutput.Reference(symbol);
+                if (symbol.ReturnType != null && symbol.Signature == null)
+                    human += "Recorded type: <code>" + WebUtility.HtmlEncode(symbol.ReturnType) + "</code>\n\n";
+                var reference = docs.Add(human) + "#" + symbol.Id;
                 symbols.Add(JsonSerializer.Serialize(symbol with { Documentation = reference }, Json));
                 total++;
             }
@@ -146,6 +160,8 @@ internal static class ProductCatalog
             problems.Add(JsonSerializer.Serialize(new Diagnostic(".", "empty", "No matching supported inputs were processed."), Json));
         }
         var complete = failed == 0 && pointers == 0;
+        if (!complete && File.Exists(Path.Combine(output, "catalog-manifest.json")) && CatalogOutput.ReadManifest(output).Complete)
+            throw new InvalidDataException($"Incomplete extraction ({failed} failures, {pointers} LFS pointers). Previous complete catalogue preserved. Use a new output folder to retain detailed failure artifacts.");
         package.Finish(new CatalogOutput.Report(scanned, processed, total, failed, pointers, nativeSkipped, complete));
         Console.WriteLine($"Scanned {scanned}; processed {processed}; symbols {total}; failures {failed}; LFS pointers {pointers}; native skipped {nativeSkipped}; complete {complete}.");
         return complete ? 0 : 1;

@@ -86,8 +86,8 @@ internal static class Program
             {
                 var (src, dest) = Setup("shrink");
                 File.WriteAllText(Path.Combine(src, "managed", "sample.json"), JsonSerializer.Serialize(new { format = "decoded-clr-metadata-v2", types = Enumerable.Range(0, 350).Select(i => new { name = "Type" + i, @namespace = "Example", attributes = "Public", methods = Array.Empty<object>(), fields = Array.Empty<object>() }) }));
-                Equal(0, Run(src, dest)); var before = Directory.GetFiles(dest, "reference-?????.md").Length; True(before > 1);
-                File.WriteAllText(Path.Combine(src, "managed", "sample.json"), Legacy); Equal(0, Run(src, dest)); Equal(1, Directory.GetFiles(dest, "reference-?????.md").Length); CatalogOutput.Validate(dest);
+                Equal(0, Run(src, dest)); var before = ReferencePages(dest).Length; True(before > 1);
+                File.WriteAllText(Path.Combine(src, "managed", "sample.json"), Legacy); Equal(0, Run(src, dest)); Equal(1, ReferencePages(dest).Length); CatalogOutput.Validate(dest);
             });
             Test("LFS pointers and malformed inputs have distinct diagnostics", () =>
             {
@@ -118,6 +118,13 @@ internal static class Program
                 Exec("git", work, "init", "-q"); var a = Exec("git", work, "check-attr", "filter", "--", "out/README.md", "out/symbols-00001.jsonl"); True(a.Contains("out/README.md: filter: unset")); True(a.Contains("out/symbols-00001.jsonl: filter: lfs"));
             });
             Test("managed CLI runs against isolated fixture", () => { var dest = Path.Combine(root, "managed-output"); Equal(0, Capture(["catalog", "--source", isolated, "--output", dest, "--mode", "managed"]).Code); CatalogOutput.Validate(dest); });
+            Test("incomplete input cannot replace a complete catalogue", () =>
+            {
+                var (src, dest) = Setup("input-atomic"); Equal(0, Run(src, dest)); var before = CatalogOutput.Hash(Path.Combine(dest, "catalog-manifest.json"));
+                File.WriteAllText(Path.Combine(src, "managed", "sample.json"), "{broken"); Equal(1, Run(src, dest)); Equal(before, CatalogOutput.Hash(Path.Combine(dest, "catalog-manifest.json"))); CatalogOutput.Validate(dest);
+            });
+            Test("unsupported CLI schema yields diagnostic exit code", () => { var (src, dest) = Setup("unsupported"); File.WriteAllText(Path.Combine(src, "managed", "sample.json"), "{\"format\":\"future-v99\",\"types\":[]}"); Equal(1, Run(src, dest)); True(!CatalogOutput.ReadManifest(dest).Complete); });
+            Test("human reference groups type before members and retains legacy field type", () => { var (src, dest) = Setup("human"); Equal(0, Run(src, dest)); var md = File.ReadAllText(ReferencePages(dest).Single()); True(md.IndexOf("## Example.Widget\n", StringComparison.Ordinal) < md.IndexOf("## Example.Widget.Read", StringComparison.Ordinal)); True(md.Contains("Recorded type: <code>bool</code>")); });
         }
         finally { Environment.SetEnvironmentVariable("DLL2LLM_FIXTURE_MARKER", null); Directory.Delete(root, true); }
         Console.WriteLine($"RESULT: {passed} passed; {failed} failed.");
@@ -126,6 +133,8 @@ internal static class Program
     private static void Test(string name, Action action) { try { action(); passed++; Console.WriteLine("PASS " + name); } catch (Exception e) { failed++; Console.Error.WriteLine("FAIL " + name + ": " + e); } }
     private static string Dir(string name) { var path = Path.Combine(root, name); Directory.CreateDirectory(path); return path; }
     private static (string Source, string Destination) Setup(string name) { var dir = Dir(name); var source = Path.Combine(dir, "src"); Directory.CreateDirectory(Path.Combine(source, "managed")); File.WriteAllText(Path.Combine(source, "managed", "sample.json"), Legacy); return (source, Path.Combine(dir, "out")); }
+    // '?' also matched INDEX.md; count actual numeric page names, not navigation files.
+    private static string[] ReferencePages(string directory) => Directory.GetFiles(directory, "reference-*.md").Where(p => Path.GetFileNameWithoutExtension(p).Split('-').Last().All(char.IsDigit)).ToArray();
     private static int Run(string source, string dest) => Capture(["catalog", "--source", source, "--output", dest]).Code;
     private static (int Code, string Text) Capture(string[] args) { var old = Console.Out; using var text = new StringWriter(); try { Console.SetOut(text); return (ProductCatalog.Run(args), text.ToString()); } finally { Console.SetOut(old); } }
     private static void True(bool value) { if (!value) throw new Exception("Assertion failed."); }
