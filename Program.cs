@@ -159,6 +159,18 @@ namespace DllToLLMDoc
 
         static void Main(string[] args)
         {
+            if (args.Length > 0 && args[0] == "restore-shards")
+            {
+                if (args.Length != 3)
+                {
+                    Console.Error.WriteLine("Usage: dll2llm restore-shards <file.parts.json> <destination>");
+                    Environment.ExitCode = 2;
+                    return;
+                }
+                try { OutputSizeAudit.Restore(args[1], args[2]); }
+                catch (Exception ex) { Console.Error.WriteLine(ex.Message); Environment.ExitCode = 1; }
+                return;
+            }
             if (args.Length > 0 && args[0].Equals("catalog", StringComparison.OrdinalIgnoreCase))
             {
                 Environment.ExitCode = ProductCatalog.Run(args);
