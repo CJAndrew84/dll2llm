@@ -31,6 +31,9 @@ internal static class SymbolCatalog
         public string? Forwarder { get; init; }
         public string? Notes { get; init; }
         public string? Documentation { get; init; }
+        public string[] GenericConstraints { get; init; } = [];
+        public string[] CustomAttributes { get; init; } = [];
+        public string[] AssemblyReferences { get; init; } = [];
     }
     internal sealed record Extraction(string Format, string? Assembly, List<Symbol> Symbols, List<string> Diagnostics);
 
