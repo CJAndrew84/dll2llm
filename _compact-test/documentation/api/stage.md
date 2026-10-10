@@ -1,0 +1,19 @@
+# Stage
+
+Exact extracted records. Verify version and API support before calling native symbols.
+- Stage.get_EqualityContract | method | clr-metadata
+- Stage.get_Name | method | clr-metadata
+- Stage.set_Name | method | clr-metadata
+- Stage.get_Status | method | clr-metadata
+- Stage.set_Status | method | clr-metadata
+- Stage.get_Detail | method | clr-metadata
+- Stage.set_Detail | method | clr-metadata
+- Stage.ToString | method | clr-metadata
+- Stage.PrintMembers | method | clr-metadata
+- Stage.op_Inequality | method | clr-metadata
+- Stage.op_Equality | method | clr-metadata
+- Stage.GetHashCode | method | clr-metadata
+- Stage.Equals | method | clr-metadata
+- Stage.Equals | method | clr-metadata
+- Stage.<Clone>$ | method | clr-metadata
+- Stage.Deconstruct | method | clr-metadata

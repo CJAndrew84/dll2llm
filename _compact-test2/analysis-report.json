@@ -1,0 +1,94 @@
+{
+  "format": "product-analysis-v1",
+  "source": "C:\\Repos\\dll2llm",
+  "sdk": null,
+  "managedAssemblies": 14,
+  "nativeBinaries": 0,
+  "stages": [
+    {
+      "Name": "inventory",
+      "Status": "success",
+      "Detail": null
+    },
+    {
+      "Name": "manifest",
+      "Status": "success",
+      "Detail": null
+    },
+    {
+      "Name": "metadata:bin\\Debug\\net10.0\\dll2llm.dll",
+      "Status": "success",
+      "Detail": null
+    },
+    {
+      "Name": "metadata:bin\\Debug\\net10.0\\Microsoft.Win32.SystemEvents.dll",
+      "Status": "success",
+      "Detail": null
+    },
+    {
+      "Name": "metadata:bin\\Debug\\net10.0\\runtimes\\win\\lib\\net8.0\\Microsoft.Win32.SystemEvents.dll",
+      "Status": "success",
+      "Detail": null
+    },
+    {
+      "Name": "metadata:bin\\Debug\\net10.0\\System.Drawing.Common.dll",
+      "Status": "success",
+      "Detail": null
+    },
+    {
+      "Name": "metadata:bin\\Release\\net10.0\\dll2llm.dll",
+      "Status": "success",
+      "Detail": null
+    },
+    {
+      "Name": "metadata:bin\\Release\\net10.0\\Microsoft.Win32.SystemEvents.dll",
+      "Status": "success",
+      "Detail": null
+    },
+    {
+      "Name": "metadata:bin\\Release\\net10.0\\runtimes\\win\\lib\\net8.0\\Microsoft.Win32.SystemEvents.dll",
+      "Status": "success",
+      "Detail": null
+    },
+    {
+      "Name": "metadata:bin\\Release\\net10.0\\System.Drawing.Common.dll",
+      "Status": "success",
+      "Detail": null
+    },
+    {
+      "Name": "metadata:obj\\Debug\\net10.0\\dll2llm.dll",
+      "Status": "success",
+      "Detail": null
+    },
+    {
+      "Name": "metadata:obj\\Debug\\net10.0\\refint\\dll2llm.dll",
+      "Status": "success",
+      "Detail": null
+    },
+    {
+      "Name": "metadata:obj\\Debug\\net10.0\\ref\\dll2llm.dll",
+      "Status": "success",
+      "Detail": null
+    },
+    {
+      "Name": "metadata:obj\\Release\\net10.0\\dll2llm.dll",
+      "Status": "success",
+      "Detail": null
+    },
+    {
+      "Name": "metadata:obj\\Release\\net10.0\\refint\\dll2llm.dll",
+      "Status": "success",
+      "Detail": null
+    },
+    {
+      "Name": "metadata:obj\\Release\\net10.0\\ref\\dll2llm.dll",
+      "Status": "success",
+      "Detail": null
+    },
+    {
+      "Name": "compose",
+      "Status": "success",
+      "Detail": null
+    }
+  ]
+}

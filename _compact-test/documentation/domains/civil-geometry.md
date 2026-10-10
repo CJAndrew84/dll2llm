@@ -1,0 +1,63 @@
+# civil geometry
+
+Automatic keyword classification. Entries may appear in multiple domains.
+
+## Gdip
+- [Gdip.GdipSetLineLinearBlend](../api/gdip.md) - clr-metadata
+- [Gdip.GdipSetPathGradientLinearBlend](../api/gdip.md) - clr-metadata
+- [Gdip.GdipSetImageAttributesOutputChannelColorProfile](../api/gdip.md) - clr-metadata
+- [Gdip.<GdipSetLineLinearBlend>g____PInvoke\|91_0](../api/gdip.md) - clr-metadata
+- [Gdip.<GdipSetPathGradientLinearBlend>g____PInvoke\|126_0](../api/gdip.md) - clr-metadata
+- [Gdip.<GdipSetImageAttributesOutputChannelColorProfile>g____PInvoke\|147_0](../api/gdip.md) - clr-metadata
+## System.Drawing
+- [System.Drawing.ContentAlignment](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Pen.get_Alignment](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Pen.set_Alignment](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.StringFormat.get_Alignment](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.StringFormat.set_Alignment](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.StringFormat.get_LineAlignment](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.StringFormat.set_LineAlignment](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.StringAlignment](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientMode](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush..ctor](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush..ctor](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush..ctor](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush..ctor](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush..ctor](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush..ctor](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush..ctor](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush..ctor](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush..ctor](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush.Clone](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush.get_LinearColors](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush.set_LinearColors](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush.get_Rectangle](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush.get_GammaCorrection](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush.set_GammaCorrection](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush.get_Blend](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush.set_Blend](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush.SetSigmaBellShape](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush.SetSigmaBellShape](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush.SetBlendTriangularShape](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush.SetBlendTriangularShape](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush.get_InterpolationColors](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush.set_InterpolationColors](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush.get_WrapMode](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush.set_WrapMode](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush.get_Transform](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush.set_Transform](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush.ResetTransform](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush.MultiplyTransform](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush.MultiplyTransform](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush.TranslateTransform](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush.TranslateTransform](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush.ScaleTransform](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush.ScaleTransform](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush.RotateTransform](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.LinearGradientBrush.RotateTransform](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Drawing2D.PenAlignment](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Imaging.ImageAttributes.SetOutputChannelColorProfile](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Imaging.ImageAttributes.SetOutputChannelColorProfile](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Imaging.ImageAttributes.ClearOutputChannelColorProfile](../api/system-drawing.md) - clr-metadata
+- [System.Drawing.Imaging.ImageAttributes.ClearOutputChannelColorProfile](../api/system-drawing.md) - clr-metadata

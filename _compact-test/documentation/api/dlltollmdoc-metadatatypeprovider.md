@@ -1,0 +1,18 @@
+# DllToLLMDoc.MetadataTypeProvider
+
+Exact extracted records. Verify version and API support before calling native symbols.
+- DllToLLMDoc.MetadataTypeProvider.GetPrimitiveType | method | clr-metadata
+- DllToLLMDoc.MetadataTypeProvider.GetTypeFromDefinition | method | clr-metadata
+- DllToLLMDoc.MetadataTypeProvider.GetTypeFromReference | method | clr-metadata
+- DllToLLMDoc.MetadataTypeProvider.GetTypeFromSpecification | method | clr-metadata
+- DllToLLMDoc.MetadataTypeProvider.GetSZArrayType | method | clr-metadata
+- DllToLLMDoc.MetadataTypeProvider.GetArrayType | method | clr-metadata
+- DllToLLMDoc.MetadataTypeProvider.GetByReferenceType | method | clr-metadata
+- DllToLLMDoc.MetadataTypeProvider.GetPointerType | method | clr-metadata
+- DllToLLMDoc.MetadataTypeProvider.GetGenericInstantiation | method | clr-metadata
+- DllToLLMDoc.MetadataTypeProvider.GetGenericMethodParameter | method | clr-metadata
+- DllToLLMDoc.MetadataTypeProvider.GetGenericTypeParameter | method | clr-metadata
+- DllToLLMDoc.MetadataTypeProvider.GetModifiedType | method | clr-metadata
+- DllToLLMDoc.MetadataTypeProvider.GetPinnedType | method | clr-metadata
+- DllToLLMDoc.MetadataTypeProvider.GetFunctionPointerType | method | clr-metadata
+- DllToLLMDoc.MetadataTypeProvider.Join | method | clr-metadata

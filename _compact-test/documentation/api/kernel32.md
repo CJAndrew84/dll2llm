@@ -1,0 +1,31 @@
+# Kernel32
+
+Exact extracted records. Verify version and API support before calling native symbols.
+- Kernel32.GetSystemDefaultLCID | method | clr-metadata
+- Kernel32.IntGlobalAlloc | method | clr-metadata
+- Kernel32.GlobalAlloc | method | clr-metadata
+- Kernel32.GlobalFree | method | clr-metadata
+- Kernel32.GlobalFree | method | clr-metadata
+- Kernel32.GlobalLock | method | clr-metadata
+- Kernel32.GlobalLock | method | clr-metadata
+- Kernel32.GlobalUnlock | method | clr-metadata
+- Kernel32.GlobalUnlock | method | clr-metadata
+- Kernel32.SelectObject | method | clr-metadata
+- Kernel32.<GetSystemDefaultLCID>g____PInvoke\|0_0 | method | clr-metadata
+- Kernel32.<IntGlobalAlloc>g____PInvoke\|1_0 | method | clr-metadata
+- Kernel32.<GlobalFree>g____PInvoke\|3_0 | method | clr-metadata
+- Kernel32.<GlobalLock>g____PInvoke\|5_0 | method | clr-metadata
+- Kernel32.<SelectObject>g____PInvoke\|9_0 | method | clr-metadata
+- Kernel32.GetCurrentThreadId | method | clr-metadata
+- Kernel32.GetModuleHandle | method | clr-metadata
+- Kernel32.GetProcAddress | method | clr-metadata
+- Kernel32.GetProcAddress | method | clr-metadata
+- Kernel32.LoadLibrary | method | clr-metadata
+- Kernel32.FreeLibrary | method | clr-metadata
+- Kernel32.SetConsoleCtrlHandler | method | clr-metadata
+- Kernel32.<GetModuleHandle>g____PInvoke\|1_0 | method | clr-metadata
+- Kernel32.<GetProcAddress>g____PInvoke\|2_0 | method | clr-metadata
+- Kernel32.<GetProcAddress>g____PInvoke\|3_0 | method | clr-metadata
+- Kernel32.<LoadLibrary>g____PInvoke\|4_0 | method | clr-metadata
+- Kernel32.<FreeLibrary>g____PInvoke\|5_0 | method | clr-metadata
+- Kernel32.<SetConsoleCtrlHandler>g____PInvoke\|7_0 | method | clr-metadata

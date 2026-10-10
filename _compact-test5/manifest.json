@@ -1,0 +1,137 @@
+{
+  "format": "dll2llm-file-manifest-v1",
+  "source": "C:\\Repos\\dll2llm",
+  "files": [
+    {
+      "path": "bin/Debug/net10.0/dll2llm.dll",
+      "size": 186368,
+      "sha256": "0B33AFED8F1F10AA20AD7BCFF74AC59E5BFB97EF01BDC0B034F36D87A9490DC2",
+      "error": null
+    },
+    {
+      "path": "bin/Debug/net10.0/dll2llm.pdb",
+      "size": 56424,
+      "sha256": "5BD6265EED0683C2474509E9EF69358C1BC84F5E2F3027A84031A7DAA5BE3B71",
+      "error": null
+    },
+    {
+      "path": "bin/Debug/net10.0/Microsoft.Win32.SystemEvents.dll",
+      "size": 25880,
+      "sha256": "D27ECC9DF37937AE9B703692F0997573727AB44FF8989B91C0ADBF32894A5E5B",
+      "error": null
+    },
+    {
+      "path": "bin/Debug/net10.0/runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.dll",
+      "size": 58632,
+      "sha256": "B3327CD3A71A4CC2A246AA5BD36C23C738D88F1724D0EA2F4F550623C9DAF55E",
+      "error": null
+    },
+    {
+      "path": "bin/Debug/net10.0/System.Drawing.Common.dll",
+      "size": 610992,
+      "sha256": "9033CE87D2307CBC102B23E4096E61E504DCE0EB4E56FF045BD779C6E7D0C094",
+      "error": null
+    },
+    {
+      "path": "bin/Release/net10.0/dll2llm.dll",
+      "size": 175616,
+      "sha256": "A59DCD35A92AD5C13697E002242734F32222ADE3BBF6C55AF05D278F08BF196E",
+      "error": null
+    },
+    {
+      "path": "bin/Release/net10.0/dll2llm.pdb",
+      "size": 46816,
+      "sha256": "90BBFC0F32DA5E571C66B908188D72F6AB01ADCF6724BF43A487C81E5B3C8993",
+      "error": null
+    },
+    {
+      "path": "bin/Release/net10.0/Microsoft.Win32.SystemEvents.dll",
+      "size": 25880,
+      "sha256": "D27ECC9DF37937AE9B703692F0997573727AB44FF8989B91C0ADBF32894A5E5B",
+      "error": null
+    },
+    {
+      "path": "bin/Release/net10.0/runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.dll",
+      "size": 58632,
+      "sha256": "B3327CD3A71A4CC2A246AA5BD36C23C738D88F1724D0EA2F4F550623C9DAF55E",
+      "error": null
+    },
+    {
+      "path": "bin/Release/net10.0/System.Drawing.Common.dll",
+      "size": 610992,
+      "sha256": "9033CE87D2307CBC102B23E4096E61E504DCE0EB4E56FF045BD779C6E7D0C094",
+      "error": null
+    },
+    {
+      "path": "obj/Debug/net10.0/dll2llm.dll",
+      "size": 186368,
+      "sha256": "0B33AFED8F1F10AA20AD7BCFF74AC59E5BFB97EF01BDC0B034F36D87A9490DC2",
+      "error": null
+    },
+    {
+      "path": "obj/Debug/net10.0/dll2llm.pdb",
+      "size": 56424,
+      "sha256": "5BD6265EED0683C2474509E9EF69358C1BC84F5E2F3027A84031A7DAA5BE3B71",
+      "error": null
+    },
+    {
+      "path": "obj/Debug/net10.0/ref/dll2llm.dll",
+      "size": 26112,
+      "sha256": "F3B726B9EF168A1B7A4B13741B7B8BAA273288FB1F786716CFAF3B7671A2A1C1",
+      "error": null
+    },
+    {
+      "path": "obj/Debug/net10.0/refint/dll2llm.dll",
+      "size": 26112,
+      "sha256": "F3B726B9EF168A1B7A4B13741B7B8BAA273288FB1F786716CFAF3B7671A2A1C1",
+      "error": null
+    },
+    {
+      "path": "obj/Release/net10.0/dll2llm.dll",
+      "size": 175616,
+      "sha256": "A59DCD35A92AD5C13697E002242734F32222ADE3BBF6C55AF05D278F08BF196E",
+      "error": null
+    },
+    {
+      "path": "obj/Release/net10.0/dll2llm.pdb",
+      "size": 46816,
+      "sha256": "90BBFC0F32DA5E571C66B908188D72F6AB01ADCF6724BF43A487C81E5B3C8993",
+      "error": null
+    },
+    {
+      "path": "obj/Release/net10.0/ref/dll2llm.dll",
+      "size": 26112,
+      "sha256": "080CD9301512ECEDD527F8E5B3322D0D0B4B6E08E58149156F242DEE8CB78201",
+      "error": null
+    },
+    {
+      "path": "obj/Release/net10.0/refint/dll2llm.dll",
+      "size": 26112,
+      "sha256": "080CD9301512ECEDD527F8E5B3322D0D0B4B6E08E58149156F242DEE8CB78201",
+      "error": null
+    }
+  ],
+  "delta": {
+    "changed": [
+      "bin/Debug/net10.0/dll2llm.dll",
+      "bin/Debug/net10.0/dll2llm.pdb",
+      "bin/Debug/net10.0/Microsoft.Win32.SystemEvents.dll",
+      "bin/Debug/net10.0/runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.dll",
+      "bin/Debug/net10.0/System.Drawing.Common.dll",
+      "bin/Release/net10.0/dll2llm.dll",
+      "bin/Release/net10.0/dll2llm.pdb",
+      "bin/Release/net10.0/Microsoft.Win32.SystemEvents.dll",
+      "bin/Release/net10.0/runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.dll",
+      "bin/Release/net10.0/System.Drawing.Common.dll",
+      "obj/Debug/net10.0/dll2llm.dll",
+      "obj/Debug/net10.0/dll2llm.pdb",
+      "obj/Debug/net10.0/ref/dll2llm.dll",
+      "obj/Debug/net10.0/refint/dll2llm.dll",
+      "obj/Release/net10.0/dll2llm.dll",
+      "obj/Release/net10.0/dll2llm.pdb",
+      "obj/Release/net10.0/ref/dll2llm.dll",
+      "obj/Release/net10.0/refint/dll2llm.dll"
+    ],
+    "deleted": []
+  }
+}

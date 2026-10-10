@@ -1,257 +1,105 @@
-# dll2llm
+# DLL2LLM — Managed and Native API Documentation Generator
 
-![Platforms](https://img.shields.io/badge/Platform-Windows-lightgray.svg)
-![.NET](https://img.shields.io/badge/.NET-10-blue.svg)
-[![NuGet](https://img.shields.io/nuget/v/dll2llm.svg)](https://www.nuget.org/packages/dll2llm)
-[![Revit](https://img.shields.io/badge/Revit-2025|2026-lightblue.svg)](http://developer.autodesk.com/)
-[![AutoCAD](https://img.shields.io/badge/AutoCAD-2026-lightblue.svg)](http://developer.autodesk.com/)
+**Generate documentation for humans and AI assistants from a software installation root.**
 
-![Intermediate](https://img.shields.io/badge/Level-Intermediate-yellow.svg)
+This fork extends the original DLL2LLM with recursive product scanning, CLR metadata extraction, native Windows PE export analysis, optional C++ SDK header and import-library inspection, PDB symbol discovery, incremental manifests, and automatic domain-organised documentation.
 
-A command-line tool that generates ready-to-use **Agent Skills** directly from any .NET assembly.
+> Native unmanaged DLLs **are supported for static PE export analysis**. This is not full C++ decompilation: internal non-exported classes and callable ABI contracts cannot be reliably reconstructed from exports alone.
 
-## Overview
+## Quick start
 
-dll2llm reflects .NET assemblies and extracts public types, constructors, methods, properties, events, and constants — formatting them into an Agent Skill folder with `SKILL.md` (including YAML frontmatter), `INDEX.md`, and topic Markdown files, optimized for LLM consumption.
-
-
-## Videos
-
-1. [Creating Agent Skills from DLLs](https://www.youtube.com/watch?v=h3k3p_5MlMM)
-2. [Creating plugins with the Revit API Agent Skill](https://www.youtube.com/watch?v=laa-S8Zvqjg)
-
-## Prerequisites
-
-- .NET 10 SDK
-- Windows x64 (required for most Autodesk desktop APIs due to native dependencies)
-- The target product must be **installed on the machine running dll2llm**, so its native and managed dependencies can be resolved
-
-## Installation
-
-Install as a .NET global tool from [NuGet](https://www.nuget.org/packages/dll2llm):
-
-```bash
-dotnet tool install --global dll2llm
-```
-
-The `dll2llm` command is then available from any directory. To update later:
-
-```bash
-dotnet tool update --global dll2llm
-```
-
-Or run it once without installing (requires the .NET 10 SDK):
-
-```bash
-dnx dll2llm "C:\Program Files\Autodesk\Revit 2026\RevitAPI.dll"
-```
-
-## Building from source
-
-```bash
-dotnet build -c Release
-```
-
-The executable is emitted under `bin/Release/net10.0/` (or `bin/Debug/net10.0/` after a Debug build). To install your local build as a tool:
-
-```bash
-dotnet pack -c Release -o nupkg
-dotnet tool install --global dll2llm --add-source ./nupkg
-```
-
-## Quick start — generate and install a skill in one command
-
-Adjust the year and install path to match your Revit version and the skills directory your agent/tool reads from.
-
-```bash
-# Revit API — generate skill and install to a skills directory
-dll2llm "C:\Program Files\Autodesk\Revit 2026\RevitAPI.dll" --install "<path-to-your-skills-directory>"
-
-# Revit API — merge DB + UI layers
-dll2llm "C:\Program Files\Autodesk\Revit 2026\RevitAPI.dll" ^
-            "C:\Program Files\Autodesk\Revit 2026\RevitAPIUI.dll" ^
-            --install "<path-to-your-skills-directory>"
-
-# AutoCAD .NET API (adjust year to your install)
-dll2llm "C:\Program Files\Autodesk\AutoCAD 2026\AcDbMgd.dll" ^
-            "C:\Program Files\Autodesk\AutoCAD 2026\AcMgd.dll" ^
-            "C:\Program Files\Autodesk\AutoCAD 2026\AcCoreMgd.dll" ^
-            --install "<path-to-your-skills-directory>"
-```
-
-`--install <path>` copies the generated skill folder into `<path>\<folder-name>\`, where `<folder-name>` is the basename of your `--output` directory (see below). Restart your agent/tool after running so it picks up the new skill.
-
-## CLI usage
-
-```bash
-dll2llm RevitAPI.dll RevitAPIUI.dll --output ./revit-api-skill
-```
-
-If you omit `--output`, the default is **`<directory-of-first-dll>\<first-assembly-name-lower>-skill`** (for example, pointing at `RevitAPI.dll` yields `revitapi-skill` next to that DLL).
-
-Produces:
-
-```
-revit-api-skill/
-├── SKILL.md       ← Agent Skill (YAML frontmatter + links to topics)
-├── INDEX.md       ← Topic table + per-type file lookup
-├── db-architecture-b-s.md
-├── db-mechanical-a-r.md
-└── ...            ← one or more files per namespace; large namespaces are split alphabetically
-```
-
-### All options
-
-| Option | Description |
-|--------|-------------|
-| `<dll> [dll2] ...` | One or more DLL paths to process |
-| `--install <path>` | Copy the generated skill folder into `<path>\<output-folder-name>\` after generation |
-| `--output <path>` | Output directory for the skill folder |
-| `--xml <path>` | Load an additional XML documentation file (useful when XML is not co-located with the DLL) |
-
-### Interactive mode
-
-Run without arguments for a guided prompt:
-
-```bash
-dll2llm
-```
-
-## Output format
-
-### Skill folder
-
-Large namespaces are split into multiple topic files when they exceed **50 public types**, using consecutive letter ranges in the filename (for example `db-b-c.md`, `db-architecture-t-w.md`). Small namespaces still get a single file (for example `creation.md`).
-
-Each topic file groups types with the same header pattern: namespace title, `NAMESPACE:` line, separator, then per-type blocks.
-
-### Per-type sections
-
-Documentation includes, when applicable:
-
-- Kind, full name, summary and remarks from XML, base type (`Inherits`), directly implemented interfaces
-- Generic type parameter descriptions
-- For enums: numeric values (best-effort for non-`int`/`long` underlying types)
-- **CONSTRUCTORS**, **PROPERTIES**, **METHODS** (with parameter/return/exception text from XML), **EVENTS**, **CONSTANTS/STATIC FIELDS**
-
-## Why a skill folder for large APIs
-
-A full Revit API export is on the order of tens of thousands of lines and millions of tokens. The skill folder approach keeps token usage predictable:
-
-- `SKILL.md` stays small; the agent loads it first
-- `INDEX.md` lists every type and which topic file contains it (this file grows with API size)
-- Only the relevant topic file(s) need to be read for a given question
-
-## Using the generated skill
-
-### Any Agent-Skills-compatible tool
-
-The generated folder is a standard Agent Skill — copy it wherever your agent/tool reads skills from and restart it to pick up the new skill.
-
-The easiest way is `--install <path>`, which copies it there automatically. Or copy manually:
+Windows x64 and the .NET 10 SDK are required to build the fork.
 
 ```powershell
-# Windows
-xcopy /E /I ".\revit-api-skill" "<path-to-your-skills-directory>\revit-api-skill"
+git clone https://github.com/CJAndrew84/dll2llm.git
+cd dll2llm
+git switch feature/native-pe-inventory
+dotnet build dll2llm.sln -c Release
+
+dotnet run --project dll2llm.csproj -c Release -- analyze `
+  --source "C:\Path\To\InstalledProduct" `
+  --output "C:\Repos\ProductAPI"
 ```
 
-```bash
-# macOS/Linux
-cp -r ./revit-api-skill <path-to-your-skills-directory>/revit-api-skill
+Optionally provide `--sdk "C:\Path\To\ProductSDK"` for SDK headers and import libraries. This requires `clang++` and `llvm-readobj` on PATH. Paths above are examples.
+
+## What is generated?
+
+```text
+ProductAPI/
+  documentation/
+    README.md                Human entry point
+    SKILL.md                 LLM instructions
+    INDEX.md                 Domain and API navigation
+    domains/                 Automatically classified capability guides
+    api/                     Evidence-backed namespace reference pages
+    relationships/           Scope and limitations
+    search/api-index.json    Searchable symbol index
+    reports/
+    sources/
+  skills/                    Origin manifests plus sharded skill summaries
+  index/api-index.json       Small manifest for sharded machine-readable index
+  index/api-index-*.ndjson   Sharded symbol records
+  managed/                   Per-assembly CLR metadata
+  native/                    Per-DLL native exports
+  inventory.json
+  manifest.json
+  composition-report.json
+  analysis-report.json
 ```
 
-### Claude Desktop (MCP filesystem)
+With `--sdk`, the pipeline also creates `sdk-headers.json`, `sdk-libraries.json` and `sdk-manifest.json`.
 
-```bash
-npm install -g @anthropic/mcp-server-filesystem
+## Capabilities and limits
+
+| Input             | Extracted evidence                                     | Limitation                            |
+| ----------------- | ------------------------------------------------------ | ------------------------------------- |
+| Managed .NET DLL  | Types, methods, fields, decoded and raw CLR signatures | Not proof of runtime loadability      |
+| Native DLL        | PE exports, ordinals, RVAs and forwarders              | Not complete internal C++ classes     |
+| C++ SDK headers   | Clang AST declarations and type relationships          | Requires correct compiler environment |
+| COFF .lib         | Import/library symbol inventory                        | Not all libraries are import stubs    |
+| PDB               | Optional public debug symbols                          | Only available symbols                |
+| Decorated exports | Optional MSVC demangling                               | Not a supported API guarantee         |
+
+## Commands
+
+| Command                                            | Purpose                                 |
+| -------------------------------------------------- | --------------------------------------- |
+| `analyze --source ROOT --output DIR [--sdk SDK]` | Complete product scan and documentation |
+| `scan ROOT`                                      | Managed/native DLL inventory            |
+| `metadata DLL`                                   | Static CLR metadata                     |
+| `exports DLL`                                    | Native PE export analysis               |
+| `headers SDK`                                    | C++ AST extraction                      |
+| `import-libs SDK`                                | COFF symbol inspection                  |
+| `pdb ROOT`                                       | PDB public symbol inspection            |
+| `demangle EXPORTS_JSON`                          | MSVC name demangling                    |
+| `correlate MANAGED HEADERS EXPORTS`              | Candidate managed/native matches        |
+| `index MANAGED HEADERS EXPORTS DIR`              | Build index from individual inputs      |
+| `search-index INDEX QUERY`                       | Search indexed symbols                  |
+| `manifest ROOT`                                  | SHA-256 file inventory and deltas       |
+| `merge-headers OLD DELTA MANIFEST OUTPUT`        | Merge incremental header results        |
+| `audit-recovery SKILLS_DIR`                      | Measure recovery markers                |
+| `self-test`                                      | Run internal regression tests           |
+
+## Original .NET skill generation remains supported
+
+```powershell
+dotnet run --project dll2llm.csproj -c Release -- "C:\Path\To\ManagedApi.dll" `
+  --reference-dir "C:\Path\To\ProductRoot" `
+  --resolution-report "C:\Results\resolution.json" `
+  --output "C:\Results\Skill"
 ```
 
-Add to `claude_desktop_config.json`:
+This reflection-based workflow supports multiple DLL arguments, `--xml` and `--install`. Failed method/property formatting can fall back to exact CLR metadata tokens and marks recovered entries `[RECOVERED: CLR metadata]`. The `analyze` pipeline uses separate metadata-based reference generation and does not automatically run the XML-enriched legacy generator for every assembly.
 
-**Windows** (`%APPDATA%\Claude\claude_desktop_config.json`):
+## Quality, validation and security
 
-```json
-{
-  "mcpServers": {
-    "revit-api": {
-      "command": "npx",
-      "args": ["@anthropic/mcp-server-filesystem", "C:\\path\\to\\revit-api-skill"]
-    }
-  }
-}
-```
+The Windows .NET 10 build and synthetic smoke tests have passed on this feature branch. **OpenRail Designer 2026 and OpenRoads Designer 2026 SDK validation remains outstanding.** The previously reported 2,811 skipped AR-ORDSDK signatures have not yet been remeasured with this implementation.
 
-**macOS** (`~/Library/Application Support/Claude/claude_desktop_config.json`):
+Domain organisation is heuristic, and name-based managed/native correlation is exploratory rather than a verified call graph. Static binary inspection does not execute inspected DLLs, but the legacy reflection workflow loads managed assemblies. Keep generated output outside the scanned source directory and do not commit proprietary vendor binaries or SDK materials.
 
-```json
-{
-  "mcpServers": {
-    "revit-api": {
-      "command": "npx",
-      "args": ["@anthropic/mcp-server-filesystem", "/path/to/revit-api-skill"]
-    }
-  }
-}
-```
+For full installation instructions, all CLI options, incremental extraction, evidence confidence, generated files and release criteria, read the [complete feature guide](docs/FEATURE-GUIDE.md), [incremental workflow](docs/INCREMENTAL-WORKFLOW.md) and [release gate](docs/RELEASE-GATE.md).
 
-Restart Claude Desktop and the docs are available as a resource.
+## Licence and attribution
 
-> **Tip:** dll2llm's output organizes types by namespace, not by use case. You could also consider running the generated skill through an AI to categorize namespaces/classes/etc. based on use cases, which can make it easier for an agent to find the right type for a given task.
-
----
-
-## Known limitations
-
-### Must run on a machine with the product installed
-
-Autodesk desktop APIs depend on native and managed binaries that ship with the product (for example `RevitNative.dll`, AutoCAD runtime DLLs). The tool resolves dependencies from the DLL's directory; if you copy the DLL elsewhere without its sibling binaries, type loading will fail silently or throw. **Always point the tool at the product's install directory.**
-
-### Inherited members are not repeated on subclasses
-
-Properties, methods, and events are only documented on the type where they are declared (`DeclaringType == type`). Inherited members from base classes (for example `Element.get_Id()` on every Revit element subclass) are not repeated. When writing code, check the base class documentation as well.
-
-### No XML = no descriptions
-
-If the API does not ship an XML documentation file alongside the DLL (common for Inventor's COM interop assembly, some Navisworks assemblies, and older ObjectARX wrappers), the tool produces complete structural documentation (types, signatures, enums) but every description field will be empty.
-
-### Native (unmanaged) DLLs are not supported
-
-The tool uses .NET reflection and only works with managed assemblies. Native C++ DLLs (ObjectARX `.arx` / `.dll`) cannot be processed and will fail immediately.
-
-### COM interop assemblies load but have limited value
-
-Inventor's primary API is COM-based. The .NET interop assembly (`Autodesk.Inventor.Interop.dll`) can be reflected but ships without XML documentation, so the output contains signatures only with no descriptions.
-
-### Large enum values may not convert cleanly
-
-Enum underlying types other than `int` or `long` are handled with a best-effort `Convert.ToInt64` and may be skipped silently on overflow.
-
-### Generic XML key matching — edge cases
-
-The tool generates standard XML doc member keys (backtick arity notation for type definitions, `{curly}` braces for generic type arguments in signatures). Complex generic scenarios (nested generics, generic methods with constraints) may still produce key mismatches and missing descriptions.
-
----
-
-## Troubleshooting
-
-| Error | Likely cause | Fix |
-|-------|-------------|-----|
-| `Could not load file or assembly` | Missing dependency DLLs | Point the tool at the product's install folder, not a copy of the DLL |
-| `Warning: Could not resolve dependency` | A transitive dependency is missing | Safe to ignore if types load; re-run from the install directory for best results |
-| `Warning: No XML documentation found` | No `.xml` file alongside the DLL | Expected for APIs that don't ship XML; use `--xml` to provide one if available separately |
-| Many `[ERROR DOCUMENTING TYPE]` entries | Incompatible .NET target or native dependency issues | Ensure you are targeting the correct .NET version and running on a machine with the product installed |
-| Access denied on output path | Insufficient permissions | Run from a directory where you have write access, or specify `--output` pointing to a writable location |
-
----
-
-## Contributing
-
-Contributions welcome. Please open an issue or pull request.
-
-## License
-
-MIT License — see [LICENSE](LICENSE) for details.
-
-## Written by
-
-Joao Martins [in/jpornelas](https://linkedin.com/in/jpornelas), [Developer Advocate](http://aps.autodesk.com)
+MIT licence; see [LICENSE](LICENSE). Originally created by Joao Martins for [Autodesk Platform Services](https://github.com/autodesk-platform-services/dll2llm). This fork retains upstream attribution and the original managed DLL skill-generation workflow.

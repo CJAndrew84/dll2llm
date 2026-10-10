@@ -1,0 +1,19 @@
+# KeepAliveMarshaller
+
+Exact extracted records. Verify version and API support before calling native symbols.
+- KeepAliveMarshaller.FromManaged | method | clr-metadata
+- KeepAliveMarshaller.ToUnmanaged | method | clr-metadata
+- KeepAliveMarshaller.OnInvoked | method | clr-metadata
+- KeepAliveMarshaller.Free | method | clr-metadata
+- KeepAliveMarshaller.FromManaged | method | clr-metadata
+- KeepAliveMarshaller.ToUnmanaged | method | clr-metadata
+- KeepAliveMarshaller.OnInvoked | method | clr-metadata
+- KeepAliveMarshaller.Free | method | clr-metadata
+- KeepAliveMarshaller.FromManaged | method | clr-metadata
+- KeepAliveMarshaller.ToUnmanaged | method | clr-metadata
+- KeepAliveMarshaller.OnInvoked | method | clr-metadata
+- KeepAliveMarshaller.Free | method | clr-metadata
+- KeepAliveMarshaller.FromManaged | method | clr-metadata
+- KeepAliveMarshaller.ToUnmanaged | method | clr-metadata
+- KeepAliveMarshaller.OnInvoked | method | clr-metadata
+- KeepAliveMarshaller.Free | method | clr-metadata
