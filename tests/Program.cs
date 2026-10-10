@@ -38,6 +38,31 @@ internal static class Program
             Test("base type and interface references", () => { var t = Find("Widget`1", "class"); Equal("ExternalContract.ExternalBase", t.BaseType); True(t.Interfaces.Contains("ExternalContract.IExternal")); });
             Test("nested identity includes declaring type", () => True(Find("Nested", "class").FullName == "Fixture.Widget`1+Nested"));
             Test("generic parameters and return types", () => { var m = Find("Map", "method"); True(m.GenericParameters.Contains("U")); Equal("U", m.ReturnType); Equal("T", m.Parameters.Single().Type); });
+            Test("generic constraints include flags and type constraints", () =>
+            {
+                var widget = Find("Widget`1", "class");
+                True(widget.GenericConstraints.Any(x => x.Contains("T flags:") && x.Contains("ReferenceTypeConstraint")));
+                var map = Find("Map", "method");
+                True(map.GenericConstraints.Any(x => x.Contains("U flags:") && x.Contains("DefaultConstructorConstraint")));
+            });
+            Test("custom attributes resolve names rather than tokens only", () =>
+            {
+                var widget = Find("Widget`1", "class");
+                True(widget.CustomAttributes.Any(x => x.Contains("System.ObsoleteAttribute")));
+            });
+            Test("assembly reference identity retained", () =>
+            {
+                var widget = Find("Widget`1", "class");
+                True(widget.AssemblyReferences.Any(x => x.Contains("MissingDependency")));
+            });
+            Test("human reference displays rich metadata", () =>
+            {
+                var widget = Find("Widget`1", "class");
+                var page = CatalogOutput.Reference(widget);
+                True(page.Contains("Generic constraints:"));
+                True(page.Contains("Custom attributes:"));
+                True(page.Contains("Assembly references:"));
+            });
             Test("property getter and private setter", () => { var p = Find("Value", "property"); True(p.Accessors.Contains("get:Public")); True(p.Accessors.Contains("set:Private")); });
             Test("readonly property and indexer", () => { Equal(1, Find("ReadOnly", "property").Accessors.Length); Equal(1, Find("Item", "property").Parameters.Length); });
             Test("enum struct interface delegate classification", () => { Find("Mode", "enum"); Find("Position", "struct"); Find("IContract", "interface"); Find("Callback", "delegate"); });
