@@ -19,7 +19,7 @@ dotnet run --project dll2llm.csproj -c Release -- analyze `
   --catalog-output "C:\\Repos\\AR-ORDSDK\\2024-catalog"
 ```
 
-`--catalog-output` is optional. It imports the analysis's managed/native JSON into a symbol-level catalogue. For direct CLR inspection instead, run `catalog --mode managed --source <install> --output <separate-folder>`. The size audit **rejects** oversized legacy `analyze` outputs; it does not yet dynamically split every legacy writer. Never push an analysis that fails the audit. Check `analysis-report.json` for failed stages. Git LFS and proprietary redistribution permissions still apply.
+`--catalog-output` is optional. It imports the analysis's managed/native JSON into a symbol-level catalogue. For direct CLR inspection instead, run `catalog --mode managed --source <install> --output <separate-folder>`. Oversized generated files are divided into 64 MiB byte-range parts with a SHA-256 manifest after composition. Use `restore-shards` to reconstruct the original file for local parsing. These byte-range parts are not standalone JSON documents. Check `analysis-report.json` for failed stages. Git LFS and proprietary redistribution permissions still apply.
 
 See [catalogue usage](docs/catalogue.md) and [P0 progress](docs/implementation-progress.md).
 
