@@ -176,11 +176,11 @@ namespace DllToLLMDoc
                 var output = Option("--output");
                 if (string.IsNullOrWhiteSpace(source) || string.IsNullOrWhiteSpace(output))
                 {
-                    Console.Error.WriteLine("Usage: dll2llm analyze --source <product-root> --output <output-dir> [--sdk <sdk-root>]");
+                    Console.Error.WriteLine("Usage: dll2llm analyze --source <product-root> --output <output-dir> [--sdk <sdk-root>] [--catalog-output <separate-folder>]");
                     Environment.ExitCode = 2;
                     return;
                 }
-                try { ProductAnalyzer.Run(source, output, Option("--sdk")); }
+                try { ProductAnalyzer.Run(source, output, Option("--sdk"), Option("--catalog-output")); }
                 catch (Exception ex) { Console.Error.WriteLine(ex); Environment.ExitCode = 1; }
                 return;
             }

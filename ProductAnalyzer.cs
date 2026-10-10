@@ -10,7 +10,7 @@ namespace DllToLLMDoc;
 internal static class ProductAnalyzer
 {
     internal sealed record Stage(string Name, string Status, string? Detail);
-    internal static void Run(string source, string output, string? sdk)
+    internal static void Run(string source, string output, string? sdk, string? catalogOutput = null)
     {
         if (!Directory.Exists(source)) throw new DirectoryNotFoundException(source);
         Directory.CreateDirectory(output);
@@ -76,6 +76,15 @@ internal static class ProductAnalyzer
                 nativeBinaries = native.Count,
                 stages
             }, new JsonSerializerOptions { WriteIndented = true }));
+        StageRun("output-size-audit", () => OutputSizeAudit.Verify(output));
+        if (!string.IsNullOrWhiteSpace(catalogOutput))
+        {
+            StageRun("catalog", () =>
+            {
+                var result = ProductCatalog.Run(["catalog", "--mode", "metadata", "--source", output, "--output", catalogOutput]);
+                if (result != 0) throw new InvalidDataException("Catalogue generation failed. Inspect its diagnostics.");
+            });
+        }
         Console.WriteLine($"Analysis complete: {managed.Count} managed, {native.Count} native. " +
                           $"{stages.Count(x => x.Status == "failed")} failed stages.");
         if (stages.Any(x => x.Status == "failed")) Environment.ExitCode = 1;
