@@ -1,0 +1,43 @@
+# Entry
+
+Exact extracted records. Verify version and API support before calling native symbols.
+- Entry.get_EqualityContract | method | clr-metadata
+- Entry.get_Path | method | clr-metadata
+- Entry.set_Path | method | clr-metadata
+- Entry.get_Kind | method | clr-metadata
+- Entry.set_Kind | method | clr-metadata
+- Entry.get_Machine | method | clr-metadata
+- Entry.set_Machine | method | clr-metadata
+- Entry.get_HasMetadata | method | clr-metadata
+- Entry.set_HasMetadata | method | clr-metadata
+- Entry.get_Error | method | clr-metadata
+- Entry.set_Error | method | clr-metadata
+- Entry.ToString | method | clr-metadata
+- Entry.PrintMembers | method | clr-metadata
+- Entry.op_Inequality | method | clr-metadata
+- Entry.op_Equality | method | clr-metadata
+- Entry.GetHashCode | method | clr-metadata
+- Entry.Equals | method | clr-metadata
+- Entry.Equals | method | clr-metadata
+- Entry.<Clone>$ | method | clr-metadata
+- Entry.Deconstruct | method | clr-metadata
+- Entry.get_EqualityContract | method | clr-metadata
+- Entry.get_Name | method | clr-metadata
+- Entry.set_Name | method | clr-metadata
+- Entry.get_Kind | method | clr-metadata
+- Entry.set_Kind | method | clr-metadata
+- Entry.get_Origin | method | clr-metadata
+- Entry.set_Origin | method | clr-metadata
+- Entry.get_Source | method | clr-metadata
+- Entry.set_Source | method | clr-metadata
+- Entry.get_Signature | method | clr-metadata
+- Entry.set_Signature | method | clr-metadata
+- Entry.ToString | method | clr-metadata
+- Entry.PrintMembers | method | clr-metadata
+- Entry.op_Inequality | method | clr-metadata
+- Entry.op_Equality | method | clr-metadata
+- Entry.GetHashCode | method | clr-metadata
+- Entry.Equals | method | clr-metadata
+- Entry.Equals | method | clr-metadata
+- Entry.<Clone>$ | method | clr-metadata
+- Entry.Deconstruct | method | clr-metadata

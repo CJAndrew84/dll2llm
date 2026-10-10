@@ -1,0 +1,37 @@
+# Kernel32
+
+Exact extracted records. Verify version and API support before calling native symbols.
+- Kernel32.GetSystemDefaultLCID | method | clr-metadata
+- Kernel32.IntGlobalAlloc | method | clr-metadata
+- Kernel32.GlobalAlloc | method | clr-metadata
+- Kernel32.GlobalFree | method | clr-metadata
+- Kernel32.GlobalFree | method | clr-metadata
+- Kernel32.GlobalLock | method | clr-metadata
+- Kernel32.GlobalLock | method | clr-metadata
+- Kernel32.GlobalUnlock | method | clr-metadata
+- Kernel32.GlobalUnlock | method | clr-metadata
+- Kernel32.SelectObject | method | clr-metadata
+- Kernel32.GetSystemDefaultLCID | method | clr-metadata
+- Kernel32.IntGlobalAlloc | method | clr-metadata
+- Kernel32.GlobalAlloc | method | clr-metadata
+- Kernel32.GlobalFree | method | clr-metadata
+- Kernel32.GlobalFree | method | clr-metadata
+- Kernel32.GlobalLock | method | clr-metadata
+- Kernel32.GlobalLock | method | clr-metadata
+- Kernel32.GlobalUnlock | method | clr-metadata
+- Kernel32.GlobalUnlock | method | clr-metadata
+- Kernel32.SelectObject | method | clr-metadata
+- Kernel32.GetCurrentThreadId | method | clr-metadata
+- Kernel32.GetModuleHandle | method | clr-metadata
+- Kernel32.GetProcAddress | method | clr-metadata
+- Kernel32.GetProcAddress | method | clr-metadata
+- Kernel32.LoadLibrary | method | clr-metadata
+- Kernel32.FreeLibrary | method | clr-metadata
+- Kernel32.SetConsoleCtrlHandler | method | clr-metadata
+- Kernel32.GetCurrentThreadId | method | clr-metadata
+- Kernel32.GetModuleHandle | method | clr-metadata
+- Kernel32.GetProcAddress | method | clr-metadata
+- Kernel32.GetProcAddress | method | clr-metadata
+- Kernel32.LoadLibrary | method | clr-metadata
+- Kernel32.FreeLibrary | method | clr-metadata
+- Kernel32.SetConsoleCtrlHandler | method | clr-metadata

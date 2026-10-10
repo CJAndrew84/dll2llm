@@ -10,6 +10,9 @@ namespace DllToLLMDoc;
 /// <summary>Publishes human-first domain navigation and evidence-backed AI reference pages.</summary>
 internal static class DocumentationPublisher
 {
+    private const int NamespaceRootDepth = 2;
+    private const int ApiShardCount = 16;
+
     private static readonly (string Domain, string[] Terms)[] Rules =
     {
         ("civil-geometry", new[] { "alignment", "linear", "geometry", "corridor", "roadway", "rail", "profile", "superelevation" }),
@@ -37,35 +40,61 @@ internal static class DocumentationPublisher
         var search = Path.Combine(root, "search");
         var reports = Path.Combine(root, "reports");
         var sources = Path.Combine(root, "sources");
+
+        // Regeneration should replace prior docs to prevent stale 10K+ files accumulating.
+        if (Directory.Exists(root)) Directory.Delete(root, true);
         foreach (var dir in new[] { root, domains, api, relationships, search, reports, sources })
             Directory.CreateDirectory(dir);
 
         var namespaces = new HashSet<string>(StringComparer.Ordinal);
         foreach (var symbol in ReadSymbols(symbolStream))
-            namespaces.Add(NamespaceOf(symbol.Name));
+        {
+            if (!ShouldPublishSymbol(symbol)) continue;
+            namespaces.Add(GroupKey(symbol));
+        }
 
         var namespaceGroups = namespaces.OrderBy(x => x, StringComparer.OrdinalIgnoreCase).ToArray();
         var apiLinks = new Dictionary<string, string>(StringComparer.Ordinal);
-        var usedNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        var shardFiles = new Dictionary<int, string>();
+        var usedAnchorsByFile = new Dictionary<string, HashSet<string>>(StringComparer.OrdinalIgnoreCase);
         foreach (var group in namespaceGroups)
         {
-            var slug = Slug(group);
-            var unique = slug;
-            for (var n = 2; !usedNames.Add(unique); n++) unique = slug + "-" + n;
-            var file = unique + ".md";
-            apiLinks[group] = file;
-            using var writer = new StreamWriter(Path.Combine(api, file));
-            writer.WriteLine("# " + group);
-            writer.WriteLine();
-            writer.WriteLine("Exact extracted records. Verify version and API support before calling native symbols.");
+            var shard = SelectShard(group);
+            if (!shardFiles.TryGetValue(shard, out var file))
+            {
+                file = $"catalog-{shard + 1:D2}.md";
+                shardFiles[shard] = file;
+                using var writer = new StreamWriter(Path.Combine(api, file));
+                writer.WriteLine("# API catalog " + (shard + 1));
+                writer.WriteLine();
+                writer.WriteLine("Exact extracted records. Verify version and API support before calling native symbols.");
+            }
+
+            if (!usedAnchorsByFile.TryGetValue(file, out var usedAnchors))
+            {
+                usedAnchors = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                usedAnchorsByFile[file] = usedAnchors;
+            }
+
+            var baseAnchor = Slug(group);
+            var anchor = baseAnchor;
+            for (var n = 2; !usedAnchors.Add(anchor); n++) anchor = baseAnchor + "-" + n;
+
+            apiLinks[group] = file + "#" + anchor;
         }
 
         var apiBuffers = new Dictionary<string, StringBuilder>(StringComparer.Ordinal);
+        var emittedHeaders = new HashSet<string>(StringComparer.Ordinal);
         var domainBuckets = new Dictionary<string, Dictionary<string, DomainBucket>>(StringComparer.Ordinal);
         foreach (var symbol in ReadSymbols(symbolStream))
         {
-            var ns = NamespaceOf(symbol.Name);
-            if (!apiLinks.TryGetValue(ns, out var apiFile)) continue;
+            if (!ShouldPublishSymbol(symbol)) continue;
+
+            var ns = GroupKey(symbol);
+            if (!apiLinks.TryGetValue(ns, out var apiLink)) continue;
+            var hashIndex = apiLink.IndexOf('#');
+            var apiFile = hashIndex >= 0 ? apiLink[..hashIndex] : apiLink;
+            var anchor = hashIndex >= 0 ? apiLink[(hashIndex + 1)..] : Slug(ns);
 
             if (!apiBuffers.TryGetValue(apiFile, out var buffer))
             {
@@ -73,14 +102,16 @@ internal static class DocumentationPublisher
                 apiBuffers[apiFile] = buffer;
             }
 
-            buffer.AppendLine();
-            buffer.AppendLine("## " + Clean(symbol.Name));
-            buffer.AppendLine();
-            buffer.AppendLine("- Kind: " + Clean(symbol.Kind));
-            buffer.AppendLine("- Evidence: " + Clean(symbol.Origin));
-            buffer.AppendLine("- Source: `" + Clean(symbol.Source).Replace("`", "'") + "`");
-            if (symbol.Signature is not null)
-                buffer.AppendLine("- Signature: `" + Clean(symbol.Signature).Replace("`", "'") + "`");
+            var sectionKey = apiFile + "|" + ns;
+            if (emittedHeaders.Add(sectionKey))
+            {
+                buffer.AppendLine();
+                buffer.AppendLine("<a id=\"" + anchor + "\"></a>");
+                buffer.AppendLine("## " + ns);
+                buffer.AppendLine();
+            }
+
+            buffer.AppendLine("- " + Clean(symbol.Name) + " | " + Clean(symbol.Kind) + " | " + Clean(symbol.Origin));
 
             if (buffer.Length > 65536)
             {
@@ -103,7 +134,7 @@ internal static class DocumentationPublisher
                 }
 
                 bucket.Count++;
-                if (bucket.Samples.Count < 150)
+                if (bucket.Samples.Count < 80)
                     bucket.Samples.Add((symbol.Name, symbol.Origin));
             }
         }
@@ -128,7 +159,7 @@ internal static class DocumentationPublisher
                 var link = "../api/" + apiLinks[group.Key];
                 foreach (var item in group.Value.Samples)
                     writer.WriteLine("- [" + Clean(item.Name) + "](" + link + ") - " + item.Origin);
-                if (group.Value.Count > 150) writer.WriteLine("- Further entries: " + link);
+                if (group.Value.Count > 80) writer.WriteLine("- Further entries: " + link);
             }
         }
 
@@ -184,6 +215,43 @@ internal static class DocumentationPublisher
         var normalized = name.Replace("::", ".");
         var index = normalized.LastIndexOf('.');
         return index < 0 ? "(global)" : normalized[..index];
+    }
+
+    private static string NamespaceRoot(string name)
+    {
+        if (name == "(global)") return name;
+        var parts = name.Split('.', StringSplitOptions.RemoveEmptyEntries);
+        if (parts.Length <= NamespaceRootDepth) return name;
+        return string.Join('.', parts.Take(NamespaceRootDepth));
+    }
+
+    private static bool ShouldPublishSymbol(AnalysisComposer.Symbol symbol)
+    {
+        if (string.IsNullOrWhiteSpace(symbol.Name)) return false;
+
+        // Skip compiler-generated artifacts that cause very high file counts and low-value docs.
+        if (symbol.Name.Contains("<") || symbol.Name.Contains(">")) return false;
+        if (symbol.Name.Contains("AnonymousType", StringComparison.OrdinalIgnoreCase)) return false;
+        if (symbol.Name.Contains("DisplayClass", StringComparison.OrdinalIgnoreCase)) return false;
+
+        return true;
+    }
+
+    private static string GroupKey(AnalysisComposer.Symbol symbol)
+    {
+        if (symbol.Origin == "pe-export-table") return "native-exports";
+        if (symbol.Origin == "clang-ast") return "cpp-sdk";
+
+        var ns = NamespaceOf(symbol.Name);
+        return NamespaceRoot(ns);
+    }
+
+    private static int SelectShard(string group)
+    {
+        var hash = StringComparer.Ordinal.GetHashCode(group);
+        if (hash == int.MinValue) hash = 0;
+        hash = Math.Abs(hash);
+        return hash % ApiShardCount;
     }
     private static string Slug(string name)
     {

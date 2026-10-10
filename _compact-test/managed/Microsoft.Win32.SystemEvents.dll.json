@@ -1,0 +1,1604 @@
+{
+  "source": "C:\\Repos\\dll2llm\\bin\\Release\\net10.0\\Microsoft.Win32.SystemEvents.dll",
+  "format": "decoded-clr-metadata-v2",
+  "note": "Decoded signatures are best-effort; raw ECMA-335 blobs remain authoritative.",
+  "types": [
+    {
+      "namespace": "FxResources.Microsoft.Win32.SystemEvents",
+      "name": "SR",
+      "attributes": "Abstract, Sealed, BeforeFieldInit",
+      "methods": [],
+      "fields": []
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "PowerModeChangedEventArgs",
+      "attributes": "Public, BeforeFieldInit",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(Microsoft.Win32.PowerModes)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "2001011114",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "mode"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "Microsoft.Win32.PowerModes get_Mode()",
+          "name": "get_Mode",
+          "attributes": "Public, HideBySig, SpecialName",
+          "signatureHex": "20001114",
+          "parameters": []
+        }
+      ],
+      "fields": []
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "PowerModeChangedEventHandler",
+      "attributes": "Public, Sealed",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(object, nint)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "2002011C18",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "object"
+            },
+            {
+              "sequence": 2,
+              "name": "method"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void Invoke(object, Microsoft.Win32.PowerModeChangedEventArgs)",
+          "name": "Invoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "2002011C120C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "sender"
+            },
+            {
+              "sequence": 2,
+              "name": "e"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "System.IAsyncResult BeginInvoke(object, Microsoft.Win32.PowerModeChangedEventArgs, System.AsyncCallback, object)",
+          "name": "BeginInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "200412751C120C127D1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "sender"
+            },
+            {
+              "sequence": 2,
+              "name": "e"
+            },
+            {
+              "sequence": 3,
+              "name": "callback"
+            },
+            {
+              "sequence": 4,
+              "name": "object"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void EndInvoke(System.IAsyncResult)",
+          "name": "EndInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "2001011275",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "result"
+            }
+          ]
+        }
+      ],
+      "fields": []
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "PowerModes",
+      "attributes": "Public, Sealed",
+      "methods": [],
+      "fields": [
+        {
+          "name": "value__",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "Resume",
+          "decodedType": "Microsoft.Win32.PowerModes",
+          "signatureHex": "061114"
+        },
+        {
+          "name": "StatusChange",
+          "decodedType": "Microsoft.Win32.PowerModes",
+          "signatureHex": "061114"
+        },
+        {
+          "name": "Suspend",
+          "decodedType": "Microsoft.Win32.PowerModes",
+          "signatureHex": "061114"
+        }
+      ]
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "SessionEndedEventArgs",
+      "attributes": "Public, BeforeFieldInit",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(Microsoft.Win32.SessionEndReasons)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "2001011128",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "reason"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "Microsoft.Win32.SessionEndReasons get_Reason()",
+          "name": "get_Reason",
+          "attributes": "Public, HideBySig, SpecialName",
+          "signatureHex": "20001128",
+          "parameters": []
+        }
+      ],
+      "fields": []
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "SessionEndedEventHandler",
+      "attributes": "Public, Sealed",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(object, nint)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "2002011C18",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "object"
+            },
+            {
+              "sequence": 2,
+              "name": "method"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void Invoke(object, Microsoft.Win32.SessionEndedEventArgs)",
+          "name": "Invoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "2002011C1218",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "sender"
+            },
+            {
+              "sequence": 2,
+              "name": "e"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "System.IAsyncResult BeginInvoke(object, Microsoft.Win32.SessionEndedEventArgs, System.AsyncCallback, object)",
+          "name": "BeginInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "200412751C1218127D1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "sender"
+            },
+            {
+              "sequence": 2,
+              "name": "e"
+            },
+            {
+              "sequence": 3,
+              "name": "callback"
+            },
+            {
+              "sequence": 4,
+              "name": "object"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void EndInvoke(System.IAsyncResult)",
+          "name": "EndInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "2001011275",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "result"
+            }
+          ]
+        }
+      ],
+      "fields": []
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "SessionEndingEventArgs",
+      "attributes": "Public, BeforeFieldInit",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(Microsoft.Win32.SessionEndReasons)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "2001011128",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "reason"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "bool get_Cancel()",
+          "name": "get_Cancel",
+          "attributes": "Public, HideBySig, SpecialName",
+          "signatureHex": "200002",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "void set_Cancel(bool)",
+          "name": "set_Cancel",
+          "attributes": "Public, HideBySig, SpecialName",
+          "signatureHex": "20010102",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "Microsoft.Win32.SessionEndReasons get_Reason()",
+          "name": "get_Reason",
+          "attributes": "Public, HideBySig, SpecialName",
+          "signatureHex": "20001128",
+          "parameters": []
+        }
+      ],
+      "fields": []
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "SessionEndingEventHandler",
+      "attributes": "Public, Sealed",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(object, nint)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "2002011C18",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "object"
+            },
+            {
+              "sequence": 2,
+              "name": "method"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void Invoke(object, Microsoft.Win32.SessionEndingEventArgs)",
+          "name": "Invoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "2002011C1220",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "sender"
+            },
+            {
+              "sequence": 2,
+              "name": "e"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "System.IAsyncResult BeginInvoke(object, Microsoft.Win32.SessionEndingEventArgs, System.AsyncCallback, object)",
+          "name": "BeginInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "200412751C1220127D1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "sender"
+            },
+            {
+              "sequence": 2,
+              "name": "e"
+            },
+            {
+              "sequence": 3,
+              "name": "callback"
+            },
+            {
+              "sequence": 4,
+              "name": "object"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void EndInvoke(System.IAsyncResult)",
+          "name": "EndInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "2001011275",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "result"
+            }
+          ]
+        }
+      ],
+      "fields": []
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "SessionEndReasons",
+      "attributes": "Public, Sealed",
+      "methods": [],
+      "fields": [
+        {
+          "name": "value__",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "Logoff",
+          "decodedType": "Microsoft.Win32.SessionEndReasons",
+          "signatureHex": "061128"
+        },
+        {
+          "name": "SystemShutdown",
+          "decodedType": "Microsoft.Win32.SessionEndReasons",
+          "signatureHex": "061128"
+        }
+      ]
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "SessionSwitchEventArgs",
+      "attributes": "Public, BeforeFieldInit",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(Microsoft.Win32.SessionSwitchReason)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "2001011134",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "reason"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "Microsoft.Win32.SessionSwitchReason get_Reason()",
+          "name": "get_Reason",
+          "attributes": "Public, HideBySig, SpecialName",
+          "signatureHex": "20001134",
+          "parameters": []
+        }
+      ],
+      "fields": []
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "SessionSwitchEventHandler",
+      "attributes": "Public, Sealed",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(object, nint)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "2002011C18",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "object"
+            },
+            {
+              "sequence": 2,
+              "name": "method"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void Invoke(object, Microsoft.Win32.SessionSwitchEventArgs)",
+          "name": "Invoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "2002011C122C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "sender"
+            },
+            {
+              "sequence": 2,
+              "name": "e"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "System.IAsyncResult BeginInvoke(object, Microsoft.Win32.SessionSwitchEventArgs, System.AsyncCallback, object)",
+          "name": "BeginInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "200412751C122C127D1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "sender"
+            },
+            {
+              "sequence": 2,
+              "name": "e"
+            },
+            {
+              "sequence": 3,
+              "name": "callback"
+            },
+            {
+              "sequence": 4,
+              "name": "object"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void EndInvoke(System.IAsyncResult)",
+          "name": "EndInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "2001011275",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "result"
+            }
+          ]
+        }
+      ],
+      "fields": []
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "SessionSwitchReason",
+      "attributes": "Public, Sealed",
+      "methods": [],
+      "fields": [
+        {
+          "name": "value__",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "ConsoleConnect",
+          "decodedType": "Microsoft.Win32.SessionSwitchReason",
+          "signatureHex": "061134"
+        },
+        {
+          "name": "ConsoleDisconnect",
+          "decodedType": "Microsoft.Win32.SessionSwitchReason",
+          "signatureHex": "061134"
+        },
+        {
+          "name": "RemoteConnect",
+          "decodedType": "Microsoft.Win32.SessionSwitchReason",
+          "signatureHex": "061134"
+        },
+        {
+          "name": "RemoteDisconnect",
+          "decodedType": "Microsoft.Win32.SessionSwitchReason",
+          "signatureHex": "061134"
+        },
+        {
+          "name": "SessionLogon",
+          "decodedType": "Microsoft.Win32.SessionSwitchReason",
+          "signatureHex": "061134"
+        },
+        {
+          "name": "SessionLogoff",
+          "decodedType": "Microsoft.Win32.SessionSwitchReason",
+          "signatureHex": "061134"
+        },
+        {
+          "name": "SessionLock",
+          "decodedType": "Microsoft.Win32.SessionSwitchReason",
+          "signatureHex": "061134"
+        },
+        {
+          "name": "SessionUnlock",
+          "decodedType": "Microsoft.Win32.SessionSwitchReason",
+          "signatureHex": "061134"
+        },
+        {
+          "name": "SessionRemoteControl",
+          "decodedType": "Microsoft.Win32.SessionSwitchReason",
+          "signatureHex": "061134"
+        }
+      ]
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "SystemEvents",
+      "attributes": "Public, Sealed, BeforeFieldInit",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor()",
+          "name": ".ctor",
+          "attributes": "Assembly, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "200001",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "void add_DisplaySettingsChanged(System.EventHandler)",
+          "name": "add_DisplaySettingsChanged",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "000101128085",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void remove_DisplaySettingsChanged(System.EventHandler)",
+          "name": "remove_DisplaySettingsChanged",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "000101128085",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void add_DisplaySettingsChanging(System.EventHandler)",
+          "name": "add_DisplaySettingsChanging",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "000101128085",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void remove_DisplaySettingsChanging(System.EventHandler)",
+          "name": "remove_DisplaySettingsChanging",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "000101128085",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void add_EventsThreadShutdown(System.EventHandler)",
+          "name": "add_EventsThreadShutdown",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "000101128085",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void remove_EventsThreadShutdown(System.EventHandler)",
+          "name": "remove_EventsThreadShutdown",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "000101128085",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void add_InstalledFontsChanged(System.EventHandler)",
+          "name": "add_InstalledFontsChanged",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "000101128085",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void remove_InstalledFontsChanged(System.EventHandler)",
+          "name": "remove_InstalledFontsChanged",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "000101128085",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void add_LowMemory(System.EventHandler)",
+          "name": "add_LowMemory",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "000101128085",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void remove_LowMemory(System.EventHandler)",
+          "name": "remove_LowMemory",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "000101128085",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void add_PaletteChanged(System.EventHandler)",
+          "name": "add_PaletteChanged",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "000101128085",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void remove_PaletteChanged(System.EventHandler)",
+          "name": "remove_PaletteChanged",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "000101128085",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void add_PowerModeChanged(Microsoft.Win32.PowerModeChangedEventHandler)",
+          "name": "add_PowerModeChanged",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011210",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void remove_PowerModeChanged(Microsoft.Win32.PowerModeChangedEventHandler)",
+          "name": "remove_PowerModeChanged",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011210",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void add_SessionEnded(Microsoft.Win32.SessionEndedEventHandler)",
+          "name": "add_SessionEnded",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "000101121C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void remove_SessionEnded(Microsoft.Win32.SessionEndedEventHandler)",
+          "name": "remove_SessionEnded",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "000101121C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void add_SessionEnding(Microsoft.Win32.SessionEndingEventHandler)",
+          "name": "add_SessionEnding",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011224",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void remove_SessionEnding(Microsoft.Win32.SessionEndingEventHandler)",
+          "name": "remove_SessionEnding",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011224",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void add_SessionSwitch(Microsoft.Win32.SessionSwitchEventHandler)",
+          "name": "add_SessionSwitch",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011230",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void remove_SessionSwitch(Microsoft.Win32.SessionSwitchEventHandler)",
+          "name": "remove_SessionSwitch",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011230",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void add_TimeChanged(System.EventHandler)",
+          "name": "add_TimeChanged",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "000101128085",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void remove_TimeChanged(System.EventHandler)",
+          "name": "remove_TimeChanged",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "000101128085",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void add_TimerElapsed(Microsoft.Win32.TimerElapsedEventHandler)",
+          "name": "add_TimerElapsed",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011240",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void remove_TimerElapsed(Microsoft.Win32.TimerElapsedEventHandler)",
+          "name": "remove_TimerElapsed",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011240",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void add_UserPreferenceChanged(Microsoft.Win32.UserPreferenceChangedEventHandler)",
+          "name": "add_UserPreferenceChanged",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "000101124C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void remove_UserPreferenceChanged(Microsoft.Win32.UserPreferenceChangedEventHandler)",
+          "name": "remove_UserPreferenceChanged",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "000101124C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void add_UserPreferenceChanging(Microsoft.Win32.UserPreferenceChangingEventHandler)",
+          "name": "add_UserPreferenceChanging",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011254",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void remove_UserPreferenceChanging(Microsoft.Win32.UserPreferenceChangingEventHandler)",
+          "name": "remove_UserPreferenceChanging",
+          "attributes": "Public, Static, HideBySig, SpecialName",
+          "signatureHex": "0001011254",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "nint CreateTimer(int)",
+          "name": "CreateTimer",
+          "attributes": "Public, Static, HideBySig",
+          "signatureHex": "00011808",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "interval"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void InvokeOnEventsThread(System.Delegate)",
+          "name": "InvokeOnEventsThread",
+          "attributes": "Public, Static, HideBySig",
+          "signatureHex": "000101128099",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "method"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void KillTimer(nint)",
+          "name": "KillTimer",
+          "attributes": "Public, Static, HideBySig",
+          "signatureHex": "00010118",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "timerId"
+            }
+          ]
+        }
+      ],
+      "fields": []
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "TimerElapsedEventArgs",
+      "attributes": "Public, BeforeFieldInit",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(nint)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "20010118",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "timerId"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "nint get_TimerId()",
+          "name": "get_TimerId",
+          "attributes": "Public, HideBySig, SpecialName",
+          "signatureHex": "200018",
+          "parameters": []
+        }
+      ],
+      "fields": []
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "TimerElapsedEventHandler",
+      "attributes": "Public, Sealed",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(object, nint)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "2002011C18",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "object"
+            },
+            {
+              "sequence": 2,
+              "name": "method"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void Invoke(object, Microsoft.Win32.TimerElapsedEventArgs)",
+          "name": "Invoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "2002011C123C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "sender"
+            },
+            {
+              "sequence": 2,
+              "name": "e"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "System.IAsyncResult BeginInvoke(object, Microsoft.Win32.TimerElapsedEventArgs, System.AsyncCallback, object)",
+          "name": "BeginInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "200412751C123C127D1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "sender"
+            },
+            {
+              "sequence": 2,
+              "name": "e"
+            },
+            {
+              "sequence": 3,
+              "name": "callback"
+            },
+            {
+              "sequence": 4,
+              "name": "object"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void EndInvoke(System.IAsyncResult)",
+          "name": "EndInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "2001011275",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "result"
+            }
+          ]
+        }
+      ],
+      "fields": []
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "UserPreferenceCategory",
+      "attributes": "Public, Sealed",
+      "methods": [],
+      "fields": [
+        {
+          "name": "value__",
+          "decodedType": "int",
+          "signatureHex": "0608"
+        },
+        {
+          "name": "Accessibility",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "061144"
+        },
+        {
+          "name": "Color",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "061144"
+        },
+        {
+          "name": "Desktop",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "061144"
+        },
+        {
+          "name": "General",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "061144"
+        },
+        {
+          "name": "Icon",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "061144"
+        },
+        {
+          "name": "Keyboard",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "061144"
+        },
+        {
+          "name": "Menu",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "061144"
+        },
+        {
+          "name": "Mouse",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "061144"
+        },
+        {
+          "name": "Policy",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "061144"
+        },
+        {
+          "name": "Power",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "061144"
+        },
+        {
+          "name": "Screensaver",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "061144"
+        },
+        {
+          "name": "Window",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "061144"
+        },
+        {
+          "name": "Locale",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "061144"
+        },
+        {
+          "name": "VisualStyle",
+          "decodedType": "Microsoft.Win32.UserPreferenceCategory",
+          "signatureHex": "061144"
+        }
+      ]
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "UserPreferenceChangedEventArgs",
+      "attributes": "Public, BeforeFieldInit",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(Microsoft.Win32.UserPreferenceCategory)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "2001011144",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "category"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "Microsoft.Win32.UserPreferenceCategory get_Category()",
+          "name": "get_Category",
+          "attributes": "Public, HideBySig, SpecialName",
+          "signatureHex": "20001144",
+          "parameters": []
+        }
+      ],
+      "fields": []
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "UserPreferenceChangedEventHandler",
+      "attributes": "Public, Sealed",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(object, nint)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "2002011C18",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "object"
+            },
+            {
+              "sequence": 2,
+              "name": "method"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void Invoke(object, Microsoft.Win32.UserPreferenceChangedEventArgs)",
+          "name": "Invoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "2002011C1248",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "sender"
+            },
+            {
+              "sequence": 2,
+              "name": "e"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "System.IAsyncResult BeginInvoke(object, Microsoft.Win32.UserPreferenceChangedEventArgs, System.AsyncCallback, object)",
+          "name": "BeginInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "200412751C1248127D1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "sender"
+            },
+            {
+              "sequence": 2,
+              "name": "e"
+            },
+            {
+              "sequence": 3,
+              "name": "callback"
+            },
+            {
+              "sequence": 4,
+              "name": "object"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void EndInvoke(System.IAsyncResult)",
+          "name": "EndInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "2001011275",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "result"
+            }
+          ]
+        }
+      ],
+      "fields": []
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "UserPreferenceChangingEventArgs",
+      "attributes": "Public, BeforeFieldInit",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(Microsoft.Win32.UserPreferenceCategory)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "2001011144",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "category"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "Microsoft.Win32.UserPreferenceCategory get_Category()",
+          "name": "get_Category",
+          "attributes": "Public, HideBySig, SpecialName",
+          "signatureHex": "20001144",
+          "parameters": []
+        }
+      ],
+      "fields": []
+    },
+    {
+      "namespace": "Microsoft.Win32",
+      "name": "UserPreferenceChangingEventHandler",
+      "attributes": "Public, Sealed",
+      "methods": [
+        {
+          "decodedSignature": "void .ctor(object, nint)",
+          "name": ".ctor",
+          "attributes": "Public, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "2002011C18",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "object"
+            },
+            {
+              "sequence": 2,
+              "name": "method"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void Invoke(object, Microsoft.Win32.UserPreferenceChangingEventArgs)",
+          "name": "Invoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "2002011C1250",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "sender"
+            },
+            {
+              "sequence": 2,
+              "name": "e"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "System.IAsyncResult BeginInvoke(object, Microsoft.Win32.UserPreferenceChangingEventArgs, System.AsyncCallback, object)",
+          "name": "BeginInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "200412751C1250127D1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "sender"
+            },
+            {
+              "sequence": 2,
+              "name": "e"
+            },
+            {
+              "sequence": 3,
+              "name": "callback"
+            },
+            {
+              "sequence": 4,
+              "name": "object"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "void EndInvoke(System.IAsyncResult)",
+          "name": "EndInvoke",
+          "attributes": "Public, Virtual, HideBySig, VtableLayoutMask",
+          "signatureHex": "2001011275",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "result"
+            }
+          ]
+        }
+      ],
+      "fields": []
+    },
+    {
+      "namespace": "System",
+      "name": "SR",
+      "attributes": "Abstract, Sealed, BeforeFieldInit",
+      "methods": [
+        {
+          "decodedSignature": "bool UsingResourceKeys()",
+          "name": "UsingResourceKeys",
+          "attributes": "Assembly, Static, HideBySig",
+          "signatureHex": "000002",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "string GetResourceString(string)",
+          "name": "GetResourceString",
+          "attributes": "Private, Static, HideBySig",
+          "signatureHex": "00010E0E",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "resourceKey"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "string GetResourceString(string, string)",
+          "name": "GetResourceString",
+          "attributes": "Private, Static, HideBySig",
+          "signatureHex": "00020E0E0E",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "resourceKey"
+            },
+            {
+              "sequence": 2,
+              "name": "defaultString"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "string Format(string, object)",
+          "name": "Format",
+          "attributes": "Assembly, Static, HideBySig",
+          "signatureHex": "00020E0E1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "resourceFormat"
+            },
+            {
+              "sequence": 2,
+              "name": "p1"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "string Format(string, object, object)",
+          "name": "Format",
+          "attributes": "Assembly, Static, HideBySig",
+          "signatureHex": "00030E0E1C1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "resourceFormat"
+            },
+            {
+              "sequence": 2,
+              "name": "p1"
+            },
+            {
+              "sequence": 3,
+              "name": "p2"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "string Format(string, object, object, object)",
+          "name": "Format",
+          "attributes": "Assembly, Static, HideBySig",
+          "signatureHex": "00040E0E1C1C1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "resourceFormat"
+            },
+            {
+              "sequence": 2,
+              "name": "p1"
+            },
+            {
+              "sequence": 3,
+              "name": "p2"
+            },
+            {
+              "sequence": 4,
+              "name": "p3"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "string Format(string, object[])",
+          "name": "Format",
+          "attributes": "Assembly, Static, HideBySig",
+          "signatureHex": "00020E0E1D1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "resourceFormat"
+            },
+            {
+              "sequence": 2,
+              "name": "args"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "string Format(System.IFormatProvider, string, object)",
+          "name": "Format",
+          "attributes": "Assembly, Static, HideBySig",
+          "signatureHex": "00030E1280A90E1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "provider"
+            },
+            {
+              "sequence": 2,
+              "name": "resourceFormat"
+            },
+            {
+              "sequence": 3,
+              "name": "p1"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "string Format(System.IFormatProvider, string, object, object)",
+          "name": "Format",
+          "attributes": "Assembly, Static, HideBySig",
+          "signatureHex": "00040E1280A90E1C1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "provider"
+            },
+            {
+              "sequence": 2,
+              "name": "resourceFormat"
+            },
+            {
+              "sequence": 3,
+              "name": "p1"
+            },
+            {
+              "sequence": 4,
+              "name": "p2"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "string Format(System.IFormatProvider, string, object, object, object)",
+          "name": "Format",
+          "attributes": "Assembly, Static, HideBySig",
+          "signatureHex": "00050E1280A90E1C1C1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "provider"
+            },
+            {
+              "sequence": 2,
+              "name": "resourceFormat"
+            },
+            {
+              "sequence": 3,
+              "name": "p1"
+            },
+            {
+              "sequence": 4,
+              "name": "p2"
+            },
+            {
+              "sequence": 5,
+              "name": "p3"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "string Format(System.IFormatProvider, string, object[])",
+          "name": "Format",
+          "attributes": "Assembly, Static, HideBySig",
+          "signatureHex": "00030E1280A90E1D1C",
+          "parameters": [
+            {
+              "sequence": 1,
+              "name": "provider"
+            },
+            {
+              "sequence": 2,
+              "name": "resourceFormat"
+            },
+            {
+              "sequence": 3,
+              "name": "args"
+            }
+          ]
+        },
+        {
+          "decodedSignature": "System.Resources.ResourceManager get_ResourceManager()",
+          "name": "get_ResourceManager",
+          "attributes": "Assembly, Static, HideBySig, SpecialName",
+          "signatureHex": "000012809D",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "string get_ErrorCreateSystemEvents()",
+          "name": "get_ErrorCreateSystemEvents",
+          "attributes": "Assembly, Static, HideBySig, SpecialName",
+          "signatureHex": "00000E",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "string get_ErrorCreateTimer()",
+          "name": "get_ErrorCreateTimer",
+          "attributes": "Assembly, Static, HideBySig, SpecialName",
+          "signatureHex": "00000E",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "string get_ErrorKillTimer()",
+          "name": "get_ErrorKillTimer",
+          "attributes": "Assembly, Static, HideBySig, SpecialName",
+          "signatureHex": "00000E",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "string get_InvalidLowBoundArgument()",
+          "name": "get_InvalidLowBoundArgument",
+          "attributes": "Assembly, Static, HideBySig, SpecialName",
+          "signatureHex": "00000E",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "string get_PlatformNotSupported_SystemEvents()",
+          "name": "get_PlatformNotSupported_SystemEvents",
+          "attributes": "Assembly, Static, HideBySig, SpecialName",
+          "signatureHex": "00000E",
+          "parameters": []
+        },
+        {
+          "decodedSignature": "void .cctor()",
+          "name": ".cctor",
+          "attributes": "Private, Static, HideBySig, SpecialName, RTSpecialName",
+          "signatureHex": "000001",
+          "parameters": []
+        }
+      ],
+      "fields": [
+        {
+          "name": "s_usingResourceKeys",
+          "decodedType": "bool",
+          "signatureHex": "0602"
+        },
+        {
+          "name": "s_resourceManager",
+          "decodedType": "System.Resources.ResourceManager",
+          "signatureHex": "0612809D"
+        }
+      ]
+    }
+  ]
+}
