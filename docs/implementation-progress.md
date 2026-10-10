@@ -49,3 +49,9 @@ If a new run has invalid/missing inputs, it cannot replace an existing complete 
 - Legacy reflection output now enforces a 95,000,000-byte limit (CI passed for commit `129afbf6805ece3085e1145f91f25260c195ee36`).
 - CLR metadata catalogue now records generic constraints, custom attribute tokens and assembly references; these are metadata evidence, not decoded attribute constructor values.
 - OpenRoads 2024 installation testing is delegated to a Windows laptop with the hydrated binaries and SDK. Do not mark that validation complete until the user runs it.
+
+## Legacy output safety follow-up
+
+- Legacy `Program.cs` now checks generated file sizes against the 95,000,000-byte ceiling and splits oversized `INDEX.md` into smaller pages. This is not equivalent to the catalogue pipeline's atomic publication.
+- The separate historical `analyze` implementation is **not present in this GitHub repository**. Its output-size compliance cannot be audited or fixed here until its source is available. Do not report that pipeline as verified.
+- The OpenRoads installation corpus remains for laptop validation.
