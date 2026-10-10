@@ -1,5 +1,14 @@
 # API catalogue implementation progress
 
+## Integration status (PR #1)
+
+PR #2's metadata-first catalogue, human reference generator, JSONL sharding, tests and Git-aware output policy have been incorporated into **PR #1** (`feature/native-pe-inventory`) without replacing the original `analyze` implementation. The `analyze` command now supports optional `--catalog-output <sibling-folder>` to run the catalogue importer on its generated metadata. Both output folders must remain separate.
+
+The original `analyze` output has a **95,000,000-byte publication audit**, not complete automatic sharding for every legacy output writer. An oversized artifact fails the run and must not be pushed. The catalogue pipeline itself shards JSONL at 64 MiB and limits Markdown to 48 KB. The original legacy skill generator has a per-file size guard. Full installed OpenRoads validation remains a laptop task.
+
+CI includes a cross-platform 42-test catalogue regression suite, the pre-existing native smoke test, and an integrated `analyze --catalog-output` smoke test. Check the latest PR #1 workflow results before claiming the integrated tests passed. Earlier PR #2 success does not automatically validate this combined branch.
+
+
 ## TL;DR
 
 The catalogue is no longer a filename-only prototype. Managed extraction, format-specific JSON imports, source evidence, bounded machine/human outputs, search and integrity checks are implemented. **Builds and all 38 regression tests passed on both Windows and Linux** for code commit `79424bb8c1fc0198ecf4eb8100aced09b6a15de5`.
