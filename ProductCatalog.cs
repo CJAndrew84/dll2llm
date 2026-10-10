@@ -30,7 +30,7 @@ internal static class ProductCatalog
             return 2;
         }
         var entries = new List<Entry>();
-        int scanned = 0, invalid = 0;
+        int scanned = 0, invalid = 0, lfsPointers = 0;
         var symbols = new List<SymbolCatalog.Symbol>();
         foreach (var file in Directory.EnumerateFiles(source, "*.json", SearchOption.AllDirectories)
                      .Where(p => p.Contains(Path.DirectorySeparatorChar + "managed" + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase)
@@ -41,7 +41,16 @@ internal static class ProductCatalog
             string relative = Path.GetRelativePath(source, file).Replace('\\', '/');
             try
             {
-                using var doc = JsonDocument.Parse(File.ReadAllText(file));
+                // Git LFS pointer files are not JSON; report them explicitly instead of silently treating them as corrupt metadata.
+                using var stream = File.OpenRead(file);
+                if (stream.Length < 512)
+                {
+                    using var probe = new StreamReader(stream, Encoding.UTF8, true, 128, leaveOpen: true);
+                    string firstLine = probe.ReadLine() ?? "";
+                    if (firstLine == "version https://git-lfs.github.com/spec/v1") { lfsPointers++; continue; }
+                    stream.Position = 0;
+                }
+                using var doc = JsonDocument.Parse(stream);
                 if (doc.RootElement.ValueKind != JsonValueKind.Object) { invalid++; continue; }
                 var kind = relative.StartsWith("native/", StringComparison.OrdinalIgnoreCase) ? "native-symbol" : "managed-metadata";
                 // Use source filename as a guaranteed provenance record. Never fabricate types or methods.
@@ -60,7 +69,7 @@ internal static class ProductCatalog
         var sb = new StringBuilder("# Product API navigation\n\n");
         sb.AppendLine("Generated from extracted metadata. Entries are source-file records, **not verified callable APIs**.");
         sb.AppendLine("Native exports do not establish C++ method signatures. Consult SDK headers and PDBs.");
-        sb.AppendLine().AppendLine($"Scanned: {scanned}; indexed files: {entries.Count}; extracted symbols: {symbols.Count}; invalid/unreadable: {invalid}.").AppendLine();
+        sb.AppendLine().AppendLine($"Scanned: {scanned}; indexed files: {entries.Count}; extracted symbols: {symbols.Count}; invalid/unreadable: {invalid}; LFS pointers: {lfsPointers}.").AppendLine();
         sb.AppendLine("## Source files").AppendLine();
         foreach (var group in entries.GroupBy(e => e.Kind).OrderBy(g => g.Key, StringComparer.Ordinal))
         {
@@ -78,6 +87,11 @@ internal static class ProductCatalog
         var current = new StringBuilder();
         foreach (var line in lines)
         {
+            if (Encoding.UTF8.GetByteCount(line) > 48_000)
+            {
+                Console.Error.WriteLine("Navigation entry exceeds 48 KB; refusing to silently truncate.");
+                return 1;
+            }
             if (current.Length > 0 && current.Length + line.Length + 1 > 48_000)
             {
                 chunks.Add(current.ToString()); current.Clear();
@@ -95,7 +109,7 @@ internal static class ProductCatalog
         WriteIfChanged(Path.Combine(output, "README.md"), index.ToString());
         WriteIfChanged(Path.Combine(output, "SKILL.md"), "---\nname: product-api-catalog\ndescription: Navigate extracted managed and native API metadata with provenance\n---\n\nRead [README.md](README.md) first. Consult source JSON for exact symbols; never infer signatures from native exports.\n");
         Console.WriteLine($"Indexed {entries.Count} metadata files; {invalid} invalid/unreadable.");
-        return invalid == 0 ? 0 : 1;
+        return invalid == 0 && lfsPointers == 0 ? 0 : 1;
     }
     private static string Escape(string s) => s.Replace("`", "&#96;").Replace("\r", " ").Replace("\n", " ");
     private static void WriteIfChanged(string path, string content)
