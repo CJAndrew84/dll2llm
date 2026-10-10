@@ -1,5 +1,6 @@
 using ExternalContract;
 namespace Fixture;
+[Obsolete("Fixture attribute for metadata extraction")]
 public class Widget<T> : ExternalBase, IExternal where T : class, new()
 {
     static Widget()
