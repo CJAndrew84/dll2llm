@@ -514,7 +514,36 @@ namespace DllToLLMDoc
                     sb.AppendLine($"| {type.Name} | {kind} | [{filename}]({filename}) |");
                 }
             }
-            SafeGeneratedWrite(Path.Combine(outputDir, "INDEX.md"), sb.ToString());
+            // Large inventories need bounded, human-readable lookup pages.
+            var fullIndex = sb.ToString();
+            if (Encoding.UTF8.GetByteCount(fullIndex) + 3 <= CatalogOutput.MaximumBytes)
+                SafeGeneratedWrite(Path.Combine(outputDir, "INDEX.md"), fullIndex);
+            else
+            {
+                var page = new StringBuilder("# API Index — continued\\n\\n");
+                var pages = new List<string>();
+                foreach (var line in fullIndex.Split('\\n'))
+                {
+                    if (Encoding.UTF8.GetByteCount(line) + 4 > 48_000)
+                        throw new InvalidDataException("Single index row exceeds 48 KB; cannot split safely.");
+                    if (Encoding.UTF8.GetByteCount(page.ToString()) + Encoding.UTF8.GetByteCount(line) + 4 > 48_000)
+                    {
+                        string filename = $"INDEX-{pages.Count + 1:D5}.md";
+                        SafeGeneratedWrite(Path.Combine(outputDir, filename), page.ToString());
+                        pages.Add(filename);
+                        page.Clear().AppendLine("# API Index — continued").AppendLine();
+                    }
+                    page.AppendLine(line);
+                }
+                if (page.Length > 0)
+                {
+                    string filename = $"INDEX-{pages.Count + 1:D5}.md";
+                    SafeGeneratedWrite(Path.Combine(outputDir, filename), page.ToString());
+                    pages.Add(filename);
+                }
+                var navigation = "# API Index\\n\\n" + string.Join("", pages.Select(p => $"- [{p}]({p})\\n"));
+                SafeGeneratedWrite(Path.Combine(outputDir, "INDEX.md"), navigation);
+            }
             Console.WriteLine($"  Written: INDEX.md ({types.Count} types indexed)");
         }
 
