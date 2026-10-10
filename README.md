@@ -10,6 +10,25 @@
 
 A command-line tool that generates ready-to-use **Agent Skills** directly from any .NET assembly.
 
+## Product API catalogues — new source-branch implementation
+
+The new `catalog` command reads managed DLL/EXE metadata **without loading target assemblies**, or imports existing `decoded-clr-metadata-v2` / `pe-export-table` JSON. Both inputs produce a shared symbol catalogue with a human-readable Markdown reference, source evidence, search and integrity validation.
+
+**[Catalogue guide and PowerShell commands](docs/catalogue.md)** · **[Implementation progress and verified tests](docs/implementation-progress.md)**
+
+```powershell
+dotnet build dll2llm.csproj -c Release
+dotnet run --no-build --project dll2llm.csproj -c Release -- catalog --mode managed --source "C:\Program Files\Bentley\OpenRoads Designer 2024.00" --output "C:\Repos\AR-ORDSDK\2024-catalog" --include-nonpublic
+dotnet run --no-build --project dll2llm.csproj -c Release -- catalog --source "C:\Repos\AR-ORDSDK\2024-catalog" --search "RuleManager" --limit 20
+dotnet run --no-build --project dll2llm.csproj -c Release -- catalog --source "C:\Repos\AR-ORDSDK\2024-catalog" --validate
+```
+
+Use a **new, dedicated output folder outside the input directory**. The example opts into internal discovery; omit `--include-nonpublic` for the public/protected surface. Internal symbols are not necessarily supported APIs. The tool does not copy vendor binaries or commit/push output.
+
+The catalogue pipeline enforces a 95,000,000-byte maximum per file, 64 MiB JSONL shards and 48,000-byte UTF-8 Markdown pages. Markdown stays in ordinary Git; machine shards use LFS. Failed generation preserves an existing complete catalogue. It refuses to overwrite user-added files in its generated directory.
+
+This feature is on `feature/git-readable-navigation` / PR #2; it has **not been published to NuGet**. Native header/PDB class reconstruction, SQLite indexing and full OpenRoads corpus validation remain outstanding. The original reflection workflow below is retained unchanged; its installation/native-dependency limitations and output behaviour do not describe the new metadata-first mode.
+
 ## Overview
 
 dll2llm reflects .NET assemblies and extracts public types, constructors, methods, properties, events, and constants — formatting them into an Agent Skill folder with `SKILL.md` (including YAML frontmatter), `INDEX.md`, and topic Markdown files, optimized for LLM consumption.

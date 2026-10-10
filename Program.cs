@@ -149,8 +149,24 @@ namespace DllToLLMDoc
         // Maximum types per split topic file before alphabetical sub-splitting kicks in.
         const int MaxTypesPerFile = 50;
 
+        // All legacy skill output must respect the same Git/LFS distribution ceiling.
+        // Fail explicitly rather than writing an oversized or truncated reference.
+        static void SafeGeneratedWrite(string path, string content)
+        {
+            long bytes = Encoding.UTF8.GetByteCount(content) + 3; // legacy UTF-8 BOM
+            if (bytes > CatalogOutput.MaximumBytes)
+                throw new InvalidDataException($"Generated output exceeds {CatalogOutput.MaximumBytes} bytes: {path}");
+            File.WriteAllText(path, content, Encoding.UTF8);
+        }
+
         static void Main(string[] args)
         {
+            if (args.Length > 0 && args[0].Equals("catalog", StringComparison.OrdinalIgnoreCase))
+            {
+                Environment.ExitCode = ProductCatalog.Run(args);
+                return;
+            }
+
             var dllPaths = new List<string>();
             string installDir = null;
             string outputPath = null;
@@ -433,7 +449,7 @@ namespace DllToLLMDoc
                         sb.AppendLine();
                     }
                 }
-                File.WriteAllText(Path.Combine(outputDir, filename), sb.ToString(), Encoding.UTF8);
+                SafeGeneratedWrite(Path.Combine(outputDir, filename), sb.ToString());
                 Console.WriteLine($"  Written: {filename} ({bucketTypes.Count} types)");
             }
 
@@ -498,7 +514,36 @@ namespace DllToLLMDoc
                     sb.AppendLine($"| {type.Name} | {kind} | [{filename}]({filename}) |");
                 }
             }
-            File.WriteAllText(Path.Combine(outputDir, "INDEX.md"), sb.ToString(), Encoding.UTF8);
+            // Large inventories need bounded, human-readable lookup pages.
+            var fullIndex = sb.ToString();
+            if (Encoding.UTF8.GetByteCount(fullIndex) + 3 <= CatalogOutput.MaximumBytes)
+                SafeGeneratedWrite(Path.Combine(outputDir, "INDEX.md"), fullIndex);
+            else
+            {
+                var page = new StringBuilder("# API Index — continued\n\n");
+                var pages = new List<string>();
+                foreach (var line in fullIndex.Split('\n'))
+                {
+                    if (Encoding.UTF8.GetByteCount(line) + 4 > 48_000)
+                        throw new InvalidDataException("Single index row exceeds 48 KB; cannot split safely.");
+                    if (Encoding.UTF8.GetByteCount(page.ToString()) + Encoding.UTF8.GetByteCount(line) + 4 > 48_000)
+                    {
+                        string filename = $"INDEX-{pages.Count + 1:D5}.md";
+                        SafeGeneratedWrite(Path.Combine(outputDir, filename), page.ToString());
+                        pages.Add(filename);
+                        page.Clear().AppendLine("# API Index — continued").AppendLine();
+                    }
+                    page.AppendLine(line);
+                }
+                if (page.Length > 0)
+                {
+                    string filename = $"INDEX-{pages.Count + 1:D5}.md";
+                    SafeGeneratedWrite(Path.Combine(outputDir, filename), page.ToString());
+                    pages.Add(filename);
+                }
+                var navigation = "# API Index\n\n" + string.Join("", pages.Select(p => $"- [{p}]({p})\n"));
+                SafeGeneratedWrite(Path.Combine(outputDir, "INDEX.md"), navigation);
+            }
             Console.WriteLine($"  Written: INDEX.md ({types.Count} types indexed)");
         }
 
@@ -534,7 +579,7 @@ namespace DllToLLMDoc
             foreach (var (label, filename, bucketTypes) in buckets)
                 sb.AppendLine($"- [{filename}]({filename}) — {label} ({bucketTypes.Count} types)");
 
-            File.WriteAllText(Path.Combine(outputDir, "SKILL.md"), sb.ToString(), Encoding.UTF8);
+            SafeGeneratedWrite(Path.Combine(outputDir, "SKILL.md"), sb.ToString());
             Console.WriteLine($"  Written: SKILL.md");
         }
 
